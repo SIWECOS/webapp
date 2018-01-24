@@ -67,7 +67,7 @@
             verify_explanation1: 'Alle Domains die bei Siwecos zur Überprüfung eingetragen werden, müssen verifiziert bzw. gegengeprüft werden. Dazu bietet Siwecos drei verschiedene Verfahren (Datei, Meta-Tag, E-Mail) an.',
             verify_explanation2: 'Wozu wird eine Verifizierung gemacht? Bei einer Verifizierung wird aus datenschutzrechtlichen Gründen nachgewiesen, dass Sie der wirkliche Inhaber der Domain sind.',
             verify: 'Überprüfen',
-            could_not_verify: 'Fehler bei der Überprüfung'
+            could_not_verify: 'Fehler bei der Überprüfung, bitte folgen Sie den Schritten in der Anleitung'
           }
         }
       }
@@ -84,9 +84,11 @@
         api.$http.post(api.urls.domain_verify, {domain: this.domain.domain}).then((data) => {
           router.push('/domains')
         }).catch((err) => {
-          console.log(err)
-
-          this.msg = 'could_not_verify'
+          if (err.response.status === 417) {
+            this.msg = 'could_not_verify'
+          } else {
+            this.msg = 'api_error'
+          }
         })
       },
       fetchDomainInfo () {

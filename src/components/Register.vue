@@ -113,6 +113,9 @@
                         <span v-show="errors.has('tos')">{{ errors.first('tos') }}</span>
                     </li>
                 </ul>
+
+                <vue-recaptcha size="invisible" ref="recaptcha" @verify="onVerify":sitekey="sitekey"></vue-recaptcha>
+
                 <input type="submit" class="submit button" :value="$t('messages.submit')" />
             </form>
         </div>
@@ -127,14 +130,17 @@
 import api from '../services/api.js'
 import auth from '../services/auth.js'
 import router from '../router/index.js'
+import VueRecaptcha from 'vue-recaptcha'
 
 export default {
   name: 'Register',
+  components: {VueRecaptcha},
   data () {
     return {
       user: {salutation_id: '', org_size_id: 1},
       msg: false,
-      success: false
+      success: false,
+      sitekey: '6LeBUUIUAAAAACB6RUnQUD8SxbC_YoU5i8RMQBb2'
     }
   },
   i18n: {
@@ -176,12 +182,16 @@ export default {
     validateBeforeSubmit () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.submitForm()
+          this.$refs.recaptcha.execute()
           return false
         }
 
         return true
       })
+    },
+    onVerify: function (response) {
+      this.user['g-recaptcha-response'] = response
+      this.submitForm()
     },
     submitForm () {
       api.$http.post(api.urls.signup_url, this.user).then((data) => {
