@@ -140,7 +140,7 @@ export default {
       user: {salutation_id: '', org_size_id: 1},
       msg: false,
       success: false,
-      sitekey: '6LeBUUIUAAAAACB6RUnQUD8SxbC_YoU5i8RMQBb2'
+      sitekey: '6Lc05yMUAAAAAPaLRennVMnrrmK7jEbYHvFwI6c1'
     }
   },
   i18n: {

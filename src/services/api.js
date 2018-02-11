@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://siwecos.hdworks.io:8667'
+axios.defaults.baseURL = 'http://bla.staging2.siwecos.de'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export default {
