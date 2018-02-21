@@ -7,7 +7,7 @@
         <section id="domains-wrapper">
             <ul id="domains-scanners-list" class="scanners-results" v-if="domains.length">
                 <li v-for="(domain) in domains" class="domain-results-item">
-                    <domain-details v-bind:domain="domain"></domain-details>
+                    <domain-details v-bind:domain="domain">></domain-details>
                 </li>
             </ul>
             <p v-if="!domains.length && !msg">{{ $t("messages.nodomains") }}</p>
