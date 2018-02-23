@@ -50,7 +50,8 @@ export default {
           field_password: 'Passwort',
           field_remember: 'Angemeldet bleiben',
           field_submit: 'Anmelden',
-          invalid_credentials: 'Ungültige Zugangsdaten'
+          invalid_credentials: 'Ungültige Zugangsdaten',
+          user_inactive: 'Bitte aktivieren Sie Ihren Account, bevor Sie sich einloggen'
         }
       }
     }
