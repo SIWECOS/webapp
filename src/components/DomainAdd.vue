@@ -68,7 +68,7 @@
         api.$http.post(api.urls.domain_add, this.domain).then((data) => {
           router.push('/domain/verify/' + data.data.domainId)
         }).catch((err) => {
-          if (err.response.status === 422 && err.response.data.errors.domain) {
+          if (err.response.status === 422) {
             this.msg = 'domain_in_use'
             return
           }
