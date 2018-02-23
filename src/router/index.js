@@ -5,6 +5,7 @@ import DomainAdd from '@/components/DomainAdd'
 import DomainVerify from '@/components/DomainVerify'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import Account from '@/components/Account'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ const router = new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: Account
     },
     {
       path: '/',

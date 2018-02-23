@@ -4,7 +4,7 @@
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
-        <div id="UserRegistration" v-if="!success">
+        <div id="UserAccount">
             <form @submit.prevent="validateBeforeSubmit">
                 <ul>
                     <li>
@@ -17,12 +17,12 @@
                     </li>
                     <li>
                         <label for="password">{{ $t("messages.field_password") }}</label>
-                        <input type="password" id="password" v-validate="{required:true,min:8}" :placeholder="$t('messages.field_password')" v-model="user.password" name="password" />
+                        <input type="password" id="password" v-validate="{min:8}" :placeholder="$t('messages.field_password')" v-model="user.password" name="password" />
                         <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
                     </li>
                     <li>
                         <label for="password_repeat">{{ $t("messages.field_passwordrepeat") }}</label>
-                        <input type="password" id="password_repeat" v-validate="{required:true,is:user.password}"  :placeholder="$t('messages.field_passwordrepeat')" name="password2" />
+                        <input type="password" id="password_repeat" v-validate="{is:user.password}"  :placeholder="$t('messages.field_passwordrepeat')" name="password2" />
                         <span v-show="errors.has('password2')">{{ errors.first('password2') }}</span>
                     </li>
                     <li>
@@ -31,9 +31,9 @@
                     <li>
                         <label for="salutation">{{ $t("messages.field_salutation") }}</label>
                         <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id">
-                          <option v-for="option in salutations" v-bind:value="option.id">
-                            {{ option.value }}
-                          </option>
+                            <option v-for="option in salutations" v-bind:value="option.id">
+                                {{ option.value }}
+                            </option>
                         </select>
                         <span v-show="errors.has('salutation')">{{ errors.first('salutation') }}</span>
                     </li>
@@ -73,9 +73,9 @@
                     <li>
                         <label for="org_size">{{ $t("messages.field_companysize") }}</label>
                         <select id="org_size" name="org_size" v-model="user.org_size_id">
-                          <option v-for="option in org_sizes" v-bind:value="option.id">
-                            {{ option.value }}
-                          </option>
+                            <option v-for="option in org_sizes" v-bind:value="option.id">
+                                {{ option.value }}
+                            </option>
                         </select>
                     </li>
                     <li>
@@ -98,45 +98,25 @@
                         <label for="org_phone">{{ $t("messages.field_telephone") }}</label>
                         <input type="text" id="org_phone" :placeholder="$t('messages.field_telephone')" name="org_phone" v-model="user.org_phone" />
                     </li>
-                    <li>
-                        <h4>{{ $t("messages.fielset_iagree") }}</h4>
-                    </li>
-                    <li>
-                        <label for="tos">
-                            <input type="checkbox" id="tos" v-validate="{required:true}" name="tos" v-model="user.agb"/>
-                            {{ $t("messages.field_tos") }} <a href="https://www.siwecos.de/agb/">AGB</a>
-                        </label>
-                        <span v-show="errors.has('tos')">{{ errors.first('tos') }}</span>
-                    </li>
                 </ul>
-
-                <vue-recaptcha size="invisible" ref="recaptcha" @verify="onVerify":sitekey="sitekey"></vue-recaptcha>
 
                 <input type="submit" class="submit button" :value="$t('messages.submit')" />
             </form>
-        </div>
-
-        <div id="UserRegistrationSuccess" v-if="success">
-            {{ $t("messages.successmessage") }}
         </div>
     </div>
 </template>
 
 <script>
-import api from '../services/api.js'
 import auth from '../services/auth.js'
 import router from '../router/index.js'
-import VueRecaptcha from 'vue-recaptcha'
+import api from '../services/api.js'
 
 export default {
-  name: 'Register',
-  components: {VueRecaptcha},
+  name: 'Account',
   data () {
     return {
-      user: {salutation_id: '', org_size_id: 1},
+      user: {},
       msg: false,
-      success: false,
-      sitekey: '6LeCFkYUAAAAANxnJp11dXVNBELcyVfMn0b2FQMG',
       salutations: [],
       org_sizes: []
     }
@@ -145,7 +125,7 @@ export default {
     messages: {
       de: {
         messages: {
-          headline: 'Konto anlegen',
+          headline: 'Mein Konto',
           fieldset_credentials: 'Zugangsdaten',
           field_email: 'E-Mail*',
           field_password: 'Passwort*',
@@ -166,12 +146,9 @@ export default {
           field_companysize: 'Größe',
           field_companysize_pleaseselect: '- Unternehmensgröße wählen - ',
           field_industry: 'Branche',
-          field_tos: 'Ich akzeptiere die',
-          fielset_iagree: 'Zustimmung',
-          submit: 'Registrieren',
-          emailaddress_in_use: 'Die gewünschte E-Mail-Adresse wird bereits verwendet',
-          could_not_register: 'Bei der Registrierung ist ein Fehler aufgetreten, bitte versuchen Sie es später erneut',
-          successmessage: 'Vielen Dank für Ihre Anmeldung bei SIWECOS! Bitte aktivieren Sie nun Ihr Konto, indem Sie den Bestätigungslink aufrufen, den wir Ihnen per E-Mail zugesendet haben.'
+          submit: 'Speichern',
+          account_saved: 'Konto erfolgreich gespeichert',
+          error_saving_account: 'Konto konnte nicht gespeichert werden'
         }
       }
     }
@@ -180,35 +157,28 @@ export default {
     validateBeforeSubmit () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.$refs.recaptcha.execute()
+          this.submitForm()
           return false
         }
 
         return true
       })
     },
-    onVerify: function (response) {
-      this.user['g-recaptcha-response'] = response
-      this.submitForm()
-    },
     submitForm () {
-      api.$http.post(api.urls.signup_url, this.user).then((data) => {
-        this.success = true
-        this.msg = false
-      }).catch((err) => {
-        if (err.response.status === 422 && err.response.data.errors.email) {
-          this.msg = 'emailaddress_in_use'
-          return
-        }
-
-        this.msg = 'could_not_register'
+      api.$http.post(api.urls.update_user, this.user).then((data) => {
+        this.msg = 'account_saved'
+      }).catch(() => {
+        this.msg = 'error_saving_account'
       })
     }
   },
   created: function () {
-    if (auth.user.authenticated) {
-      router.push('/domains')
+    if (!auth.user.authenticated) {
+      router.push('/login')
     }
+
+    this.user = auth.user.data
+    this.user.password = undefined
   },
   mounted: function () {
     api.$http.get(api.urls.salutations)

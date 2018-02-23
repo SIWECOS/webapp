@@ -10,7 +10,8 @@ const messages = {
         login: 'Anmeldung',
         register: 'Registrierung',
         logout: 'Abmelden',
-        domains: 'Domainübersicht'
+        domains: 'Domainübersicht',
+        myaccount: 'Mein Konto'
       }
     }
   }

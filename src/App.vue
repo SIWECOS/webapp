@@ -6,6 +6,7 @@
           <li v-if="!user.authenticated"><router-link to="/login">{{ $t('messages.nav.login') }}</router-link></li>
           <li v-if="user.authenticated"><router-link to="/domains">{{ $t('messages.nav.domains') }}</router-link></li>
           <li v-if="!user.authenticated"><router-link to="/register">{{ $t('messages.nav.register') }}</router-link></li>
+          <li v-if="user.authenticated"><router-link to="/account">{{ $t('messages.nav.myaccount') }}</router-link></li>
           <li v-if="user.authenticated" ><a href="#" @click="logout()">{{ $t('messages.nav.logout') }}</a></li>
         </ul>
       </div>

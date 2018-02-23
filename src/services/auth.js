@@ -4,7 +4,8 @@ import api from '../services/api.js'
 export default {
   // User object will let us check authentication status
   user: {
-    authenticated: false
+    authenticated: false,
+    data: {}
   },
 
   // Send a request to the login URL and save the returned token
@@ -23,6 +24,8 @@ export default {
       }
 
       this.user.authenticated = true
+      this.user.data = response.data
+
       api.$http.defaults.headers.common['userToken'] = response.data.token
 
       router.push('/domains')
@@ -44,8 +47,13 @@ export default {
   checkRememberStatus () {
     if (localStorage.getItem('access_token') && !this.user.authenticated) {
       this.user.authenticated = true
+
       sessionStorage.setItem('access_token', localStorage.getItem('access_token'))
       api.$http.defaults.headers.common['userToken'] = localStorage.getItem('access_token')
+
+      api.$http.post(api.urls.get_user).then((response) => {
+        this.user.data = response.data
+      })
 
       router.push('/domains')
     }

@@ -12,6 +12,10 @@ export default {
     domain_add: '/api/v1/domains/addNewDomain',
     domain_verify: '/api/v1/domains/verifyDomain',
     scan_start: '/api/v1/scan/start',
-    scan_results: '/api/v1/scan/result'
+    scan_results: '/api/v1/scan/result',
+    orgsizes: '/api/v1/getOrgSizes',
+    salutations: '/api/v1/getSalutation',
+    update_user: '/api/v1/users/updateUserData',
+    get_user: '/api/v1/users/getUserData'
   }
 }
