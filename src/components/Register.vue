@@ -31,9 +31,9 @@
                     <li>
                         <label for="salutation">{{ $t("messages.field_salutation") }}</label>
                         <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id">
-                            <option disabled value="">{{ $t("messages.fieldvalue_saluation_pleaseselect") }}</option>
-                            <option value="1">{{ $t("messages.fieldvalue_saluation_mr") }}</option>
-                            <option value="2">{{ $t("messages.fieldvalue_saluation_mrs") }}</option>
+                          <option v-for="option in salutations" v-bind:value="option.id">
+                            {{ option.value }}
+                          </option>
                         </select>
                         <span v-show="errors.has('salutation')">{{ errors.first('salutation') }}</span>
                     </li>
@@ -73,13 +73,9 @@
                     <li>
                         <label for="org_size">{{ $t("messages.field_companysize") }}</label>
                         <select id="org_size" name="org_size" v-model="user.org_size_id">
-                            <option value="1">{{ $t("messages.field_companysize_pleaseselect") }}</option>
-                            <option value="2">< 10</option>
-                            <option value="3">10-50</option>
-                            <option value="4">51-100</option>
-                            <option value="5">101-500</option>
-                            <option value="6">500-1000</option>
-                            <option value="7">>1000</option>
+                          <option v-for="option in org_sizes" v-bind:value="option.id">
+                            {{ option.value }}
+                          </option>
                         </select>
                     </li>
                     <li>
@@ -131,6 +127,7 @@ import api from '../services/api.js'
 import auth from '../services/auth.js'
 import router from '../router/index.js'
 import VueRecaptcha from 'vue-recaptcha'
+import axios from 'axios'
 
 export default {
   name: 'Register',
@@ -140,7 +137,9 @@ export default {
       user: {salutation_id: '', org_size_id: 1},
       msg: false,
       success: false,
-      sitekey: '6Lc05yMUAAAAAPaLRennVMnrrmK7jEbYHvFwI6c1'
+      sitekey: '6LeCFkYUAAAAANxnJp11dXVNBELcyVfMn0b2FQMG',
+      salutations: [],
+      org_sizes: []
     }
   },
   i18n: {
@@ -211,6 +210,18 @@ export default {
     if (auth.user.authenticated) {
       router.push('/domains')
     }
+  },
+  mounted: function () {
+    axios.get('https://bla.staging2.siwecos.de/api/v1/getSalutation')
+      .then(response => {
+        this.salutations = response.data
+        console.log(this.salutations)
+      })
+    axios.get('https://bla.staging2.siwecos.de/api/v1/getOrgSizes')
+      .then(response => {
+        this.org_sizes = response.data
+        console.log(this.org_sizes)
+      })
   }
 }
 </script>
