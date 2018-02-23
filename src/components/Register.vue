@@ -152,7 +152,7 @@ export default {
           field_password: 'Passwort*',
           field_passwordrepeat: 'Passwort wiederholen*',
           fieldset_profile: 'Persönliche Daten',
-          field_salutation: 'Anrede',
+          field_salutation: 'Anrede*',
           fieldvalue_saluation_pleaseselect: '- Anrede wählen -',
           fieldvalue_saluation_mr: 'Herr',
           fieldvalue_saluation_mrs: 'Frau',
