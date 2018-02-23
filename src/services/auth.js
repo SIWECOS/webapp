@@ -10,7 +10,7 @@ export default {
   // Send a request to the login URL and save the returned token
   login (context, creds, redirect) {
     api.$http.post(api.urls.login_url, creds).then((response) => {
-      if (response.data.active) {
+      if (!response.data.active) {
         context.msg = 'user_inactive'
 
         return
