@@ -5,10 +5,7 @@
 			console.log("no kontobox found");
 			return;
 		}
-		if(data === "logout") {
-			document.querySelector("div#app a[href='#']").click();
-			kb.className="loggedoff";
-		} else if(data === null) {
+		if(data === null) {
 			kb.className="loggedoff";
 		} else {
 			kb.className="loggedon";
@@ -35,9 +32,9 @@
 		<a href="/#/account">Meine Daten</a>
 	</li>
 	<li class="loggedon">
-		<a href="/#/domains">DomainÃ¼bersicht</a>
+		<a href="/#/domains">Domainübersicht</a>
 	</li>
 	<li class="loggedon">
-		<a onclick="window.login_announce('logout')">Abmelden</a>
+		<a href="/#/logout">Abmelden</a>
 	</li>
 </ul>
