@@ -68,8 +68,8 @@ export default {
     }
   },
   created: function () {
-    if(!domain.verificationStatus) {
-      return;
+    if (!this.domain.verificationStatus) {
+      return
     }
 
     api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
