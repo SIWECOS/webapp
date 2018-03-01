@@ -1,0 +1,43 @@
+<script type="text/javascript">
+	window.login_announce= function(data) {
+		var kb= document.getElementById("kontobox");
+		if( kb === null ) {
+			console.log("no kontobox found");
+			return;
+		}
+		if(data === "logout") {
+			document.querySelector("div#app a[href='#']").click();
+			kb.className="loggedoff";
+		} else if(data === null) {
+			kb.className="loggedoff";
+		} else {
+			kb.className="loggedon";
+		}
+	}
+</script>
+<style type="text/css">
+	ul#kontobox li {
+		display: none;
+	}
+	ul#kontobox.loggedon li.loggedon,
+	ul#kontobox.loggedoff li.loggedoff {
+		display: block;
+	}
+</style>
+<ul id="kontobox" class="loggedoff">
+	<li class="loggedoff">
+		<a href="/#/login">Anmelden</a>
+	</li>
+	<li class="loggedoff">
+		<a href="/#/register">Registrieren</a>
+	</li>
+	<li class="loggedon">
+		<a href="/#/account">Meine Daten</a>
+	</li>
+	<li class="loggedon">
+		<a href="/#/domains">Domainübersicht</a>
+	</li>
+	<li class="loggedon">
+		<a onclick="window.login_announce('logout')">Abmelden</a>
+	</li>
+</ul>
