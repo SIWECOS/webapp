@@ -19,7 +19,7 @@
             <canvas width="100" height="100"></canvas>
         </div>
 
-        <div class="last-scan-data" v-show="result"><span>{{ $t('messages.lastScan') }}<br> {{ result.scanFinished }}</span></div>
+        <div class="last-scan-data" v-if="result.scanFinished"><span>{{ $t('messages.lastScan') }}<br> {{ result.scanFinished.date }}</span></div>
 
         <div class="scanners-wrapper" v-show="result && showDetails">
             <div class="scanner-content" v-for="(scanner) in result.scanners">
@@ -68,6 +68,10 @@ export default {
     }
   },
   created: function () {
+    if(!domain.verificationStatus) {
+      return;
+    }
+
     api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
       this.result = data.data
     }).catch(() => {
