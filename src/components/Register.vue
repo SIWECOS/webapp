@@ -196,7 +196,7 @@ export default {
         this.success = true
         this.msg = false
       }).catch((err) => {
-        if (err.response.status === 422 && err.response.data.errors.email) {
+        if (err.response.status === 422 && err.response.data.errors && err.response.data.errors.email) {
           this.msg = 'emailaddress_in_use'
           return
         }
