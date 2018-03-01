@@ -33,7 +33,7 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/Logout',
+      path: '/logout',
       name: 'Logout',
       component: Logout
     },
