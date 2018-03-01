@@ -14,8 +14,8 @@
             </li>
         </ul>
 
-        <div class="impact-gauge gaugeMeter" :data-percent="result.score" data-size="100" data-width="20" data-style="Arch" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 100px;" v-if="result">
-            <span style="line-height: 100px; font-size: 22px;">{{ result.score }}</span>
+        <div class="impact-gauge gaugeMeter" :data-percent="result.weightedMedia.toFixed(0)" data-size="100" data-width="20" data-style="Arch" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 100px;" v-if="result">
+            <span style="line-height: 100px; font-size: 22px;">{{ result.weightedMedia.toFixed(0) }}</span>
             <canvas width="100" height="100"></canvas>
         </div>
 

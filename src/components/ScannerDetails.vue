@@ -19,8 +19,8 @@
             </div>
         </div>
 
-        <div class="impact-gauge gaugeMeter" :data-percent="scanner.score" data-size="75" data-width="14" data-style="Full" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 75px;">
-            <span style="line-height: 75px; font-size: 16.5px;">{{ scanner.score }}</span><canvas width="75" height="75"></canvas>
+        <div class="impact-gauge gaugeMeter" :data-percent="scanner.score.toFixed(0)" data-size="75" data-width="14" data-style="Full" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 75px;">
+            <span style="line-height: 75px; font-size: 16.5px;">{{ scanner.score.toFixed(0) }}</span><canvas width="75" height="75"></canvas>
         </div>
     </div>
 </template>
