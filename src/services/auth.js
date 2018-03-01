@@ -45,6 +45,10 @@ export default {
     this.user.authenticated = false
     api.$http.defaults.headers.common['userToken'] = false
 
+    if (typeof window.login_announce !== 'undefined') {
+      window.login_announce(null)
+    }
+
     router.push('/login')
   },
 
