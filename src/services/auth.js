@@ -26,6 +26,10 @@ export default {
       this.user.authenticated = true
       this.user.data = response.data
 
+      if (typeof window.login_announce !== 'undefined') {
+        window.login_announce(response.data)
+      }
+
       api.$http.defaults.headers.common['userToken'] = response.data.token
 
       router.push('/domains')
@@ -53,6 +57,10 @@ export default {
 
       api.$http.post(api.urls.get_user).then((response) => {
         this.user.data = response.data
+
+        if (typeof window.login_announce !== 'undefined') {
+          window.login_announce(response.data)
+        }
       })
 
       router.push('/domains')
