@@ -6,6 +6,7 @@ import DomainVerify from '@/components/DomainVerify'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Account from '@/components/Account'
+import Logout from '@/components/Logout'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/Logout',
+      name: 'Logout',
+      component: Logout
     },
     {
       path: '/register',
