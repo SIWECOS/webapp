@@ -71,9 +71,13 @@ export default {
 
     api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
       this.result = data.data
-      if (window.jQuery && window.jQuery('domain-id-' + this.domain.id) && typeof window.jQuery('domain-id-' + this.domain.id).gaugeMeter !== 'undefined') {
-        window.jQuery('domain-id-' + this.domain.id).gaugeMeter()
-      }
+
+      // Trigger gauge
+      setTimeout(function () {
+        if (window.jQuery && window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter') && typeof window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter !== 'undefined') {
+          window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter()
+        }
+      }.bind(this), 500)
     }).catch(() => {
       this.msg = 'fetch_error'
     })
