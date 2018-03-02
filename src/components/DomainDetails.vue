@@ -1,5 +1,5 @@
 <template>
-    <div class="domain-item-data">
+    <div class="domain-item-data" :class="domainClass" >
         <span class="domain-address">{{ domain.domain }}</span>
 
         <ul class="domain-item-actionlist">
@@ -62,9 +62,6 @@ export default {
           this.msg = false
         }.bind(this), 5000)
       })
-    },
-    toggleSlide (slider) {
-      slider.showDetails = (slider.showDetails) ? 0 : 1
     }
   },
   created: function () {
@@ -74,6 +71,9 @@ export default {
 
     api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
       this.result = data.data
+      if (window.jQuery && window.jQuery('domain-id-' + this.domain.id) && typeof window.jQuery('domain-id-' + this.domain.id).gaugeMeter !== 'undefined') {
+        window.jQuery('domain-id-' + this.domain.id).gaugeMeter()
+      }
     }).catch(() => {
       this.msg = 'fetch_error'
     })
@@ -92,6 +92,11 @@ export default {
           more_info: 'Mehr Informationen'
         }
       }
+    }
+  },
+  computed: {
+    'domainClass': function () {
+      return 'domain-id-' + this.domain.id
     }
   },
   props: ['domain']
