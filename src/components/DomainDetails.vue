@@ -14,14 +14,15 @@
             </li>
         </ul>
         <div style="padding-bottom: 25px;" class="clear: both"></div>
-      <h3>Gesamtergebnis</h3>
-        <div class="impact-gauge gaugeMeter" :data-percent="result.weightedMedia.toFixed(0)" data-size="100" data-width="20" data-style="Arch" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 100px;" v-if="result">
 
-        </div>
-
-        <div class="last-scan-data" v-if="result.scanFinished"><span>{{ $t('messages.lastScan') }}<br> {{ result.scanFinished.date }}</span></div>
 
         <div class="scanners-wrapper" v-show="result && showDetails">
+          <h3>Gesamtergebnis</h3>
+          <div class="impact-gauge gaugeMeter" :data-percent="result.weightedMedia.toFixed(0)" data-size="100" data-width="20" data-style="Arch" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 100px;" v-if="result">
+
+          </div>
+
+          <div class="last-scan-data" v-if="result.scanFinished"><span>{{ $t('messages.lastScan') }}<br> {{ result.scanFinished.date }}</span></div>
             <div class="scanner-content" v-for="(scanner) in result.scanners">
                 <scanner-details v-bind:scanner="scanner"></scanner-details>
             </div>
