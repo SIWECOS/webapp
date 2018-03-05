@@ -1,7 +1,8 @@
 <template>
   <div class="scanner-check-item-data" v-if="scanresult.scoreTypeRaw !== 'hidden'">
     <div class="col-85">
-      <span class="round-check scanner-check-data" v-bind:class="{ 'score-red': scanresult.score < 30, 'score-orange': scanresult.score >= 30 && scanresult.score < 50, 'score-yellow': scanresult.score >= 50 && scanresult.score < 80, 'score-green': scanresult.score >=80 }">{{ scanresult.name}}</span>
+      <span class="round-check scanner-check-data"
+            v-bind:class="{ 'score-red': scanresult.score < 30, 'score-orange': scanresult.score >= 30 && scanresult.score < 50, 'score-yellow': scanresult.score >= 50 && scanresult.score < 80, 'score-green': scanresult.score >=80 }">{{ scanresult.name}}</span>
     </div>
     <div class="col-20">
       <button class="btn btn-primary" v-on:click="showDetails = (showDetails) ? 0 : 1">{{ $t('messages.more_info') }}
@@ -12,7 +13,7 @@
       <p class="scanner-check-item-description-title">{{ scanresult.description }}</p>
       <p class="scanner-check-item-description-report" v-if="scanresult.report">{{ scanresult.report }}</p>
       <div style="clear: both;"></div>
-      <small><a :href="'https://www.siwecos.de/wiki/' + scanresult.name" :title="$t('messages.more_info')"
+      <small><a :href="scanresult.link"
                 target="_blank">{{ $t('messages.more_info') }} &gt;&gt;</a></small>
       <div style="clear: both;"></div>
       <ul class="scanner-check-item-details" v-show="showDetails">
@@ -34,7 +35,7 @@
     float: left;
   }
 
-  .col-20{
+  .col-20 {
     width: 30%;
     float: left;
     text-align: center;
