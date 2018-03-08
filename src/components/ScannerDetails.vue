@@ -7,7 +7,7 @@
     {{ scanner.showDetails }}
 
     <div class="scanner-check-item-description" v-show="showDetails">
-      {{ scanner.description}}
+      <div v-html="scanner.description"></div>
 
       <small><a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type" :title="$t('messages.more_info')"
                 target="_blank">{{ $t('messages.more_info') }} &gt;&gt;</a></small>
