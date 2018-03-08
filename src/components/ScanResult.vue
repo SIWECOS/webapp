@@ -13,7 +13,7 @@
       <p class="scanner-check-item-description-title" v-html="scanresult.description"></p>
       <p class="scanner-check-item-description-report" v-if="scanresult.report" v-html="scanresult.report"></p>
       <div style="clear: both;"></div>
-      <small><a :href="scanresult.link" target="_blank">{{ $t('messages.detailed_info') }} &gt;&gt;</a></small>
+      <small><a :href="scanresult.link" target="_blank">{{ $t('messages.detailed_info') }}</a></small>
       <div style="clear: both;"></div>
       <ul class="scanner-check-item-details" v-show="showDetails">
         <li v-for="(detail) in scanresult.testDetails">{{ detail.name }}</li>
