@@ -104,7 +104,7 @@
                     <li>
                         <label for="tos">
                             <input type="checkbox" id="tos" v-validate="{required:true}" name="tos" v-model="user.agb"/>
-                            {{ $t("messages.field_tos") }} <a href="https://www.siwecos.de/agb/">AGB</a>
+                            {{ $t("messages.field_tos") }} <a href="https://www.siwecos.de/agb/" target="_blank">AGB</a>
                         </label>
                         <span v-show="errors.has('tos')">{{ errors.first('tos') }}</span>
                     </li>
