@@ -96,7 +96,7 @@
           data.data.domains.forEach(function (domain) {
             if (parseInt(domain.id) === parseInt(this.$route.params.id)) {
               this.domain = domain
-              this.metaTag = '<meta name="siwecos-site-verification" content="' + domain.domainToken + '" />'
+              this.metaTag = '<meta name="siwecostoken" content="' + domain.domainToken + '" />'
             }
           }.bind(this))
         }).catch(() => {
