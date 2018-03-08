@@ -5,7 +5,7 @@
             v-bind:class="{ 'score-red': scanresult.score < 30, 'score-orange': scanresult.score >= 30 && scanresult.score < 50, 'score-yellow': scanresult.score >= 50 && scanresult.score < 80, 'score-green': scanresult.score >=80 }">{{ scanresult.name}}</span>
     </div>
     <div class="col-20">
-      <button class="btn btn-primary" v-on:click="showDetails = (showDetails) ? 0 : 1">{{ $t('messages.more_info') }}
+      <button class="btn btn-primary" v-bind:class="(showDetails) ? 'active' : ''" v-on:click="showDetails = (showDetails) ? 0 : 1">{{ $t('messages.more_info') }}
       </button>
     </div>
     <div style="clear: both"></div>
@@ -13,8 +13,7 @@
       <p class="scanner-check-item-description-title" v-html="scanresult.description"></p>
       <p class="scanner-check-item-description-report" v-if="scanresult.report" v-html="scanresult.report"></p>
       <div style="clear: both;"></div>
-      <small><a :href="scanresult.link"
-                target="_blank">{{ $t('messages.more_info') }} &gt;&gt;</a></small>
+      <small><a :href="scanresult.link" target="_blank">{{ $t('messages.detailed_info') }} &gt;&gt;</a></small>
       <div style="clear: both;"></div>
       <ul class="scanner-check-item-details" v-show="showDetails">
         <li v-for="(detail) in scanresult.testDetails">{{ detail.name }}</li>
@@ -54,7 +53,8 @@
       messages: {
         de: {
           messages: {
-            more_info: 'Mehr Informationen'
+            more_info: 'Mehr Informationen',
+            detailed_info: 'Ausführliche Beschreibung >>>'
           }
         }
       }
