@@ -2,9 +2,12 @@
   <div class="scanner-item-data">
     <span class="scanner-data">{{ scanner.scanner_type }}</span>
 
-    <button class="btn btn-primary" v-on:click="showDetails = (showDetails) ? 0 : 1">{{ $t('messages.more_info') }}
+    <button class="btn btn-primary" v-on:click="showDetails = (showDetails) ? 0 : 1" v-if="scanner.description">
+      {{ $t('messages.more_info') }}
     </button>
-    {{ scanner.showDetails }}
+
+    <a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type" :title="$t('messages.more_info')"
+       target="_blank" v-if="!scanner.description">{{ $t('messages.more_info') }} &gt;&gt;</a>
 
     <div class="scanner-check-item-description" v-show="showDetails">
       <div v-html="scanner.description"></div>
@@ -13,7 +16,7 @@
                 target="_blank">{{ $t('messages.more_info') }} &gt;&gt;</a></small>
     </div>
 
-    <br><span><small>{{ $t('messages.lastScan') }}: {{ scanner.updated_at }}</small></span>
+    <br><span><small>{{ $t('messages.lastScan') }}: {{ scanner.updated_at_human }}</small></span>
     <p></p>
 
     <div class="scanner-gauge">
@@ -46,6 +49,7 @@
 </style>
 <script>
   import ScanResult from './ScanResult'
+  import moment from 'moment'
 
   export default {
     components: {ScanResult},
@@ -64,6 +68,9 @@
           }
         }
       }
+    },
+    created: function () {
+      this.scanner.updated_at_human = moment(String(this.scanner.updated_at)).format('DD.MM.YYYY hh:mm')
     },
     props: ['scanner']
   }

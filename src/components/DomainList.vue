@@ -6,8 +6,8 @@
 
         <section id="domains-wrapper">
             <ul id="domains-scanners-list" class="scanners-results" v-if="domains.length">
-                <li v-for="(domain) in domains" class="domain-results-item">
-                    <domain-details v-bind:domain="domain">></domain-details>
+                <li v-for="(domain, index) in domains" class="domain-results-item">
+                    <domain-details v-bind:domain="domain" v-on:delete-domain="deleteThisDomain(index)"></domain-details>
                 </li>
             </ul>
             <p v-if="!domains.length && !msg">{{ $t("messages.nodomains") }}</p>
@@ -41,6 +41,11 @@ export default {
           addDomain: 'Domain hinzufügen'
         }
       }
+    }
+  },
+  methods: {
+    deleteThisDomain: function (index) {
+      this.domains.splice(index, 1)
     }
   },
   created: function () {

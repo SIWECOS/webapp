@@ -9,6 +9,7 @@ export default {
     login_url: '/api/v1/users/login',
     signup_url: '/api/v1/users/createCaptcha',
     domain_list: '/api/v1/domains/listDomains',
+    domain_delete: '/api/v1/domains/deleteDomain',
     domain_add: '/api/v1/domains/addNewDomain',
     domain_verify: '/api/v1/domains/verifyDomain',
     scan_start: '/api/v1/scan/start',
