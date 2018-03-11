@@ -13,12 +13,12 @@
                 </p>
                 <p class="login-newpassword">
                     <label for="newpassword">{{ $t("messages.field_newpassword") }}</label>
-                    <input type="password" id="newpassword" v-validate="{min:8}" :placeholder="$t('messages.field_newpassword')" v-model="data.newpassword" name="newpassword" />
+                    <input type="password" id="newpassword" v-validate="{min:8,required:true}" :placeholder="$t('messages.field_newpassword')" v-model="data.newpassword" name="newpassword" />
                     <span v-show="errors.has('newpassword')">{{ errors.first('newpassword') }}</span>
                 </p>
                 <p class="login-newpasswordrepeat">
                     <label for="newpassword_repeat">{{ $t("messages.field_newpasswordrepeat") }}</label>
-                    <input type="password" id="newpassword_repeat" v-validate="{is:data.newpassword}"  :placeholder="$t('messages.field_newpasswordrepeat')" name="newpassword2" />
+                    <input type="password" id="newpassword_repeat" v-validate="{is:data.newpassword,required:true}"  :placeholder="$t('messages.field_newpasswordrepeat')" name="newpassword2" />
                     <span v-show="errors.has('newpassword2')">{{ errors.first('newpassword2') }}</span>
                 </p>
                 <p class="login-submit">
