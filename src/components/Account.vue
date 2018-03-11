@@ -22,7 +22,7 @@
                     </li>
                     <li>
                         <label for="newpassword_repeat">{{ $t("messages.field_newpasswordrepeat") }}</label>
-                        <input type="password" id="newpassword_repeat" v-validate="{is:user.newpassword}"  :placeholder="$t('messages.field_newpasswordrepeat')" name="newpassword2" />
+                        <input type="password" id="newpassword_repeat" v-validate="{is:user.newpassword}" :placeholder="$t('messages.field_newpasswordrepeat')" v-model="user.newpassword2" name="newpassword2" />
                         <span v-show="errors.has('newpassword2')">{{ errors.first('newpassword2') }}</span>
                     </li>
                     <li>
@@ -155,6 +155,10 @@ export default {
   },
   methods: {
     validateBeforeSubmit () {
+      if (this.user.newpassword !== '' && this.user.newpassword !== this.user.newpassword2) {
+        return true
+      }
+
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.submitForm()
