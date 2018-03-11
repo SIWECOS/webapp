@@ -17,6 +17,9 @@ export default {
     orgsizes: '/api/v1/getOrgSizes',
     salutations: '/api/v1/getSalutation',
     update_user: '/api/v1/users/updateUserData',
-    get_user: '/api/v1/users/getUserData'
+    get_user: '/api/v1/users/getUserData',
+    account_delete: '/api/v1/users/deleteUserData',
+    reset_password: '/api/v1/users/password/sendForgotMail',
+    process_reset: '/api/v1/users/password/processReset'
   }
 }

@@ -6,7 +6,10 @@ import DomainVerify from '@/components/DomainVerify'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Account from '@/components/Account'
+import AccountDelete from '@/components/AccountDelete'
 import Logout from '@/components/Logout'
+import ForgotPassword from '@/components/ForgotPassword'
+import ResetPassword from '@/components/ResetPassword'
 
 Vue.use(Router)
 
@@ -46,6 +49,21 @@ const router = new Router({
       path: '/account',
       name: 'Account',
       component: Account
+    },
+    {
+      path: '/accountdelete',
+      name: 'AccountDelete',
+      component: AccountDelete
+    },
+    {
+      path: '/forgotpassword',
+      name: 'ForgotPassword',
+      component: ForgotPassword
+    },
+    {
+      path: '/processreset/:token',
+      name: 'ResetPassword',
+      component: ResetPassword
     },
     {
       path: '/',

@@ -11,7 +11,8 @@ const messages = {
         register: 'Registrierung',
         logout: 'Abmelden',
         domains: 'Domainübersicht',
-        myaccount: 'Mein Konto'
+        myaccount: 'Mein Konto',
+        deleteaccount: 'Konto löschen'
       }
     }
   }

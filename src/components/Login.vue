@@ -26,6 +26,9 @@
                     <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_submit')" type="submit"><br>
                 </p>
             </form>
+            <p>
+                <router-link to="/forgotpassword">{{ $t('messages.forgotpassword') }}</router-link>
+            </p>
         </div>
     </div>
 </template>
@@ -51,7 +54,8 @@ export default {
           field_remember: 'Angemeldet bleiben',
           field_submit: 'Anmelden',
           invalid_credentials: 'Ungültige Zugangsdaten',
-          user_inactive: 'Bitte aktivieren Sie Ihren Account, bevor Sie sich einloggen'
+          user_inactive: 'Bitte aktivieren Sie Ihren Account, bevor Sie sich einloggen',
+          forgotpassword: 'Passwort vergessen?'
         }
       }
     }
