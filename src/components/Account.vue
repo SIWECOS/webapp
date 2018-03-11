@@ -148,7 +148,8 @@ export default {
           field_industry: 'Branche',
           submit: 'Speichern',
           account_saved: 'Konto erfolgreich gespeichert',
-          error_saving_account: 'Konto konnte nicht gespeichert werden'
+          error_saving_account: 'Konto konnte nicht gespeichert werden',
+          password_no_match: 'Bitte Passwortbestätigung prüfen'
         }
       }
     }
@@ -156,6 +157,8 @@ export default {
   methods: {
     validateBeforeSubmit () {
       if (this.user.newpassword !== '' && this.user.newpassword !== this.user.newpassword2) {
+        alert(this.$t('messages.password_no_match'))
+
         return true
       }
 
