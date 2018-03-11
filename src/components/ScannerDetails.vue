@@ -59,16 +59,6 @@
         'showDetails': false
       }
     },
-    i18n: {
-      messages: {
-        de: {
-          messages: {
-            lastScan: 'Letzter Scan',
-            more_info: 'Mehr Informationen'
-          }
-        }
-      }
-    },
     created: function () {
       this.scanner.updated_at_human = moment(String(this.scanner.updated_at)).format('DD.MM.YYYY HH:mm')
     },

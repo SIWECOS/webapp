@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.headline") }}</h3>
+        <h3>{{ $t("messages.register_headline") }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -112,7 +112,7 @@
 
                 <vue-recaptcha size="invisible" ref="recaptcha" @verify="onVerify":sitekey="sitekey"></vue-recaptcha>
 
-                <input type="submit" class="submit button" :value="$t('messages.submit')" />
+                <input type="submit" class="submit button" :value="$t('messages.register_submit')" />
             </form>
         </div>
 
@@ -139,41 +139,6 @@ export default {
       sitekey: '6LeCFkYUAAAAANxnJp11dXVNBELcyVfMn0b2FQMG',
       salutations: [],
       org_sizes: []
-    }
-  },
-  i18n: {
-    messages: {
-      de: {
-        messages: {
-          headline: 'Konto anlegen',
-          fieldset_credentials: 'Zugangsdaten',
-          field_email: 'E-Mail*',
-          field_password: 'Passwort*',
-          field_passwordrepeat: 'Passwort wiederholen*',
-          fieldset_profile: 'Persönliche Daten',
-          field_salutation: 'Anrede*',
-          fieldvalue_saluation_pleaseselect: '- Anrede wählen -',
-          fieldvalue_saluation_mr: 'Herr',
-          fieldvalue_saluation_mrs: 'Frau',
-          field_firstname: 'Vorname*',
-          field_lastname: 'Nachname*',
-          field_address: 'Adresse',
-          field_zip: 'PLZ',
-          field_city: 'Stadt',
-          field_telephone: 'Telefon',
-          fieldset_company: 'Firmenangaben',
-          field_company: 'Firmenname',
-          field_companysize: 'Größe',
-          field_companysize_pleaseselect: '- Unternehmensgröße wählen - ',
-          field_industry: 'Branche',
-          field_tos: 'Ich akzeptiere die',
-          fielset_iagree: 'Zustimmung',
-          submit: 'Registrieren',
-          emailaddress_in_use: 'Die gewünschte E-Mail-Adresse wird bereits verwendet',
-          could_not_register: 'Bei der Registrierung ist ein Fehler aufgetreten, bitte versuchen Sie es später erneut',
-          successmessage: 'Vielen Dank für Ihre Anmeldung bei SIWECOS! Bitte aktivieren Sie nun Ihr Konto, indem Sie den Bestätigungslink aufrufen, den wir Ihnen per E-Mail zugesendet haben.'
-        }
-      }
     }
   },
   methods: {

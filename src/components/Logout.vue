@@ -13,15 +13,6 @@ export default {
     return {
     }
   },
-  i18n: {
-    messages: {
-      de: {
-        messages: {
-          loggingout: 'Sie werden nun abgemeldet'
-        }
-      }
-    }
-  },
   created: function () {
     auth.logout()
   }

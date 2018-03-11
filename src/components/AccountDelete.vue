@@ -15,16 +15,6 @@
       return {
       }
     },
-    i18n: {
-      messages: {
-        de: {
-          messages: {
-            accountdelete_text: 'SIWECOS Account löschen',
-            confirm_accountdelete: 'Möchten Sie Ihr Benutzerkonto unwiderruflich löschen?'
-          }
-        }
-      }
-    },
     created: function () {
       if (!auth.user.authenticated) {
         router.push('/login')

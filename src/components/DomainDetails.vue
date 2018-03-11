@@ -72,7 +72,7 @@ export default {
       })
     },
     deleteDomain: function () {
-      if (!confirm(this.$t('messages.confirm_delete'))) {
+      if (!confirm(this.$t('messages.confirm_domain_delete'))) {
         return false
       }
 
@@ -109,26 +109,6 @@ export default {
     }).catch(() => {
       this.msg = 'fetch_error'
     })
-  },
-  i18n: {
-    messages: {
-      de: {
-        messages: {
-          verifyDomain: 'Domain bestätigen',
-          startScan: 'Neuen Scan starten',
-          startedScan: 'Scan gestartet',
-          fetch_error: 'Fehler beim Abruf der Scan-Ergebnisse, bitte versuchen Sie es später erneut',
-          start_error: 'Fehler beim Starten des Scans, bitte versuchen Sie es später erneut',
-          start_success: 'Scan erfolgreich gestartet, die Ergebnisse stehen in einigen Minuten zur Verfügung',
-          lastScan: 'Letzter Scan',
-          showResults: 'Zeige Ergebnisse',
-          more_info: 'Mehr Informationen',
-          deleteDomain: 'Domain entfernen',
-          delete_error: 'Fehler beim Löschen der Domain, bitte versuchen Sie es später erneut',
-          confirm_delete: 'Möchten Sie diese Domain wirklich löschen?'
-        }
-      }
-    }
   },
   computed: {
     'domainClass': function () {

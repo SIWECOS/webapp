@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.headline") }}</h3>
+        <h3>{{ $t("messages.domainlist_headline") }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -29,18 +29,6 @@ export default {
     return {
       domains: [],
       msg: false
-    }
-  },
-  i18n: {
-    messages: {
-      de: {
-        messages: {
-          headline: 'Sicherheitsbericht',
-          api_error: 'Fehler beim Abruf der Domaindaten, bitte versuchen Sie es später erneut',
-          nodomains: 'Keine Domains verfügbar',
-          addDomain: 'Domain hinzufügen'
-        }
-      }
     }
   },
   methods: {

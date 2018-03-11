@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.headline") }}</h3>
+        <h3>{{ $t("messages.resetpassword_headline") }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -22,7 +22,7 @@
                     <span v-show="errors.has('newpassword2')">{{ errors.first('newpassword2') }}</span>
                 </p>
                 <p class="login-submit">
-                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_submit')" type="submit"><br>
+                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_resetpassword_submit')" type="submit"><br>
                 </p>
             </form>
         </div>
@@ -46,13 +46,7 @@
       messages: {
         de: {
           messages: {
-            headline: 'Passwort zurücksetzen',
-            field_submit: 'Passwort zurücksetzen',
-            field_email: 'E-Mail*',
-            no_user_found: 'Es wurde kein Nutzer mit der angegebenen Adresse gefunden',
-            field_newpassword: 'Neues Passwort*',
-            field_newpasswordrepeat: 'Neues Passwort bestätigen*',
-            reset_complete: 'Ihr Passwort wurde zurückgesetzt, Sie werden weitergeleitet'
+
           }
         }
       }

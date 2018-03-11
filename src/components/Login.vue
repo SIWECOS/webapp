@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.headline") }}</h3>
+        <h3>{{ $t("messages.login_headline") }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -42,22 +42,6 @@ export default {
     return {
       credentials: {email: '', password: '', rememberme: false},
       msg: false
-    }
-  },
-  i18n: {
-    messages: {
-      de: {
-        messages: {
-          headline: 'Login',
-          field_email: 'E-Mail',
-          field_password: 'Passwort',
-          field_remember: 'Angemeldet bleiben',
-          field_submit: 'Anmelden',
-          invalid_credentials: 'Ungültige Zugangsdaten',
-          user_inactive: 'Bitte aktivieren Sie Ihren Account, bevor Sie sich einloggen',
-          forgotpassword: 'Passwort vergessen?'
-        }
-      }
     }
   },
   methods: {

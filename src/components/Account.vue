@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.headline") }}</h3>
+        <h3>{{ $t("messages.account_headline") }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -119,39 +119,6 @@ export default {
       msg: false,
       salutations: [],
       org_sizes: []
-    }
-  },
-  i18n: {
-    messages: {
-      de: {
-        messages: {
-          headline: 'Mein Konto',
-          fieldset_credentials: 'Zugangsdaten',
-          field_email: 'E-Mail*',
-          field_newpassword: 'Neues Passwort',
-          field_newpasswordrepeat: 'Neues Passwort wiederholen',
-          fieldset_profile: 'Persönliche Daten',
-          field_salutation: 'Anrede*',
-          fieldvalue_saluation_pleaseselect: '- Anrede wählen -',
-          fieldvalue_saluation_mr: 'Herr',
-          fieldvalue_saluation_mrs: 'Frau',
-          field_firstname: 'Vorname*',
-          field_lastname: 'Nachname*',
-          field_address: 'Adresse',
-          field_zip: 'PLZ',
-          field_city: 'Stadt',
-          field_telephone: 'Telefon',
-          fieldset_company: 'Firmenangaben',
-          field_company: 'Firmenname',
-          field_companysize: 'Größe',
-          field_companysize_pleaseselect: '- Unternehmensgröße wählen - ',
-          field_industry: 'Branche',
-          submit: 'Speichern',
-          account_saved: 'Konto erfolgreich gespeichert',
-          error_saving_account: 'Konto konnte nicht gespeichert werden',
-          password_no_match: 'Bitte Passwortbestätigung prüfen'
-        }
-      }
     }
   },
   methods: {

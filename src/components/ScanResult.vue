@@ -49,16 +49,6 @@
         'showDetails': false
       }
     },
-    i18n: {
-      messages: {
-        de: {
-          messages: {
-            more_info: 'Mehr Informationen',
-            detailed_info: 'Ausführliche Beschreibung >>>'
-          }
-        }
-      }
-    },
     props: ['scanresult']
   }
 </script>

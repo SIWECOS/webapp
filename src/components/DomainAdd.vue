@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.headline") }}</h3>
+        <h3>{{ $t("messages.headline_domainadd") }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -12,7 +12,7 @@
                     <span v-show="errors.has('domain')">{{ errors.first('domain') }}</span>
                 </p>
                 <p class="login-submit">
-                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_submit')" type="submit"><br>
+                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_domain_submit')" type="submit"><br>
                 </p>
             </form>
         </div>
@@ -33,19 +33,6 @@
           danger_level: 10
         },
         msg: false
-      }
-    },
-    i18n: {
-      messages: {
-        de: {
-          messages: {
-            headline: 'Domain hinzufügen',
-            field_submit: 'Hinzufügen',
-            field_domain: 'Domain',
-            domain_in_use: 'Die angegebene Domain wird bereits in einem SIWECOS Konto verwendet',
-            could_not_add: 'Die Domain konnte nicht hinzugefügt werden, bitte versuchen Sie es später erneut'
-          }
-        }
       }
     },
     created: function () {
@@ -73,7 +60,7 @@
             return
           }
 
-          this.msg = 'could_not_add'
+          this.msg = 'domain_could_not_add'
         })
       }
     }

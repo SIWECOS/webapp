@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.headline") }}</h3>
+        <h3>{{ $t("messages.forgot_headline") }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -12,7 +12,7 @@
                     <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                 </p>
                 <p class="login-submit">
-                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_submit')" type="submit"><br>
+                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_reset_submit')" type="submit"><br>
                 </p>
             </form>
         </div>
@@ -30,19 +30,6 @@
       return {
         email: '',
         msg: false
-      }
-    },
-    i18n: {
-      messages: {
-        de: {
-          messages: {
-            headline: 'Passwort zurücksetzen',
-            field_submit: 'Passwort zurücksetzen',
-            field_email: 'E-Mail',
-            no_user_found: 'Es wurde kein Nutzer mit der angegebenen Adresse gefunden',
-            mail_sent: 'Wir haben Ihnen eine E-Mail mit weiteren Instruktionen zugesendet.'
-          }
-        }
       }
     },
     created: function () {
