@@ -16,14 +16,14 @@
                         <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                     </li>
                     <li>
-                        <label for="password">{{ $t("messages.field_password") }}</label>
-                        <input type="password" id="password" v-validate="{min:8}" :placeholder="$t('messages.field_password')" v-model="user.password" name="password" />
-                        <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
+                        <label for="newpassword">{{ $t("messages.field_newpassword") }}</label>
+                        <input type="password" id="newpassword" v-validate="{min:8}" :placeholder="$t('messages.field_newpassword')" v-model="user.newpassword" name="newpassword" />
+                        <span v-show="errors.has('newpassword')">{{ errors.first('newpassword') }}</span>
                     </li>
                     <li>
-                        <label for="password_repeat">{{ $t("messages.field_passwordrepeat") }}</label>
-                        <input type="password" id="password_repeat" v-validate="{is:user.password}"  :placeholder="$t('messages.field_passwordrepeat')" name="password2" />
-                        <span v-show="errors.has('password2')">{{ errors.first('password2') }}</span>
+                        <label for="newpassword_repeat">{{ $t("messages.field_newpasswordrepeat") }}</label>
+                        <input type="password" id="newpassword_repeat" v-validate="{is:user.newpassword}"  :placeholder="$t('messages.field_newpasswordrepeat')" name="newpassword2" />
+                        <span v-show="errors.has('newpassword2')">{{ errors.first('newpassword2') }}</span>
                     </li>
                     <li>
                         <h4>{{ $t("messages.fieldset_profile") }}</h4>
@@ -128,8 +128,8 @@ export default {
           headline: 'Mein Konto',
           fieldset_credentials: 'Zugangsdaten',
           field_email: 'E-Mail*',
-          field_password: 'Passwort*',
-          field_passwordrepeat: 'Passwort wiederholen*',
+          field_newpassword: 'Neues Passwort',
+          field_newpasswordrepeat: 'Neues Passwort wiederholen',
           fieldset_profile: 'Persönliche Daten',
           field_salutation: 'Anrede*',
           fieldvalue_saluation_pleaseselect: '- Anrede wählen -',
@@ -178,7 +178,6 @@ export default {
     }
 
     this.user = auth.user.data
-    this.user.password = undefined
   },
   mounted: function () {
     api.$http.get(api.urls.salutations)

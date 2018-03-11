@@ -5,7 +5,7 @@ VeeValidate.Validator.localize('de', {
   messages: de.messages,
   attributes: {
     email: 'E-Mail',
-    password: 'Password',
+    password: 'Passwort',
     password2: 'Passwort-Bestätigung',
     first_name: 'Vorname',
     last_name: 'Nachname',
@@ -13,7 +13,9 @@ VeeValidate.Validator.localize('de', {
     zip: 'PLZ',
     city: 'Ort',
     telephone: 'Telefon',
-    salutation: 'Anrede'
+    salutation: 'Anrede',
+    newpassword: 'Passwort',
+    newpassword2: 'Passwort-Bestätigung'
   },
   custom: {
     tos: {
