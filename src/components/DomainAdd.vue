@@ -12,7 +12,7 @@
                     <span v-show="errors.has('domain')">{{ errors.first('domain') }}</span>
                 </p>
                 <p class="login-submit">
-                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_domain_submit')" type="submit"><br>
+                    <input name="wp-submit" id="wppb-submit" class="btn btn-primary" :value="$t('messages.field_domain_submit')" type="submit"><br>
                 </p>
             </form>
         </div>

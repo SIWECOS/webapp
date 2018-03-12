@@ -22,7 +22,7 @@
                     <span v-show="errors.has('newpassword2')">{{ errors.first('newpassword2') }}</span>
                 </p>
                 <p class="login-submit">
-                    <input name="wp-submit" id="wppb-submit" class="button button-primary" :value="$t('messages.field_resetpassword_submit')" type="submit"><br>
+                    <input name="wp-submit" id="wppb-submit" class="btn btn-primary" :value="$t('messages.field_resetpassword_submit')" type="submit"><br>
                 </p>
             </form>
         </div>

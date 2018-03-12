@@ -28,7 +28,7 @@
                 <li>{{ $t("messages.method_file_step4") }}</li>
             </ul>
 
-            <a href="#" @click="verifyDomain()">{{ $t('messages.verify') }}</a>
+            <a href="#" @click="verifyDomain()" class="btn btn-primary">{{ $t('messages.verify') }}</a>
         </div>
     </div>
 </template>
