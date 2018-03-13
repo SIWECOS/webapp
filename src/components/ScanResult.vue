@@ -2,7 +2,7 @@
   <div class="scanner-check-item-data" v-if="scanresult.scoreTypeRaw !== 'hidden'">
     <div class="col-85">
       <span class="round-check scanner-check-data"
-            v-bind:class="{ 'score-red': scanresult.score < 30, 'score-orange': scanresult.score >= 30 && scanresult.score < 50, 'score-yellow': scanresult.score >= 50 && scanresult.score < 80, 'score-green': scanresult.score >=80 }">{{ scanresult.name}}</span>
+            v-bind:class="{ 'score-red': scanresult.score < 30, 'score-orange': scanresult.score >= 30 && scanresult.score < 50, 'score-yellow': scanresult.score >= 50 && scanresult.score < 100, 'score-green': scanresult.score >=100 }">{{ scanresult.name}}</span>
     </div>
     <div class="col-20">
       <button class="btn btn-primary" v-bind:class="(showDetails) ? 'active' : ''" v-on:click="showDetails = (showDetails) ? 0 : 1">{{ $t('messages.more_info') }}

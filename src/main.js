@@ -6,6 +6,8 @@ import App from './App'
 import router from './router'
 import validator from './validator'
 
+require('es6-promise').polyfill()
+
 Vue.use(validator, {
   locale: 'de'
 })

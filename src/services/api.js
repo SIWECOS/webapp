@@ -1,4 +1,3 @@
-require('es6-promise').polyfill();
 import axios from 'axios'
 
 axios.defaults.baseURL = 'https://bla.staging2.siwecos.de'
