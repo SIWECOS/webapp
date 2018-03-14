@@ -103,7 +103,8 @@ const messages = {
       resetpassword_headline: 'Passwort zurücksetzen',
       field_resetpassword_submit: 'Passwort zurücksetzen',
       reset_complete: 'Ihr Passwort wurde zurückgesetzt, Sie werden weitergeleitet',
-      detailed_info: 'Ausführliche Beschreibung >>>'
+      detailed_info: 'Ausführliche Beschreibung >>>',
+      insufficent_token: 'Sie haben die maximale Anzahl an Scans für die aktuelle Zeitperiode erreicht. Bitte probieren Sie es später erneut oder kontaktieren Sie unseren Support.'
     }
   }
 }
