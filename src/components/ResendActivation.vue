@@ -12,7 +12,7 @@
                     <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                 </p>
                 <p class="login-submit">
-                    <input name="wp-submit" id="wppb-submit" class="btn btn-primary" :value="$t('messages.field_reset_submit')" type="submit"><br>
+                    <input name="wp-submit" id="wppb-submit" class="btn btn-primary" :value="$t('messages.field_resend_submit')" type="submit"><br>
                 </p>
             </form>
         </div>

@@ -107,7 +107,8 @@ const messages = {
       insufficent_token: 'Sie haben die maximale Anzahl an Scans für die aktuelle Zeitperiode erreicht. Bitte probieren Sie es später erneut oder kontaktieren Sie unseren Support.',
       activation_resent: 'Wir haben Ihnen die Aktivierungsmail erneut zugesendet',
       no_user_found_or_already_active: 'Die angegebene Mailadresse wurde nicht gefunden bzw. der Benutzer ist bereits aktiviert',
-      resendactivation_headline: 'Aktivierungs-Nachricht erneut versenden'
+      resendactivation_headline: 'Aktivierungs-Nachricht erneut versenden',
+      field_resend_submit: 'Nachricht anfordern'
     }
   }
 }
