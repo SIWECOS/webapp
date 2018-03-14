@@ -2,7 +2,7 @@
     <div>
         <h3>{{ $t("messages.login_headline") }}</h3>
 
-        <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
+        <p class="wppb-error" v-if="msg" v-html="$t('messages.' + msg)"></p>
 
         <div id="wppb-login-wrap" class="wppb-user-forms">
             <form @submit.prevent="validateBeforeSubmit" id="loginform">

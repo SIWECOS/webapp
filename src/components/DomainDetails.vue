@@ -63,12 +63,13 @@ export default {
           this.msg = false
         }.bind(this), 5000)
       }).catch((error) => {
-        this.scanStarted = false
-        this.msg = 'start_error'
-
         if (error.response.status === 452) {
           this.msg = 'insufficent_token'
+          return
         }
+
+        this.scanStarted = false
+        this.msg = 'start_error'
 
         setTimeout(function () {
           this.msg = false

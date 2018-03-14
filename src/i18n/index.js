@@ -89,7 +89,7 @@ const messages = {
       field_remember: 'Angemeldet bleiben',
       field_submit: 'Anmelden',
       invalid_credentials: 'Ungültige Zugangsdaten',
-      user_inactive: 'Bitte aktivieren Sie Ihren Account, bevor Sie sich einloggen',
+      user_inactive: 'Bitte aktivieren Sie Ihren Account, bevor Sie sich einloggen. <a href="#/resendactivation">Mail nicht erhalten?</a>',
       forgotpassword: 'Passwort vergessen?',
       loggingout: 'Sie werden nun abgemeldet',
       register_headline: 'Konto anlegen',
@@ -104,7 +104,10 @@ const messages = {
       field_resetpassword_submit: 'Passwort zurücksetzen',
       reset_complete: 'Ihr Passwort wurde zurückgesetzt, Sie werden weitergeleitet',
       detailed_info: 'Ausführliche Beschreibung >>>',
-      insufficent_token: 'Sie haben die maximale Anzahl an Scans für die aktuelle Zeitperiode erreicht. Bitte probieren Sie es später erneut oder kontaktieren Sie unseren Support.'
+      insufficent_token: 'Sie haben die maximale Anzahl an Scans für die aktuelle Zeitperiode erreicht. Bitte probieren Sie es später erneut oder kontaktieren Sie unseren Support.',
+      activation_resent: 'Wir haben Ihnen die Aktivierungsmail erneut zugesendet',
+      no_user_found_or_already_active: 'Die angegebene Mailadresse wurde nicht gefunden bzw. der Benutzer ist bereits aktiviert',
+      resendactivation_headline: 'Aktivierungs-Nachricht erneut versenden'
     }
   }
 }

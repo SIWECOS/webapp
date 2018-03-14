@@ -10,6 +10,7 @@ import AccountDelete from '@/components/AccountDelete'
 import Logout from '@/components/Logout'
 import ForgotPassword from '@/components/ForgotPassword'
 import ResetPassword from '@/components/ResetPassword'
+import ResendActivation from '@/components/ResendActivation'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ const router = new Router({
       path: '/processreset/:token',
       name: 'ResetPassword',
       component: ResetPassword
+    },
+    {
+      path: '/resendactivation',
+      name: 'ResendActivation',
+      component: ResendActivation
     },
     {
       path: '/',
