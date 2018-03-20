@@ -8,7 +8,7 @@
             <form @submit.prevent="validateAddForm" id="forgotform">
                 <p class="login-username">
                     <label for="email">{{ $t("messages.field_email") }}</label><br>
-                    <input name="email" id="email" :placeholder="$t('messages.field_email')" type="email" v-validate="{required:true,email:true}" v-model="email">
+                    <input name="email" id="email" :placeholder="$t('messages.field_email')" type="email" v-validate="{required:true,email:true}" v-model="email" data-vv-validate-on="blur">
                     <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                 </p>
                 <p class="login-submit">

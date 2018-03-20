@@ -8,12 +8,12 @@
             <form @submit.prevent="validateBeforeSubmit" id="loginform">
                 <p class="login-username">
                     <label for="email">{{ $t("messages.field_email") }}</label><br>
-                    <input name="email" id="email" :placeholder="$t('messages.field_email')" type="email" v-validate="'required|email'" v-model="credentials.email">
+                    <input name="email" id="email" :placeholder="$t('messages.field_email')" type="email" v-validate="'required|email'" v-model="credentials.email" data-vv-validate-on="blur">
                     <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                 </p>
                 <p class="login-password">
                     <label for="password">{{ $t("messages.field_password") }}</label><br>
-                    <input name="password" id="password" :placeholder="$t('messages.field_password')" type="password" v-validate="'required'" v-model="credentials.password">
+                    <input name="password" id="password" :placeholder="$t('messages.field_password')" type="password" v-validate="'required'" v-model="credentials.password" data-vv-validate-on="blur">
                     <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
                 </p>
                 <p class="login-remember">

@@ -8,7 +8,7 @@
             <form @submit.prevent="validateAddForm" id="domainform">
                 <p class="login-username">
                     <label for="domain">{{ $t("messages.field_domain") }}</label><br>
-                    <input name="domain" id="domain" :placeholder="$t('messages.field_domain')" type="url" v-validate="{required:true,url:true}" v-model="domain.domain">
+                    <input name="domain" id="domain" :placeholder="$t('messages.field_domain')" type="url" v-validate="{required:true,url:true}" v-model="domain.domain" data-vv-validate-on="blur">
                     <span v-show="errors.has('domain')">{{ errors.first('domain') }}</span>
                 </p>
                 <p class="login-submit">

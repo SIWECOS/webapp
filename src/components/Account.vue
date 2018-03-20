@@ -12,17 +12,17 @@
                     </li>
                     <li>
                         <label for="email">{{ $t("messages.field_email") }}</label>
-                        <input type="email" id="email" v-validate="'required|email'" :placeholder="$t('messages.field_email')" v-model="user.email" name="email"/>
+                        <input type="email" id="email" v-validate="'required|email'" :placeholder="$t('messages.field_email')" v-model="user.email" name="email" data-vv-validate-on="blur"/>
                         <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                     </li>
                     <li>
                         <label for="newpassword">{{ $t("messages.field_newpassword") }}</label>
-                        <input type="password" id="newpassword" v-validate="{min:8}" :placeholder="$t('messages.field_newpassword')" v-model="user.newpassword" name="newpassword" />
+                        <input type="password" id="newpassword" v-validate="{min:8}" :placeholder="$t('messages.field_newpassword')" v-model="user.newpassword" name="newpassword" data-vv-validate-on="blur" />
                         <span v-show="errors.has('newpassword')">{{ errors.first('newpassword') }}</span>
                     </li>
                     <li>
                         <label for="newpassword_repeat">{{ $t("messages.field_newpasswordrepeat") }}</label>
-                        <input type="password" id="newpassword_repeat" v-validate="{is:user.newpassword}" :placeholder="$t('messages.field_newpasswordrepeat')" v-model="user.newpassword2" name="newpassword2" />
+                        <input type="password" id="newpassword_repeat" v-validate="{is:user.newpassword}" :placeholder="$t('messages.field_newpasswordrepeat')" v-model="user.newpassword2" name="newpassword2" data-vv-validate-on="blur" />
                         <span v-show="errors.has('newpassword2')">{{ errors.first('newpassword2') }}</span>
                     </li>
                     <li>
@@ -30,7 +30,7 @@
                     </li>
                     <li>
                         <label for="salutation">{{ $t("messages.field_salutation") }}</label>
-                        <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id">
+                        <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id" data-vv-validate-on="blur">
                             <option v-for="option in salutations" v-bind:value="option.id">
                                 {{ $t('messages.fieldvalue_saluation_' + option.value.toLowerCase().substr(0, option.value.length -1)) }}
                             </option>
@@ -39,12 +39,12 @@
                     </li>
                     <li>
                         <label for="first_name">{{ $t("messages.field_firstname") }}</label>
-                        <input type="text" id="first_name" v-validate="{required:true}" v-model="user.first_name" :placeholder="$t('messages.field_firstname')" name="first_name" />
+                        <input type="text" id="first_name" v-validate="{required:true}" v-model="user.first_name" :placeholder="$t('messages.field_firstname')" name="first_name" data-vv-validate-on="blur" />
                         <span v-show="errors.has('first_name')">{{ errors.first('first_name') }}</span>
                     </li>
                     <li>
                         <label for="last_name">{{ $t("messages.field_lastname") }}</label>
-                        <input type="text" id="last_name" v-validate="{required:true}" v-model="user.last_name"  :placeholder="$t('messages.field_lastname')" name="last_name" />
+                        <input type="text" id="last_name" v-validate="{required:true}" v-model="user.last_name"  :placeholder="$t('messages.field_lastname')" name="last_name" data-vv-validate-on="blur" />
                         <span v-show="errors.has('last_name')">{{ errors.first('last_name') }}</span>
                     </li>
                     <li>
