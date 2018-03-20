@@ -25,6 +25,8 @@
 
           </div>
 
+          <a href="https://staging2.siwecos.de/gesamtscore/" class="scanner-score-information">Informationen</a>
+
           <div class="last-scan-data" v-if="result.scanFinished"><span>{{ $t('messages.lastScan') }}<br> {{ result.scanFinished.humanDate }}</span></div>
             <div class="scanner-content" v-for="(scanner) in result.scanners">
                 <scanner-details v-bind:scanner="scanner"></scanner-details>
