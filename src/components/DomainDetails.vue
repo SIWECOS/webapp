@@ -49,15 +49,21 @@ export default {
       'scanStarted': false,
       'result': false,
       'showDetails': false,
-      'deleteStarted': false
+      'deleteStarted': false,
+      'fetchInterval': false,
+      'scanId': false,
+      'hasGauge': false
     }
   },
   methods: {
     scanStart: function () {
       this.scanStarted = true
+      this.msg = 'start_success'
 
-      api.$http.post(api.urls.scan_start, {domain: this.domain.domain, dangerLevel: 10}).then((data) => {
-        this.msg = 'start_success'
+      api.$http.post(api.urls.scan_start, {domain: this.domain.domain, dangerLevel: 10}).then((response) => {
+        this.scanId = response.data.id
+
+        this.fetchInterval = setInterval(this.getScanStatus, 3000)
 
         setTimeout(function () {
           this.msg = false
@@ -74,6 +80,19 @@ export default {
         setTimeout(function () {
           this.msg = false
         }.bind(this), 5000)
+      })
+    },
+    getScanStatus: function () {
+      api.$http.get(api.urls.status_url + '/' + this.scanId).then((response) => {
+        if (response.data.status === 3) {
+          clearInterval(this.fetchInterval)
+          this.fetchInterval = false
+          this.scanStarted = false
+
+          this.fetchResult()
+        }
+      }).catch((err) => {
+        console.log(err)
       })
     },
     deleteDomain: function () {
@@ -94,6 +113,26 @@ export default {
           this.msg = false
         }.bind(this), 5000)
       })
+    },
+    fetchResult: function () {
+      api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
+        this.result = data.data
+        this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).format('DD.MM.YYYY HH:mm')
+
+        // Trigger gauge
+        setTimeout(function () {
+          if (
+            window.jQuery && window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter') &&
+            typeof window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter !== 'undefined' &&
+            !this.hasGauge
+          ) {
+            window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter()
+            this.hasGauge = true
+          }
+        }.bind(this), 500)
+      }).catch(() => {
+        this.msg = 'fetch_error'
+      })
     }
   },
   created: function () {
@@ -101,19 +140,7 @@ export default {
       return
     }
 
-    api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
-      this.result = data.data
-      this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).format('DD.MM.YYYY HH:mm')
-
-      // Trigger gauge
-      setTimeout(function () {
-        if (window.jQuery && window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter') && typeof window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter !== 'undefined') {
-          window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter()
-        }
-      }.bind(this), 500)
-    }).catch(() => {
-      this.msg = 'fetch_error'
-    })
+    this.fetchResult()
   },
   computed: {
     'domainClass': function () {

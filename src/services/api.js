@@ -21,6 +21,7 @@ export default {
     account_delete: '/api/v1/users/deleteUserData',
     reset_password: '/api/v1/users/password/sendForgotMail',
     process_reset: '/api/v1/users/password/processReset',
-    resend_activation: '/api/v1/users/activate/resend'
+    resend_activation: '/api/v1/users/activate/resend',
+    status_url: 'https://ca.staging2.siwecos.de//api/v1/scan/status/free'
   }
 }
