@@ -119,7 +119,7 @@ export default {
     fetchResult: function () {
       api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
         this.result = data.data
-        this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).format('DD.MM.YYYY HH:mm')
+        this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).add('1', 'hours').format('DD.MM.YYYY HH:mm')
 
         // Trigger gauge
         setTimeout(function () {

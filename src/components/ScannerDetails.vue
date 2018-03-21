@@ -60,7 +60,7 @@
       }
     },
     created: function () {
-      this.scanner.updated_at_human = moment(String(this.scanner.updated_at)).format('DD.MM.YYYY HH:mm')
+      this.scanner.updated_at_human = moment(String(this.scanner.updated_at)).add('1', 'hours').format('DD.MM.YYYY HH:mm')
     },
     props: ['scanner']
   }

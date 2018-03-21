@@ -2,8 +2,6 @@
     <div>
         <h3>{{ $t("messages.account_headline") }}</h3>
 
-        <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
-
         <div id="UserAccount">
             <form @submit.prevent="validateBeforeSubmit">
                 <ul>
@@ -99,6 +97,8 @@
                         <input type="text" id="org_phone" :placeholder="$t('messages.field_telephone')" name="org_phone" v-model="user.org_phone" />
                     </li>
                 </ul>
+
+                <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
                 <input type="submit" class="submit button" :value="$t('messages.submit')" />
             </form>

@@ -76,7 +76,7 @@ const messages = {
       method_file_step2: 'Im zweiten Schritt kopieren Sie den Code <strong>{token}</strong>  in die erste Zeile der HTML-Datei.',
       method_file_step3: 'Im dritten Schritt laden Sie die erstellte HTML-Datei in das Hauptverzeichnis ihres Webseite hoch.',
       method_file_step4: 'Klicken Sie im Anschluss auf „Überprüfen“. Ist die Überprüfung erfolgreich, wird die neue Domain im Dienst von Siwecos aufgenommen bzw. gespeichert.',
-      verify_explanation1: 'Alle Domains die bei Siwecos zur Überprüfung eingetragen werden, müssen verifiziert bzw. gegengeprüft werden. Dazu bietet Siwecos drei verschiedene Verfahren (Datei, Meta-Tag, E-Mail) an.',
+      verify_explanation1: 'Alle Domains die bei Siwecos zur Überprüfung eingetragen werden, müssen verifiziert bzw. gegengeprüft werden. Dazu bietet Siwecos zwei verschiedene Verfahren (Datei, Meta-Tag) an.',
       verify_explanation2: 'Wozu wird eine Verifizierung gemacht? Bei einer Verifizierung wird aus datenschutzrechtlichen Gründen nachgewiesen, dass Sie der wirkliche Inhaber der Domain sind.',
       verify: 'Überprüfen',
       could_not_verify: 'Fehler bei der Überprüfung, bitte folgen Sie den Schritten in der Anleitung',
