@@ -31,9 +31,9 @@
                     <li>
                         <label for="salutation">{{ $t("messages.field_salutation") }}</label>
                         <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id" data-vv-validate-on="blur">
-                          <option v-for="option in salutations" v-bind:value="option.id">
-                            {{ option.value }}
-                          </option>
+                            <option v-for="option in salutations" v-bind:value="option.id">
+                                {{ $t('messages.fieldvalue_saluation_' + option.value.toLowerCase().substr(0, option.value.length -1)) }}
+                            </option>
                         </select>
                         <span v-show="errors.has('salutation')">{{ errors.first('salutation') }}</span>
                     </li>
