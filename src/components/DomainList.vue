@@ -33,7 +33,15 @@ export default {
   },
   methods: {
     deleteThisDomain: function (index) {
-      this.domains.splice(index, 1)
+      this.domains = []
+      this.fetch()
+    },
+    fetch: function () {
+      api.$http.post(api.urls.domain_list).then((data) => {
+        this.domains = data.data.domains
+      }).catch(() => {
+        this.msg = 'api_error'
+      })
     }
   },
   created: function () {
@@ -41,11 +49,7 @@ export default {
       router.push('/login')
     }
 
-    api.$http.post(api.urls.domain_list).then((data) => {
-      this.domains = data.data.domains
-    }).catch(() => {
-      this.msg = 'api_error'
-    })
+    this.fetch()
   },
   components: {
     // <my-component> will only be available in parent's template
