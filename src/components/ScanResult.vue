@@ -1,5 +1,5 @@
 <template>
-  <div class="scanner-check-item-data" v-if="scanresult.scoreTypeRaw !== 'hidden'">
+  <div class="scanner-check-item-data" v-if="!(scanresult.scoreTypeRaw === 'hidden' || (scanresult.scoreTypeRaw === 'bonus' && scanresult.score !== 100))">
     <div class="col-85">
       <span class="round-check scanner-check-data"
             v-bind:class="{ 'score-red': scanresult.score < 30, 'score-orange': scanresult.score >= 30 && scanresult.score < 50, 'score-yellow': scanresult.score >= 50 && scanresult.score < 100, 'score-green': scanresult.score >=100 }">{{ scanresult.name}}</span>
