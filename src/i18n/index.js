@@ -44,6 +44,7 @@ const messages = {
       headline_domainadd: 'Domain hinzufügen',
       field_domain_submit: 'Hinzufügen',
       field_domain: 'Domain',
+      field_domain_placeholder: 'Domain, bspw. https://www.example.org',
       domain_in_use: 'Die angegebene Domain wird bereits in einem SIWECOS Konto verwendet',
       domain_could_not_add: 'Die Domain konnte nicht hinzugefügt werden, bitte versuchen Sie es später erneut',
       verifyDomain: 'Domain bestätigen',
