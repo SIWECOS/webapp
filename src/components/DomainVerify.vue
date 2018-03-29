@@ -14,7 +14,9 @@
             <ul>
                 <li>{{ $t("messages.method_metatag_step1") }}</li>
                 <li>{{ $t("messages.method_metatag_step2") }}</li>
-                <li>{{ $t('messages.method_metatag_step3') }} <strong>{{ this.metaTag}}</strong></li>
+                <li>{{ $t('messages.method_metatag_step3') }}<br />
+                    <strong>{{ this.metaTag}}</strong> <button type="button" v-clipboard:copy="metaTag">{{ $t('messages.copy') }}</button>
+                </li>
                 <li>{{ $t("messages.method_metatag_step4") }}</li>
                 <li>{{ $t("messages.method_metatag_step5") }}</li>
             </ul>
@@ -22,8 +24,14 @@
             <p><strong>{{ $t("messages.method_file") }}</strong></p>
 
             <ul>
-                <li v-html="$t('messages.method_file_step1', {fileName: this.domain.domainToken + '.html'})"></li>
-                <li v-html="$t('messages.method_file_step2', {token: this.domain.domainToken})"></li>
+                <li>
+                    {{ $t('messages.method_file_step1') }}<br />
+                    <strong>{{ this.domain.domainToken + '.html' }}</strong> <button type="button" v-clipboard:copy="this.domain.domainToken + '.html'">{{ $t('messages.copy') }}</button>
+                </li>
+                <li>
+                    {{ $t('messages.method_file_step2') }}
+                    <strong>{{ this.domain.domainToken }}</strong> <button type="button" v-clipboard:copy="this.domain.domainToken">{{ $t('messages.copy') }}</button>
+                </li>
                 <li>{{ $t("messages.method_file_step3") }}</li>
                 <li>{{ $t("messages.method_file_step4") }}</li>
             </ul>

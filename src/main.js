@@ -5,12 +5,15 @@ import i18n from './i18n'
 import App from './App'
 import router from './router'
 import validator from './validator'
+import VueClipboard from 'vue-clipboard2'
 
 require('es6-promise').polyfill()
 
 Vue.use(validator, {
   locale: 'de'
 })
+
+Vue.use(VueClipboard)
 
 Vue.config.productionTip = false
 

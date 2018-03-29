@@ -1,6 +1,6 @@
 <template>
     <div class="domain-item-data" :class="domainClass" >
-        <span class="domain-address">{{ domain.domain }}</span>
+        <span class="domain-address" v-on:click="showDetails = (showDetails) ? 0 : 1">{{ domain.domain }}</span>
 
         <ul class="domain-item-actionlist">
             <li v-if="!domain.verificationStatus">

@@ -73,8 +73,8 @@ const messages = {
       method_metatag_step4: 'Laden Sie die Startdatei wieder in ihr Hauptverzeichnis der Webseite und klicken Sie Auf der Siwecos-Seite auf „Überprüfen“.',
       method_metatag_step5: 'Sollte die Meta-information gefunden werden, wird die neue Domain im Dienst von Siwecos aufgenommen bzw. gespeichert.',
       method_file: 'Datei',
-      method_file_step1: 'Um eine Domain mit einer Datei verifizieren zu können, erstellen Sie bitte im ersten Schritt eine HTML-Datei mit dem von uns angegebenen Namen <strong>{fileName}</strong>',
-      method_file_step2: 'Im zweiten Schritt kopieren Sie den Code <strong>{token}</strong>  in die erste Zeile der HTML-Datei.',
+      method_file_step1: 'Um eine Domain mit einer Datei verifizieren zu können, erstellen Sie bitte im ersten Schritt eine HTML-Datei mit dem von uns angegebenen Namen:',
+      method_file_step2: 'Im zweiten Schritt kopieren Sie den Code in die erste Zeile der HTML-Datei:',
       method_file_step3: 'Im dritten Schritt laden Sie die erstellte HTML-Datei in das Hauptverzeichnis ihres Webseite hoch.',
       method_file_step4: 'Klicken Sie im Anschluss auf „Überprüfen“. Ist die Überprüfung erfolgreich, wird die neue Domain im Dienst von Siwecos aufgenommen bzw. gespeichert.',
       verify_explanation1: 'Alle Domains die bei Siwecos zur Überprüfung eingetragen werden, müssen verifiziert bzw. gegengeprüft werden. Dazu bietet Siwecos zwei verschiedene Verfahren (Datei, Meta-Tag) an.',
@@ -109,7 +109,8 @@ const messages = {
       activation_resent: 'Wir haben Ihnen die Aktivierungsmail erneut zugesendet',
       no_user_found_or_already_active: 'Die angegebene Mailadresse wurde nicht gefunden bzw. der Benutzer ist bereits aktiviert',
       resendactivation_headline: 'Aktivierungs-Nachricht erneut versenden',
-      field_resend_submit: 'Nachricht anfordern'
+      field_resend_submit: 'Nachricht anfordern',
+      copy: 'Kopieren'
     }
   }
 }
