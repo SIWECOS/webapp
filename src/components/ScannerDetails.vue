@@ -13,7 +13,7 @@
       <div v-html="scanner.description"></div>
 
       <small><a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type" :title="$t('messages.more_info')"
-                target="_blank">{{ $t('messages.more_info') }} &gt;&gt;</a></small>
+                target="_blank">{{ $t('messages.detailed_info') }} &gt;&gt;</a></small>
     </div>
 
     <br><span><small>{{ $t('messages.lastScan') }}: {{ scanner.updated_at_human }}</small></span>
