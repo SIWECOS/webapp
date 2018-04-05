@@ -24,7 +24,7 @@
             </div>
             <a href="https://staging2.siwecos.de/gesamtscore/" class="scanner-score-information">Informationen</a>
 
-            <div class="last-scan-data" v-if="result.scanFinished"><span>{{ $t('messages.lastScan') }}<br> {{ result.scanFinished.humanDate }}</span></div>
+            <div class="last-scan-data" v-if="result.scanFinished"><span>{{ result.scanFinished.humanDate }}</span></div>
         </div>
 
         <div class="scanners-wrapper" v-show="result && showDetails">
