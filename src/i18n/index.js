@@ -110,7 +110,8 @@ const messages = {
       no_user_found_or_already_active: 'Die angegebene Mailadresse wurde nicht gefunden bzw. der Benutzer ist bereits aktiviert',
       resendactivation_headline: 'Aktivierungs-Nachricht erneut versenden',
       field_resend_submit: 'Nachricht anfordern',
-      copy: 'Kopieren'
+      copy: 'Kopieren',
+      wanttodelete: 'Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen? '
     }
   }
 }

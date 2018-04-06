@@ -102,6 +102,8 @@
 
                 <input type="submit" class="submit button" :value="$t('messages.submit')" />
             </form>
+
+            <p>{{ $t('messages.wanttodelete') }} <router-link to="/accountdelete">{{ $t('messages.nav.deleteaccount') }}</router-link></p>
         </div>
     </div>
 </template>

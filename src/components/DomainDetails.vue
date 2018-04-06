@@ -22,7 +22,7 @@
         <div v-show="result">
             <div class="impact-gauge gaugeMeter" :data-percent="result.weightedMedia.toFixed(0)" data-size="100" data-width="20" data-style="Arch" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 100px;" v-if="result">
             </div>
-            <a href="https://staging2.siwecos.de/gesamtscore/" class="scanner-score-information">Informationen</a>
+            <a href="https://staging2.siwecos.de/gesamtscore/" target="_blank" class="scanner-score-information">Informationen</a>
 
             <div class="last-scan-data" v-if="result.scanFinished"><span>{{ result.scanFinished.humanDate }}</span></div>
         </div>
