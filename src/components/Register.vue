@@ -11,24 +11,6 @@
                         <h4>{{ $t("messages.fieldset_credentials") }}</h4>
                     </li>
                     <li>
-                        <label for="email">{{ $t("messages.field_email") }}</label>
-                        <input type="email" id="email" v-validate="'required|email'" :placeholder="$t('messages.field_email')" v-model="user.email" name="email" data-vv-validate-on="blur" />
-                        <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
-                    </li>
-                    <li>
-                        <label for="password">{{ $t("messages.field_password") }}</label>
-                        <input type="password" id="password" v-validate="{required:true,min:8}" :placeholder="$t('messages.field_password')" v-model="user.password" name="password" data-vv-validate-on="blur"  />
-                        <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
-                    </li>
-                    <li>
-                        <label for="password_repeat">{{ $t("messages.field_passwordrepeat") }}</label>
-                        <input type="password" id="password_repeat" v-validate="{required:true,is:user.password}"  :placeholder="$t('messages.field_passwordrepeat')" name="password2" data-vv-validate-on="blur"  />
-                        <span v-show="errors.has('password2')">{{ errors.first('password2') }}</span>
-                    </li>
-                    <li>
-                        <h4>{{ $t("messages.fieldset_profile") }}</h4>
-                    </li>
-                    <li>
                         <label for="salutation">{{ $t("messages.field_salutation") }}</label>
                         <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id" data-vv-validate-on="blur">
                             <option v-for="option in salutations" v-bind:value="option.id">
@@ -48,21 +30,21 @@
                         <span v-show="errors.has('last_name')">{{ errors.first('last_name') }}</span>
                     </li>
                     <li>
-                        <label for="address">{{ $t("messages.field_address") }}</label>
-                        <input type="text" id="address" :placeholder="$t('messages.field_address')" name="address" v-model="user.address" />
+                        <label for="email">{{ $t("messages.field_email") }}</label>
+                        <input type="email" id="email" v-validate="'required|email'" :placeholder="$t('messages.field_email')" v-model="user.email" name="email" data-vv-validate-on="blur" />
+                        <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                     </li>
                     <li>
-                        <label for="plz">{{ $t("messages.field_zip") }}</label>
-                        <input type="text" id="plz" :placeholder="$t('messages.field_zip')" name="plz" v-model="user.plz" />
+                        <label for="password">{{ $t("messages.field_password") }}</label>
+                        <input type="password" id="password" v-validate="{required:true,min:8}" :placeholder="$t('messages.field_password')" v-model="user.password" name="password" data-vv-validate-on="blur"  />
+                        <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
                     </li>
                     <li>
-                        <label for="city">{{ $t("messages.field_city") }}</label>
-                        <input type="text" id="city" :placeholder="$t('messages.field_city')" name="city" v-model="user.city" />
+                        <label for="password_repeat">{{ $t("messages.field_passwordrepeat") }}</label>
+                        <input type="password" id="password_repeat" v-validate="{required:true,is:user.password}"  :placeholder="$t('messages.field_passwordrepeat')" name="password2" data-vv-validate-on="blur"  />
+                        <span v-show="errors.has('password2')">{{ errors.first('password2') }}</span>
                     </li>
-                    <li>
-                        <label for="phone">{{ $t("messages.field_telephone") }}</label>
-                        <input type="text" id="phone" :placeholder="$t('messages.field_telephone')" name="phone" v-model="user.phone" />
-                    </li>
+
                     <li>
                         <h4>{{ $t("messages.fieldset_company") }}</h4>
                     </li>
@@ -81,22 +63,6 @@
                     <li>
                         <label for="org_industry">{{ $t("messages.field_industry") }}</label>
                         <input type="text" id="org_industry" :placeholder="$t('messages.field_industry')" name="org_industry" v-model="user.org_industry" />
-                    </li>
-                    <li>
-                        <label for="org_address">{{ $t("messages.field_address") }}</label>
-                        <input type="text" id="org_address" :placeholder="$t('messages.field_address')" name="org_address" v-model="user.org_address" />
-                    </li>
-                    <li>
-                        <label for="org_plz">{{ $t("messages.field_zip") }}</label>
-                        <input type="text" id="org_plz" :placeholder="$t('messages.field_zip')" name="org_plz" v-model="user.org_plz" />
-                    </li>
-                    <li>
-                        <label for="org_city">{{ $t("messages.field_city") }}</label>
-                        <input type="text" id="org_city" :placeholder="$t('messages.field_city')" name="org_city" v-model="user.org_city" />
-                    </li>
-                    <li>
-                        <label for="org_phone">{{ $t("messages.field_telephone") }}</label>
-                        <input type="text" id="org_phone" :placeholder="$t('messages.field_telephone')" name="org_phone" v-model="user.org_phone" />
                     </li>
                     <li>
                         <h4>{{ $t("messages.fielset_iagree") }}</h4>
@@ -179,6 +145,8 @@ export default {
     api.$http.get(api.urls.salutations)
       .then(response => {
         this.salutations = response.data
+
+        this.salutations.unshift({id: '', value: 'pleaseselect.'})
       })
     api.$http.get(api.urls.orgsizes)
       .then(response => {

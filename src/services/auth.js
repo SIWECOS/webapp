@@ -52,22 +52,32 @@ export default {
     router.push('/login')
   },
 
-  checkRememberStatus () {
-    if (localStorage.getItem('access_token') && !this.user.authenticated) {
+  checkLoginStatus () {
+    if (this.user.authenticated) {
+      return
+    }
+
+    let token = false
+
+    if (localStorage.getItem('access_token')) {
+      token = localStorage.getItem('access_token')
+    }
+
+    if (sessionStorage.getItem('access_token')) {
+      token = sessionStorage.getItem('access_token')
+    }
+
+    api.$http.defaults.headers.common['userToken'] = token
+
+    api.$http.post(api.urls.get_user).then((response) => {
+      this.user.data = response.data
       this.user.authenticated = true
 
-      sessionStorage.setItem('access_token', localStorage.getItem('access_token'))
-      api.$http.defaults.headers.common['userToken'] = localStorage.getItem('access_token')
-
-      api.$http.post(api.urls.get_user).then((response) => {
-        this.user.data = response.data
-
-        if (typeof window.login_announce !== 'undefined') {
-          window.login_announce(response.data)
-        }
-      })
-
       router.push('/domains')
-    }
+
+      if (typeof window.login_announce !== 'undefined') {
+        window.login_announce(response.data)
+      }
+    })
   }
 }

@@ -33,7 +33,7 @@ export default {
     }
   },
   created: function () {
-    auth.checkRememberStatus()
+    auth.checkLoginStatus()
   }
 }
 </script>
