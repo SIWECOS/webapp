@@ -67,6 +67,10 @@ export default {
       token = sessionStorage.getItem('access_token')
     }
 
+    if (!token) {
+      return
+    }
+
     api.$http.defaults.headers.common['userToken'] = token
 
     api.$http.post(api.urls.get_user).then((response) => {
