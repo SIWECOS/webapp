@@ -2,3 +2,4 @@
 /config/
 /dist/
 /*.js
+/src/i18n/*.js
