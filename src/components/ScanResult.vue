@@ -16,7 +16,9 @@
                 target="_blank">{{ $t('messages.more_info') }}</a></small>
       <div style="clear: both;"></div>
       <ul class="scanner-check-item-details" v-show="showDetails">
-        <li v-for="(detail) in scanresult.testDetails">{{ detail.name }}</li>
+        <li v-for="(detail) in scanresult.testDetails">
+          <span v-html="detail.name"></span>
+        </li>
       </ul>
       <div style="clear: both; padding-bottom: 20px"></div>
     </div>
