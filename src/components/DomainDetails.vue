@@ -125,11 +125,11 @@ export default {
         setTimeout(function () {
           if (
             window.jQuery && window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter') &&
-            typeof window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter !== 'undefined' &&
-            !this.hasGauge
+            typeof window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter !== 'undefined'
           ) {
+            window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter > *').remove()
+            window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').removeData(['percent', 'size', 'theme', 'width', 'style', 'animate_gauge_colors'])
             window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter()
-            this.hasGauge = true
           }
         }.bind(this), 500)
       }).catch(() => {

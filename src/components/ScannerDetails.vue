@@ -16,7 +16,7 @@
                 target="_blank">{{ $t('messages.more_info') }} &gt;&gt;</a></small>
     </div>
 
-    <br><span><small>{{ $t('messages.lastScan') }}: {{ scanner.updated_at_human }}</small></span>
+    <br><span><small>{{ $t('messages.lastScan') }}: {{ updated_at_human }}</small></span>
     <p></p>
 
     <div class="scanner-gauge">
@@ -59,8 +59,12 @@
         'showDetails': false
       }
     },
-    created: function () {
-      this.scanner.updated_at_human = moment(String(this.scanner.updated_at)).add('1', 'hours').format('DD.MM.YYYY HH:mm')
+    computed: {
+      // a computed getter
+      updated_at_human: function () {
+        // `this` points to the vm instance
+        return moment(String(this.scanner.updated_at)).add('2', 'hours').format('DD.MM.YYYY HH:mm')
+      }
     },
     props: ['scanner']
   }
