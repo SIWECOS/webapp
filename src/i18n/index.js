@@ -111,7 +111,8 @@ const messages = {
       "resendactivation_headline": "Aktivierungs-Nachricht erneut versenden",
       "field_resend_submit": "Nachricht anfordern",
       "copy": "Kopieren",
-      "wanttodelete": "Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen? "
+      "wanttodelete": "Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen? ",
+      "seallink": "SIWECOS-Siegel auf {domain} einbinden. So geht's..."
     }
   }
 }

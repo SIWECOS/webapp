@@ -31,6 +31,10 @@
             <div class="scanner-content" v-for="(scanner) in result.scanners">
                 <scanner-details v-bind:scanner="scanner"></scanner-details>
             </div>
+
+            <div class="seal-link">
+                <a v-bind:href="'https://www.siwecos.de/wiki/Siwecos-Siegel?userdomain=' + noProtocolDomain" target="_blank" class="scanner-score-information">{{ $t('messages.seallink', {domain: noProtocolDomain}) }}</a>
+            </div>
         </div>
 
         <span v-show="msg">{{ $t('messages.' + msg) }}</span>
@@ -147,6 +151,9 @@ export default {
   computed: {
     'domainClass': function () {
       return 'domain-id-' + this.domain.id
+    },
+    'noProtocolDomain': function () {
+      return this.domain.domain.replace(/(^\w+:|^)\/\//, '')
     }
   },
   props: ['domain']
