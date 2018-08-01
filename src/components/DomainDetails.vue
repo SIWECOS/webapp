@@ -33,7 +33,7 @@
             </div>
 
             <div class="seal-link">
-                <a v-bind:href="sealLink + noProtocolDomain" target="_blank" class="scanner-score-information">{{ $t('messages.seallink-text', {domain: noProtocolDomain}) }}</a>
+                <a v-bind:href="sealLink + noProtocolDomain" target="_blank">{{ $t('messages.seallink-text', {domain: noProtocolDomain}) }}</a>
             </div>
         </div>
 
