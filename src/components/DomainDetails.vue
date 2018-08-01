@@ -33,7 +33,7 @@
             </div>
 
             <div class="seal-link">
-                <a v-bind:href="'https://www.siwecos.de/wiki/Siwecos-Siegel?userdomain=' + noProtocolDomain" target="_blank" class="scanner-score-information">{{ $t('messages.seallink', {domain: noProtocolDomain}) }}</a>
+                <a v-bind:href="sealLink + noProtocolDomain" target="_blank" class="scanner-score-information">{{ $t('messages.seallink-text', {domain: noProtocolDomain}) }}</a>
             </div>
         </div>
 
@@ -154,6 +154,9 @@ export default {
     },
     'noProtocolDomain': function () {
       return this.domain.domain.replace(/(^\w+:|^)\/\//, '')
+    },
+    'sealLink': function () {
+      return this.$t('messages.seallink')
     }
   },
   props: ['domain']

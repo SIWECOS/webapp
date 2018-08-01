@@ -112,7 +112,8 @@ const messages = {
       "field_resend_submit": "Nachricht anfordern",
       "copy": "Kopieren",
       "wanttodelete": "Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen? ",
-      "seallink": "SIWECOS-Siegel auf {domain} einbinden. So geht's..."
+      "seallink-text": "SIWECOS-Siegel auf {domain} einbinden. So geht's...",
+      "seallink": "https://www.siwecos.de/wiki/Siwecos-Siegel?userdomain="
     }
   }
 }
