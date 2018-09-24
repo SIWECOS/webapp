@@ -20,8 +20,14 @@
 
 
         <div v-show="result">
-            <div class="impact-gauge gaugeMeter" :data-percent="result.weightedMedia.toFixed(0)" data-size="100" data-width="20" data-style="Arch" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 100px;" v-if="result">
-            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="126" height="126" version="1.1" v-if="result">
+                <g transform="translate(63,63)">
+                    <text x="0" y="12%" dominant-baseline="central" text-anchor="middle" font-size="200%">{{ result.weightedMedia.toFixed(0) }}</text>
+                    <path d="M-35.35,35.36 A50,50 0 1 1 35.35,35.36" stroke="lightgrey" stroke-width="25" stroke-linecap="round" fill="none"/>
+                    <path v-bind:d="'M-35.35,35.36 A50,50 0 ' +  gaugeData.big_arc + ' 1 ' + gaugeData.score_x + ',' + gaugeData.score_y" v-bind:stroke="gaugeData.score_col" stroke-width="25" stroke-linecap="round" fill="none"/>
+                </g>
+            </svg>
+
             <a href="/gesamtscore/" target="_blank" class="scanner-score-information">Informationen</a>
 
             <div class="last-scan-data" v-if="result.scanFinished"><span>{{ result.scanFinished.humanDate }}</span></div>
@@ -124,18 +130,6 @@ export default {
       api.$http.get(api.urls.scan_results + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
         this.result = data.data
         this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).add('1', 'hours').format('DD.MM.YYYY HH:mm')
-
-        // Trigger gauge
-        setTimeout(function () {
-          if (
-            window.jQuery && window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter') &&
-            typeof window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter !== 'undefined'
-          ) {
-            window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter > *').remove()
-            window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').removeData(['percent', 'size', 'theme', 'width', 'style', 'animate_gauge_colors'])
-            window.jQuery('.domain-id-' + this.domain.id + ' .gaugeMeter').gaugeMeter()
-          }
-        }.bind(this), 500)
       }).catch(() => {
         this.msg = 'fetch_error'
       })
@@ -157,6 +151,20 @@ export default {
     },
     'sealLink': function () {
       return this.$t('messages.seallink')
+    },
+    'gaugeData': function () {
+      let radius = 50
+      let origin = Math.PI * 0.25
+      let factor = Math.PI * 1.5 / 100
+      let deg = this.result.weightedMedia.toFixed(0) * factor
+      let hue = (this.result.weightedMedia.toFixed(0) / 100 * 120)
+
+      return {
+        'score_x': Math.cos(deg - origin) * radius * -1,
+        'score_y': Math.sin(deg - origin) * radius * -1,
+        'score_col': 'hsl(' + hue + ', 100%, 50%)',
+        'big_arc': (deg > Math.PI) ? 1 : 0
+      }
     }
   },
   props: ['domain']

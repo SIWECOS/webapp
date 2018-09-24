@@ -20,10 +20,13 @@
     <p></p>
 
     <div class="scanner-gauge">
-      <div class="impact-gauge gaugeMeter" :data-percent="scanner.score.toFixed(0)" data-size="75" data-width="14"
-           data-style="Arch" data-theme="Red-Gold-Green" data-animate_gauge_colors="1" style="width: 75px;">
-
-      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="126" height="126" version="1.1">
+        <g transform="translate(63,63)">
+          <text x="0" y="12%" dominant-baseline="central" text-anchor="middle" font-size="200%">{{ scanner.score.toFixed(0) }}</text>
+          <path d="M-35.35,35.36 A50,50 0 1 1 35.35,35.36" stroke="lightgrey" stroke-width="25" stroke-linecap="round" fill="none"/>
+          <path v-bind:d="'M-35.35,35.36 A50,50 0 ' +  gaugeData.big_arc + ' 1 ' + gaugeData.score_x + ',' + gaugeData.score_y" v-bind:stroke="gaugeData.score_col" stroke-width="25" stroke-linecap="round" fill="none"/>
+        </g>
+      </svg>
     </div>
     <div class="scanner-check-wrapper">
       <div class="scanner-check-content" v-for="(scanresult) in scanner.result">
@@ -36,17 +39,6 @@
   </div>
 </template>
 
-<style>
-  .scanner-gauge{
-    width: 15%;
-    float: left;
-  }
-
-  .scanner-check-wrapper{
-    width: 80%;
-    float:left;
-  }
-</style>
 <script>
   import ScanResult from './ScanResult'
   import moment from 'moment'
@@ -64,6 +56,20 @@
       updated_at_human: function () {
         // `this` points to the vm instance
         return moment(String(this.scanner.updated_at)).add('2', 'hours').format('DD.MM.YYYY HH:mm')
+      },
+      gaugeData: function () {
+        let radius = 50
+        let origin = Math.PI * 0.25
+        let factor = Math.PI * 1.5 / 100
+        let deg = this.scanner.score.toFixed(0) * factor
+        let hue = (this.scanner.score.toFixed(0) / 100 * 120)
+
+        return {
+          'score_x': Math.cos(deg - origin) * radius * -1,
+          'score_y': Math.sin(deg - origin) * radius * -1,
+          'score_col': 'hsl(' + hue + ', 100%, 50%)',
+          'big_arc': (deg > Math.PI) ? 1 : 0
+        }
       }
     },
     props: ['scanner']
