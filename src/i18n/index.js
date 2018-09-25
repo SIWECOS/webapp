@@ -230,11 +230,22 @@ const messages = {
   }
 }
 
+let locale = "de";
 
+if (document.documentElement && document.documentElement.getAttribute("lang"))
+{
+  const langAttribute = document.documentElement.getAttribute("lang");
+  const langTag = langAttribute.substr(0,2);
+
+  if (typeof messages[langTag] === "object")
+  {
+    locale = langTag;
+  }
+}
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: 'de', // set locale
+  'locale': locale, // set locale
   messages // set locale messages
 })
 
