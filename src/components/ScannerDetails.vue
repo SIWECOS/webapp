@@ -22,7 +22,7 @@
     <div class="scanner-gauge">
       <svg xmlns="http://www.w3.org/2000/svg" width="126" height="126" version="1.1">
         <g transform="translate(63,63)">
-          <text x="0" y="12%" dominant-baseline="central" text-anchor="middle" font-size="200%">{{ scanner.score.toFixed(0) }}</text>
+          <text x="0" y="0%" dominant-baseline="central" text-anchor="middle" font-size="200%">{{ scanner.score.toFixed(0) }}</text>
           <path d="M-35.35,35.36 A50,50 0 1 1 35.35,35.36" stroke="lightgrey" stroke-width="25" stroke-linecap="round" fill="none"/>
           <path v-bind:d="'M-35.35,35.36 A50,50 0 ' +  gaugeData.big_arc + ' 1 ' + gaugeData.score_x + ',' + gaugeData.score_y" v-bind:stroke="gaugeData.score_col" stroke-width="25" stroke-linecap="round" fill="none"/>
         </g>
