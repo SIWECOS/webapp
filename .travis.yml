@@ -1,0 +1,50 @@
+dist: trusty
+
+env:
+  global:
+    secure: "qJiRzYnGy2+4DjkFSEhO3fgvQ3dr+HrGd9Do9LZtrYWHuw6GE9Ldenicqa5SZ0gvElzRZWyRwhLP754OiPNJnCKB/onwzoQvciaJBdQG/haj2TETLMJyu2ELj2oSdgnm5louRQ/Mrjyk6xM3+qFlD3ZP1kuwXF8y2bF/i3EtT+hkmaJ28F7im7GzXU4Wj8K1zjzm8Tkd4FOP1bkp+wEZMcJsW8AMW2WBoFXDPyhVQJQEFgPOgwGgdOKmm3gkKiEZ3n3XwrtKv5cMZ5NS3SKgvvs+t374ms9ae47K78fuV8Gc/NbMklyvcG5q8SAGtu71CqnRzS5QAtVQxbEcMAmk2Ox/OGtpWCTwL69oZNpz0ZjmRcvrSLHAfOjEzsLTjFSXNGOBCxT5XVGo/xBY3kF4Fb0XznhuVp05EskHRmXR98f0zbgzFZtkHomb/sDtlYS0PE4f2P4zCZIL8MxbKXf49ZmE4MSElUDt5VE9pvdUIChkxyXA4hBdXWb+VNttzfkg0ra7mHhnkVqe8d+3MjHx8UuUsOH6TlRMB9lDwhlqMymMgdf5CfMIm9EHa5l/cRzxDYWAFUYO5XBv84XAKHTgMpSw9sm9zb/QZcFkml1yQGzXfTBFrbx1pUxYqnEHYQ6ccdO9dxyIui6fc6JSnKvV+lwO+Ai4DC+oe4lBdutOs7Y="
+
+stages:
+  - name: test
+  - name: deploy-live
+    if: branch = master AND type = push
+  - name: deploy-staging
+    if: branch = develop AND type = push
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_12c8071d2874_key -iv $encrypted_12c8071d2874_iv -in siwecosdeploy_rsa.enc -out siwecosdeploy_rsa -d
+- chmod 600 siwecosdeploy_rsa
+
+matrix:
+  include:
+    - language: node_js
+      stage: test
+      php: 7.2
+      script:
+        - npm install
+        - npm run lint
+
+    - language: node_js
+      stage: deploy-staging
+      node_js: lts/*
+      script:
+        - npm install
+        - npm run build prod
+        - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/static/js/* ${SFTP_HOST}:/home/web4cshyx/html/staging.siwecos.de/spa/main
+
+    - language: node_js
+      stage: deploy-live
+      node_js: lts/*
+      script:
+        - npm install
+        - npm run build prod
+        - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/static/js/* ${SFTP_HOST}:/home/web4cshyx/html/siwecos.de/spa/main
+
+
+notifications:
+  webhooks:
+    on_success: change  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: false     # default: false
+
+sudo: required
