@@ -40,7 +40,6 @@ matrix:
         - npm run build prod
         - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/static/js/* ${SFTP_HOST}:/home/web4cshyx/html/siwecos.de/spa/main
 
-
 notifications:
   webhooks:
     on_success: change  # options: [always|never|change] default: always
