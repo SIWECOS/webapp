@@ -19,7 +19,7 @@ matrix:
   include:
     - language: node_js
       stage: test
-      php: 7.2
+      node_js: lts/*
       script:
         - npm install
         - npm run lint
