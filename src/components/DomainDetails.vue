@@ -127,7 +127,7 @@ export default {
       })
     },
     fetchResult: function () {
-      api.$http.get(api.urls.scan_results + '/' + this.$i18n.locale + '/?domain=' + encodeURI(this.domain.domain)).then((data) => {
+      api.$http.get(api.urls.scan_results + '/' + this.$i18n.locale + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
         this.result = data.data
         this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).add('1', 'hours').format('DD.MM.YYYY HH:mm')
       }).catch(() => {
