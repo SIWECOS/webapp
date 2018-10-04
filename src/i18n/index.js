@@ -116,7 +116,7 @@ const messages = {
       "wanttodelete": "Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen?"
     }
   },
-  "en_US": {
+  "en": {
     "messages": {
       "account_headline": "My Account",
       "account_saved": "Account saved successfully",
