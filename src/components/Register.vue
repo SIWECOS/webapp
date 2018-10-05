@@ -2,8 +2,6 @@
     <div>
         <h3>{{ $t("messages.register_headline") }}</h3>
 
-        <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
-
         <div id="UserRegistration" v-if="!success">
             <form @submit.prevent="validateBeforeSubmit">
                 <ul>
@@ -77,6 +75,8 @@
                 </ul>
 
                 <vue-recaptcha size="invisible" ref="recaptcha" @verify="onVerify":sitekey="sitekey"></vue-recaptcha>
+
+                <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
                 <input type="submit" class="submit button" :value="$t('messages.register_submit')" />
             </form>
