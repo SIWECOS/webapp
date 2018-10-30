@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://bla.staging2.siwecos.de/'
+axios.defaults.baseURL = 'https://bla.staging.siwecos.de/'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export default {
@@ -22,6 +22,6 @@ export default {
     reset_password: '/api/v1/users/password/sendForgotMail',
     process_reset: '/api/v1/users/password/processReset',
     resend_activation: '/api/v1/users/activate/resend',
-    status_url: 'https://ca.staging2.siwecos.de/api/v1/scan/status/free'
+    status_url: 'https://ca.staging.siwecos.de/api/v1/scan/status/free'
   }
 }
