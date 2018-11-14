@@ -60,6 +60,11 @@
             return
           }
 
+          if (err.response.status === 502) {
+            this.msg = 'domain_timedout'
+            return
+          }
+
           this.msg = 'domain_could_not_add'
         })
       }

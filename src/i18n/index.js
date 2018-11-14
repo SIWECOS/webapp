@@ -114,7 +114,8 @@ const messages = {
       "verify_explanation2": "Wozu wird eine Verifizierung gemacht? Bei einer Verifizierung wird aus datenschutzrechtlichen Gründen nachgewiesen, dass Sie der wirkliche Inhaber der Domain sind.",
       "verifyheading": "Das Verifizierungsverfahren",
       "wanttodelete": "Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen?",
-      "reportlink-text": "Bericht als PDF herunterladen"
+      "reportlink-text": "Bericht als PDF herunterladen",
+      "domain_timedout": "Die Domain antwortet nicht oder existiert nicht"
     }
   },
   "en": {
@@ -227,7 +228,8 @@ const messages = {
       "verify_explanation2": "Why is verification necessary? The verification proves that you are the true owner of the domain, which is necessary for data protection reasons.",
       "verifyheading": "The verification process",
       "wanttodelete": "You don't want to use your SIWECOS account anymore?",
-      "reportlink-text": "Download report as PDF"
+      "reportlink-text": "Download report as PDF",
+      "domain_timedout": "The domain in question is not responding or does not exist"
     }
   }
 }
