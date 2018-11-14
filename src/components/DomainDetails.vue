@@ -133,8 +133,10 @@ export default {
     },
     fetchResult: function () {
       api.$http.get(api.urls.scan_results + '/' + this.$i18n.locale + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
+        let offset = new Date().getTimezoneOffset()
+
         this.result = data.data
-        this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).add('1', 'hours').format('DD.MM.YYYY HH:mm')
+        this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).add(parseInt(offset / 60 * -1), 'hours').format('DD.MM.YYYY HH:mm')
       }).catch(() => {
         this.msg = 'fetch_error'
       })

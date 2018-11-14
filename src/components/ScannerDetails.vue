@@ -54,8 +54,8 @@
     computed: {
       // a computed getter
       updated_at_human: function () {
-        // `this` points to the vm instance
-        return moment(String(this.scanner.updated_at)).add('2', 'hours').format('DD.MM.YYYY HH:mm')
+        let offset = new Date().getTimezoneOffset()
+        return moment(String(this.scanner.updated_at)).add(parseInt(offset / 60 * -1), 'hours').format('DD.MM.YYYY HH:mm')
       },
       gaugeData: function () {
         let radius = 50
