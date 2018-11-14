@@ -41,6 +41,10 @@
             <div class="seal-link">
                 <a v-bind:href="sealLink + noProtocolDomain" target="_blank">{{ $t('messages.seallink-text', {domain: noProtocolDomain}) }}</a>
             </div>
+
+            <div class="report-link">
+                <a v-bind:href="reportLink" target="_blank" download>{{ $t('messages.reportlink-text') }}</a>
+            </div>
         </div>
 
         <span v-show="msg">{{ $t('messages.' + msg) }}</span>
@@ -49,6 +53,7 @@
 
 <script>
 import api from '../services/api.js'
+import auth from '../services/auth.js'
 import ScannerDetails from './ScannerDetails'
 import moment from 'moment'
 
@@ -151,6 +156,9 @@ export default {
     },
     'sealLink': function () {
       return this.$t('messages.seallink')
+    },
+    'reportLink': function () {
+      return api.$http.defaults.baseURL + 'pdf/' + this.result.scanners[0].scan_id + '/' + encodeURI(auth.user.data.token)
     },
     'gaugeData': function () {
       let radius = 50

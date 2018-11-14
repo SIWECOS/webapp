@@ -113,7 +113,8 @@ const messages = {
       "verify_explanation1": "Alle Domains die bei Siwecos zur Überprüfung eingetragen werden, müssen verifiziert bzw. gegengeprüft werden. Dazu bietet Siwecos zwei verschiedene Verfahren (Datei, Meta-Tag) an.",
       "verify_explanation2": "Wozu wird eine Verifizierung gemacht? Bei einer Verifizierung wird aus datenschutzrechtlichen Gründen nachgewiesen, dass Sie der wirkliche Inhaber der Domain sind.",
       "verifyheading": "Das Verifizierungsverfahren",
-      "wanttodelete": "Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen?"
+      "wanttodelete": "Sie möchten Ihr SIWECOS-Konto nicht mehr nutzen?",
+      "reportlink-text": "Bericht als PDF herunterladen"
     }
   },
   "en": {
@@ -225,7 +226,8 @@ const messages = {
       "verify_explanation1": "Any domain that is added to be scanned by SIWECOS must be verified and cross checked. Siwecos offers two methods for this (File, Meta Tag).",
       "verify_explanation2": "Why is verification necessary? The verification proves that you are the true owner of the domain, which is necessary for data protection reasons.",
       "verifyheading": "The verification process",
-      "wanttodelete": null
+      "wanttodelete": "You don't want to use your SIWECOS account anymore?",
+      "reportlink-text": "Download report as PDF"
     }
   }
 }
