@@ -55,12 +55,12 @@
         api.$http.post(api.urls.domain_add, this.domain).then((data) => {
           router.push('/domain/verify/' + data.data.domainId)
         }).catch((err) => {
-          if (err.response.status === 422) {
+          if (err.response.status === 409) {
             this.msg = 'domain_in_use'
             return
           }
 
-          if (err.response.status === 502) {
+          if (err.response.status === 422) {
             this.msg = 'domain_timedout'
             return
           }
