@@ -48,7 +48,8 @@
     data () {
       return {
         domain: {},
-        msg: false
+        msg: false,
+        metaTag: ''
       }
     },
     created: function () {
