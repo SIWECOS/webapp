@@ -160,6 +160,10 @@ export default {
       return this.$t('messages.seallink')
     },
     'reportLink': function () {
+      if (!this.result.scanners || !this.results.scanners.length) {
+        return ''
+      }
+
       return api.$http.defaults.baseURL + 'pdf/' + this.result.scanners[0].scan_id + '/' + encodeURI(auth.user.data.token)
     },
     'gaugeData': function () {
