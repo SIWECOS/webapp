@@ -26,14 +26,10 @@
             <ul>
                 <li>
                     {{ $t('messages.method_file_step1') }}<br />
-                    <strong>{{ this.domain.domainToken + '.html' }}</strong> <button type="button" v-clipboard:copy="this.domain.domainToken + '.html'">{{ $t('messages.copy') }}</button>
+                    <button type="button" v-on:click="downloadHtml">{{ $t('messages.method_file_download') }}</button>
                 </li>
-                <li>
-                    {{ $t('messages.method_file_step2') }}
-                    <strong>{{ this.domain.domainToken }}</strong> <button type="button" v-clipboard:copy="this.domain.domainToken">{{ $t('messages.copy') }}</button>
-                </li>
+                <li>{{ $t("messages.method_file_step2") }}</li>
                 <li>{{ $t("messages.method_file_step3") }}</li>
-                <li>{{ $t("messages.method_file_step4") }}</li>
             </ul>
 
             <a href="#" @click="verifyDomain()" class="btn btn-primary">{{ $t('messages.verify') }}</a>
@@ -45,6 +41,7 @@
   import api from '../services/api.js'
   import auth from '../services/auth.js'
   import router from '../router/index.js'
+  import FileSaver from 'file-saver'
 
   export default {
     name: 'DomainVerify',
@@ -72,6 +69,11 @@
             this.msg = 'domainverify_api_error'
           }
         })
+      },
+      downloadHtml () {
+        let blob = new Blob([this.domain.domainToken], {type: 'text/html;charset=utf-8'})
+
+        FileSaver.saveAs(blob, this.domain.domainToken + '.html')
       },
       fetchDomainInfo () {
         api.$http.post(api.urls.domain_list).then((data) => {
