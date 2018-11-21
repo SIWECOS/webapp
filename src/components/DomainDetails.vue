@@ -160,7 +160,7 @@ export default {
       return this.$t('messages.seallink')
     },
     'reportLink': function () {
-      if (!this.result.scanners || !this.results.scanners.length) {
+      if (!this.result.scanners || !this.result.scanners.length) {
         return ''
       }
 
