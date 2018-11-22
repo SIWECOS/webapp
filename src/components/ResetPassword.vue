@@ -6,11 +6,6 @@
 
         <div id="wppb-resetpwd-wrap" class="wppb-resetpwd-forms">
             <form @submit.prevent="validateAddForm" id="resetform">
-                <p class="login-username">
-                    <label for="email">{{ $t("messages.field_email") }}</label><br>
-                    <input name="email" id="email" :placeholder="$t('messages.field_email')" type="email" v-validate="{required:true,email:true}" v-model="data.email" data-vv-validate-on="blur">
-                    <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
-                </p>
                 <p class="login-newpassword">
                     <label for="newpassword">{{ $t("messages.field_newpassword") }}</label>
                     <input type="password" id="newpassword" v-validate="{min:8,required:true}" :placeholder="$t('messages.field_newpassword')" v-model="data.newpassword" name="newpassword"  data-vv-validate-on="blur"/>
