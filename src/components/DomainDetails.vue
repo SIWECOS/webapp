@@ -33,7 +33,7 @@
             <div class="last-scan-data" v-if="result.scanFinished"><span>{{ result.scanFinished.humanDate }}</span></div>
         </div>
 
-        <div class="scanners-wrapper" v-show="result && showDetails">
+        <div class="scanners-wrapper" v-if="result && showDetails">
             <div class="scanner-content" v-for="(scanner) in result.scanners">
                 <scanner-details v-bind:scanner="scanner"></scanner-details>
             </div>
@@ -43,7 +43,12 @@
             </div>
 
             <div class="report-link">
-                <a v-bind:href="reportLink" target="_blank" download>{{ $t('messages.reportlink-text') }}</a>
+                <form method="post" v-bind:action="pdfurl">
+                    <input type="hidden" name="usertoken" v-bind:value="authToken" />
+                    <input type="hidden" name="id" v-bind:value="result.scanners[0].scan_id" />
+                    <input type="hidden" name="language" v-bind:value="language" />
+                    <input type="submit" v-bind:value="$t('messages.reportlink-text')" />
+                </form>
             </div>
         </div>
 
@@ -159,12 +164,14 @@ export default {
     'sealLink': function () {
       return this.$t('messages.seallink')
     },
-    'reportLink': function () {
-      if (!this.result.scanners || !this.result.scanners.length) {
-        return ''
-      }
-
-      return api.$http.defaults.baseURL + 'pdf/' + this.result.scanners[0].scan_id + '/' + encodeURI(auth.user.data.token)
+    'authToken': function () {
+      return auth.user.data.token
+    },
+    'language': function () {
+      return this.$root.$i18n.locale
+    },
+    'pdfurl': function () {
+      return api.$http.defaults.baseURL + 'api/v1/pdf'
     },
     'gaugeData': function () {
       let radius = 50
