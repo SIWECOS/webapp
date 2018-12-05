@@ -141,7 +141,7 @@ export default {
       })
     },
     submitForm () {
-      let userData = Object.assign({}, this.user);
+      let userData = Object.assign({}, this.user)
       userData.preferred_language = this.$root.$i18n.locale
 
       api.$http.post(api.urls.update_user, userData).then((data) => {
