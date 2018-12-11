@@ -141,7 +141,10 @@ export default {
       })
     },
     submitForm () {
-      api.$http.post(api.urls.update_user, this.user).then((data) => {
+      let userData = Object.assign({}, this.user)
+      userData.preferred_language = this.$root.$i18n.locale
+
+      api.$http.post(api.urls.update_user, userData).then((data) => {
         this.msg = 'account_saved'
       }).catch(() => {
         this.msg = 'error_saving_account'

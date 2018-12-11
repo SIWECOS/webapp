@@ -123,7 +123,10 @@ export default {
       this.submitForm()
     },
     submitForm () {
-      api.$http.post(api.urls.signup_url, this.user).then((data) => {
+      let userData = Object.assign({}, this.user)
+      userData.preferred_language = this.$root.$i18n.locale
+
+      api.$http.post(api.urls.signup_url, userData).then((data) => {
         this.success = true
         this.msg = false
       }).catch((err) => {
