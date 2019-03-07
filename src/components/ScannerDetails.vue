@@ -6,14 +6,14 @@
       {{ $t('messages.more_info') }}
     </button>
 
-    <a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type + '/' + $i18n.locale.toUpperCase()" :title="$t('messages.more_info')"
-       target="_blank" v-if="!scanner.description">{{ $t('messages.more_info') }} &gt;&gt;</a>
+    <a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type" :title="$t('messages.background_info')"
+       target="_blank" v-if="!scanner.description">{{ $t('messages.background_info') }} &gt;&gt;</a>
 
     <div class="scanner-check-item-description" v-show="showDetails">
       <div v-html="scanner.description"></div>
 
-      <small><a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type + '/' + $i18n.locale.toUpperCase()" :title="$t('messages.more_info')"
-                target="_blank">{{ $t('messages.more_info') }} &gt;&gt;</a></small>
+      <small><a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type" :title="$t('messages.background_info')"
+                target="_blank">{{ $t('messages.background_info') }} &gt;&gt;</a></small>
     </div>
 
     <br><span><small>{{ $t('messages.lastScan') }}: {{ updated_at_human }}</small></span>

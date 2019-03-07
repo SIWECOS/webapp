@@ -13,7 +13,7 @@
       <p class="scanner-check-item-description-report" v-if="scanresult.report" v-html="scanresult.report"></p>
       <div style="clear: both;"></div>
       <small v-show="!scanresult.has_error"><a :href="scanresult.link"
-                target="_blank">{{ $t('messages.more_info') }}</a></small>
+                target="_blank">{{ $t('messages.background_info') }}</a></small>
       <div style="clear: both;"></div>
       <ul class="scanner-check-item-details" v-show="showDetails">
         <li v-for="(detail) in scanresult.testDetails">
