@@ -197,6 +197,7 @@ const messages = {
       "method_metatag_step4": "Reload the start file to the main directory of the website and click “Verify” on the Siwecos page.",
       "method_metatag_step5": "If the meta information can be found, the new domain will be accepted for the Siwecos services and saved.",
       "more_info": "Further Information",
+      "less_info": "Less Information",
       "nav": {
         "deleteaccount": "Delete Account",
         "domains": "Domain List",
