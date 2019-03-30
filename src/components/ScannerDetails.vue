@@ -3,7 +3,7 @@
     <span class="scanner-data">{{ scanner.scanner_type }}</span>
 
     <button class="btn btn-primary" v-on:click="showDetails = (showDetails) ? 0 : 1" v-if="scanner.description">
-      {{ $t('messages.more_info') }}
+      <span v-if="!showDetails">{{ $t('messages.more_info') }}</span><span v-if="showDetails">{{ $t('messages.less_info') }}</span>
     </button>
 
     <a :href="'https://www.siwecos.de/wiki/' + scanner.scanner_type" :title="$t('messages.background_info')"

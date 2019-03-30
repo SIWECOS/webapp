@@ -4,7 +4,8 @@
       <span class="round-check scanner-check-data" v-bind:class="{ 'score-red': scanresult.score < 30, 'score-orange': scanresult.score >= 30 && scanresult.score < 50, 'score-yellow': scanresult.score >= 50 && scanresult.score < 100, 'score-green': scanresult.score >=100 }" v-html="scanresult.name"></span>
     </div>
     <div class="col-20">
-      <button class="btn btn-primary" v-show="!scanresult.has_error" v-bind:class="(showDetails) ? 'active' : ''" v-on:click="showDetails = (showDetails) ? 0 : 1">{{ $t('messages.more_info') }}
+      <button class="btn btn-primary" v-show="!scanresult.has_error" v-bind:class="(showDetails) ? 'active' : ''" v-on:click="showDetails = (showDetails) ? 0 : 1">
+        <span v-if="!showDetails">{{ $t('messages.more_info') }}</span><span v-if="showDetails">{{ $t('messages.less_info') }}</span>
       </button>
     </div>
  <div style="clear: both"></div>

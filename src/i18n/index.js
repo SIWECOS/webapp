@@ -81,6 +81,7 @@ const messages = {
       "method_metatag_step4": "Laden Sie die Startdatei wieder in ihr Hauptverzeichnis der Webseite und klicken Sie Auf der Siwecos-Seite auf „Überprüfen“.",
       "method_metatag_step5": "Sollte die Meta-information gefunden werden, wird die neue Domain im Dienst von Siwecos aufgenommen bzw. gespeichert.",
       "more_info": "Mehr Informationen",
+      "less_info": "Weniger Informationen",
       "background_info": "Hintergrundinformationen",
       "nav": {
         "deleteaccount": "Konto löschen",
