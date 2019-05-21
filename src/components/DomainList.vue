@@ -4,6 +4,8 @@
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
+        <router-link to="domain/add" class="btn btn-primary">{{ $t('messages.addDomain') }}</router-link></li>
+
         <section id="domains-wrapper">
             <ul id="domains-scanners-list" class="scanners-results" v-if="domains.length">
                 <li v-for="(domain, index) in domains" class="domain-results-item">
