@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t("messages.domainverify_headline") }}</h3>
+        <h3>{{ $t("messages.domainverify_headline") }} {{ this.domain.domain }}</h3>
 
         <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
