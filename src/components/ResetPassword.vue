@@ -51,7 +51,7 @@
         router.push('/domains')
       }
 
-      this.data.token = this.$route.params.token
+      this.data.reset_token = this.$route.params.token
     },
     methods: {
       validateAddForm () {

@@ -31,6 +31,7 @@ export default {
       }
 
       api.$http.defaults.headers.common['userToken'] = response.data.token
+      api.$http.defaults.headers.common['SIWECOS-Token'] = response.data.token
 
       router.push('/domains')
     }).catch(() => {
@@ -44,6 +45,7 @@ export default {
     localStorage.removeItem('access_token')
     this.user.authenticated = false
     api.$http.defaults.headers.common['userToken'] = false
+    api.$http.defaults.headers.common['SIWECOS-Token'] = false
 
     if (typeof window.login_announce !== 'undefined') {
       window.login_announce(null)

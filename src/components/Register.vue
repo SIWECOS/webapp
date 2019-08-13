@@ -2,30 +2,11 @@
     <div>
         <h3>{{ $t("messages.register_headline") }}</h3>
 
-        <div id="UserRegistration" v-if="!success">
-            <form @submit.prevent="validateBeforeSubmit">
+        <div id="UserRegistration" v-if="!success" @submit.prevent="submitForm()">
+            <form>
                 <ul>
                     <li>
                         <h4>{{ $t("messages.fieldset_credentials") }}</h4>
-                    </li>
-                    <li>
-                        <label for="salutation">{{ $t("messages.field_salutation") }}</label>
-                        <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id" data-vv-validate-on="blur">
-                            <option v-for="option in salutations" v-bind:value="option.id">
-                                {{ $t('messages.fieldvalue_saluation_' + option.value.toLowerCase().substr(0, option.value.length -1)) }}
-                            </option>
-                        </select>
-                        <span v-show="errors.has('salutation')">{{ errors.first('salutation') }}</span>
-                    </li>
-                    <li>
-                        <label for="first_name">{{ $t("messages.field_firstname") }}</label>
-                        <input type="text" id="first_name" v-validate="{required:true}" v-model="user.first_name" :placeholder="$t('messages.field_firstname')" name="first_name" data-vv-validate-on="blur" />
-                        <span v-show="errors.has('first_name')">{{ errors.first('first_name') }}</span>
-                    </li>
-                    <li>
-                        <label for="last_name">{{ $t("messages.field_lastname") }}</label>
-                        <input type="text" id="last_name" v-validate="{required:true}" v-model="user.last_name"  :placeholder="$t('messages.field_lastname')" name="last_name" data-vv-validate-on="blur" />
-                        <span v-show="errors.has('last_name')">{{ errors.first('last_name') }}</span>
                     </li>
                     <li>
                         <label for="email">{{ $t("messages.field_email") }}</label>
@@ -42,39 +23,14 @@
                         <input type="password" id="password_repeat" v-validate="{required:true,is:user.password}"  :placeholder="$t('messages.field_passwordrepeat')" name="password2" data-vv-validate-on="blur"  />
                         <span v-show="errors.has('password2')">{{ errors.first('password2') }}</span>
                     </li>
-
-                    <li>
-                        <h4>{{ $t("messages.fieldset_company") }}</h4>
-                    </li>
-                    <li>
-                        <label for="org_name">{{ $t("messages.field_company") }}</label>
-                        <input type="text" id="org_name" :placeholder="$t('messages.field_company')" name="org_name" v-model="user.org_name" />
-                    </li>
-                    <li>
-                        <label for="org_size">{{ $t("messages.field_companysize") }}</label>
-                        <select id="org_size" name="org_size" v-model="user.org_size_id">
-                          <option v-for="option in org_sizes" v-bind:value="option.id">
-                            {{ option.value }}
-                          </option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="org_industry">{{ $t("messages.field_industry") }}</label>
-                        <input type="text" id="org_industry" :placeholder="$t('messages.field_industry')" name="org_industry" v-model="user.org_industry" />
-                    </li>
-                    <li>
-                        <h4>{{ $t("messages.fielset_iagree") }}</h4>
-                    </li>
                     <li>
                         <label for="tos">
-                            <input type="checkbox" id="tos" v-validate="{required:true}" name="tos" v-model="user.agb" data-vv-validate-on="blur"/>
+                            <input type="checkbox" id="tos" v-validate="{required:true}" name="tos" v-model="user.agb_check" data-vv-validate-on="blur"/>
                             {{ $t("messages.field_tos") }} <a href="https://www.siwecos.de/agb/" target="_blank">AGB</a>
                         </label>
                         <span v-show="errors.has('tos')">{{ errors.first('tos') }}</span>
                     </li>
                 </ul>
-
-                <vue-recaptcha size="invisible" ref="recaptcha" @verify="onVerify":sitekey="sitekey"></vue-recaptcha>
 
                 <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
 
@@ -92,36 +48,17 @@
 import api from '../services/api.js'
 import auth from '../services/auth.js'
 import router from '../router/index.js'
-import VueRecaptcha from 'vue-recaptcha'
 
 export default {
   name: 'Register',
-  components: {VueRecaptcha},
   data () {
     return {
-      user: {salutation_id: '', org_size_id: 1},
+      user: {},
       msg: false,
-      success: false,
-      sitekey: '6LeCFkYUAAAAANxnJp11dXVNBELcyVfMn0b2FQMG',
-      salutations: [],
-      org_sizes: []
+      success: false
     }
   },
   methods: {
-    validateBeforeSubmit () {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.$refs.recaptcha.execute()
-          return false
-        }
-
-        return true
-      })
-    },
-    onVerify: function (response) {
-      this.user['g-recaptcha-response'] = response
-      this.submitForm()
-    },
     submitForm () {
       let userData = Object.assign({}, this.user)
       userData.preferred_language = this.$root.$i18n.locale
@@ -143,18 +80,6 @@ export default {
     if (auth.user.authenticated) {
       router.push('/domains')
     }
-  },
-  mounted: function () {
-    api.$http.get(api.urls.salutations)
-      .then(response => {
-        this.salutations = response.data
-
-        this.salutations.unshift({id: '', value: 'pleaseselect.'})
-      })
-    api.$http.get(api.urls.orgsizes)
-      .then(response => {
-        this.org_sizes = response.data
-      })
   }
 }
 </script>

@@ -23,79 +23,6 @@
                         <input type="password" id="newpassword_repeat" v-validate="{is:user.newpassword}" :placeholder="$t('messages.field_newpasswordrepeat')" v-model="user.newpassword2" name="newpassword2" data-vv-validate-on="blur" />
                         <span v-show="errors.has('newpassword2')">{{ errors.first('newpassword2') }}</span>
                     </li>
-                    <li>
-                        <h4>{{ $t("messages.fieldset_profile") }}</h4>
-                    </li>
-                    <li>
-                        <label for="salutation">{{ $t("messages.field_salutation") }}</label>
-                        <select id="salutation" v-validate="{required:true}" name="salutation" v-model="user.salutation_id" data-vv-validate-on="blur">
-                            <option v-for="option in salutations" v-bind:value="option.id">
-                                {{ $t('messages.fieldvalue_saluation_' + option.value.toLowerCase().substr(0, option.value.length -1)) }}
-                            </option>
-                        </select>
-                        <span v-show="errors.has('salutation')">{{ errors.first('salutation') }}</span>
-                    </li>
-                    <li>
-                        <label for="first_name">{{ $t("messages.field_firstname") }}</label>
-                        <input type="text" id="first_name" v-validate="{required:true}" v-model="user.first_name" :placeholder="$t('messages.field_firstname')" name="first_name" data-vv-validate-on="blur" />
-                        <span v-show="errors.has('first_name')">{{ errors.first('first_name') }}</span>
-                    </li>
-                    <li>
-                        <label for="last_name">{{ $t("messages.field_lastname") }}</label>
-                        <input type="text" id="last_name" v-validate="{required:true}" v-model="user.last_name"  :placeholder="$t('messages.field_lastname')" name="last_name" data-vv-validate-on="blur" />
-                        <span v-show="errors.has('last_name')">{{ errors.first('last_name') }}</span>
-                    </li>
-                    <li>
-                        <label for="address">{{ $t("messages.field_address") }}</label>
-                        <input type="text" id="address" :placeholder="$t('messages.field_address')" name="address" v-model="user.address" />
-                    </li>
-                    <li>
-                        <label for="plz">{{ $t("messages.field_zip") }}</label>
-                        <input type="text" id="plz" :placeholder="$t('messages.field_zip')" name="plz" v-model="user.plz" />
-                    </li>
-                    <li>
-                        <label for="city">{{ $t("messages.field_city") }}</label>
-                        <input type="text" id="city" :placeholder="$t('messages.field_city')" name="city" v-model="user.city" />
-                    </li>
-                    <li>
-                        <label for="phone">{{ $t("messages.field_telephone") }}</label>
-                        <input type="text" id="phone" :placeholder="$t('messages.field_telephone')" name="phone" v-model="user.phone" />
-                    </li>
-                    <li>
-                        <h4>{{ $t("messages.fieldset_company") }}</h4>
-                    </li>
-                    <li>
-                        <label for="org_name">{{ $t("messages.field_company") }}</label>
-                        <input type="text" id="org_name" :placeholder="$t('messages.field_company')" name="org_name" v-model="user.org_name" />
-                    </li>
-                    <li>
-                        <label for="org_size">{{ $t("messages.field_companysize") }}</label>
-                        <select id="org_size" name="org_size" v-model="user.org_size_id">
-                            <option v-for="option in org_sizes" v-bind:value="option.id">
-                                {{ option.value }}
-                            </option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="org_industry">{{ $t("messages.field_industry") }}</label>
-                        <input type="text" id="org_industry" :placeholder="$t('messages.field_industry')" name="org_industry" v-model="user.org_industry" />
-                    </li>
-                    <li>
-                        <label for="org_address">{{ $t("messages.field_address") }}</label>
-                        <input type="text" id="org_address" :placeholder="$t('messages.field_address')" name="org_address" v-model="user.org_address" />
-                    </li>
-                    <li>
-                        <label for="org_plz">{{ $t("messages.field_zip") }}</label>
-                        <input type="text" id="org_plz" :placeholder="$t('messages.field_zip')" name="org_plz" v-model="user.org_plz" />
-                    </li>
-                    <li>
-                        <label for="org_city">{{ $t("messages.field_city") }}</label>
-                        <input type="text" id="org_city" :placeholder="$t('messages.field_city')" name="org_city" v-model="user.org_city" />
-                    </li>
-                    <li>
-                        <label for="org_phone">{{ $t("messages.field_telephone") }}</label>
-                        <input type="text" id="org_phone" :placeholder="$t('messages.field_telephone')" name="org_phone" v-model="user.org_phone" />
-                    </li>
                 </ul>
 
                 <p class="wppb-error" v-if="msg">{{ $t('messages.' + msg) }}</p>
@@ -118,9 +45,7 @@ export default {
   data () {
     return {
       user: {},
-      msg: false,
-      salutations: [],
-      org_sizes: []
+      msg: false
     }
   },
   methods: {
@@ -144,7 +69,7 @@ export default {
       let userData = Object.assign({}, this.user)
       userData.preferred_language = this.$root.$i18n.locale
 
-      api.$http.post(api.urls.update_user, userData).then((data) => {
+      api.$http.patch(api.urls.update_user, userData).then((data) => {
         this.msg = 'account_saved'
       }).catch(() => {
         this.msg = 'error_saving_account'
@@ -157,16 +82,6 @@ export default {
     }
 
     this.user = auth.user.data
-  },
-  mounted: function () {
-    api.$http.get(api.urls.salutations)
-      .then(response => {
-        this.salutations = response.data
-      })
-    api.$http.get(api.urls.orgsizes)
-      .then(response => {
-        this.org_sizes = response.data
-      })
   }
 }
 </script>

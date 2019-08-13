@@ -35,7 +35,6 @@ npm run dev
 
 ## Configuration
 * Adjust the used API-servernames in src/services/api.js
-* Adjust the recaptcha client-key in src/components/Register.vue (sitekey)
 
 ## Translation
 Find the translatable strings in src/i18n/index.js
