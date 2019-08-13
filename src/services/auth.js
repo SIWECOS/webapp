@@ -74,8 +74,9 @@ export default {
     }
 
     api.$http.defaults.headers.common['userToken'] = token
+    api.$http.defaults.headers.common['SIWECOS-Token'] = token
 
-    api.$http.post(api.urls.get_user).then((response) => {
+    api.$http.get(api.urls.get_user).then((response) => {
       this.user.data = response.data
       this.user.authenticated = true
 
