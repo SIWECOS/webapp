@@ -54,8 +54,7 @@
     computed: {
       // a computed getter
       updated_at_human: function () {
-        let offset = new Date().getTimezoneOffset()
-        return moment(String(this.scanner.updated_at)).add(parseInt(offset / 60 * -1), 'hours').format('DD.MM.YYYY HH:mm')
+        return moment(String(this.scanner.updated_at)).format('DD.MM.YYYY HH:mm')
       },
       gaugeData: function () {
         let radius = 50
