@@ -43,10 +43,8 @@
             </div>
 
             <div class="report-link">
-                <form method="post" v-bind:action="pdfurl">
-                    <input type="hidden" name="usertoken" v-bind:value="authToken" />
-                    <input type="hidden" name="id" v-bind:value="result.scanners[0].scan_id" />
-                    <input type="hidden" name="language" v-bind:value="language" />
+                <form method="get" v-bind:action="pdfurl">
+                    <input type="hidden" name="SIWECOS-Token" v-bind:value="authToken" />
                     <input type="submit" v-bind:value="$t('messages.reportlink-text')" />
                 </form>
             </div>
@@ -169,7 +167,7 @@ export default {
       return this.$root.$i18n.locale
     },
     'pdfurl': function () {
-      return api.$http.defaults.baseURL + 'api/v1/pdf'
+      return `${api.$http.defaults.baseURL}api/v2/scan/${this.result.scanners[0].scan_id}/${this.$root.$i18n.locale}/pdf`
     },
     'gaugeData': function () {
       let radius = 50
