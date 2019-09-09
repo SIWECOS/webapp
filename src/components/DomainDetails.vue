@@ -136,6 +136,11 @@ export default {
     },
     fetchResult: function () {
       api.$http.get(api.urls.scan_results + '/' + this.$i18n.locale + '?domain=' + encodeURI(this.domain.domain)).then((data) => {
+        if (data.data.has_error) {
+          this.msg = data.data.error_message
+          return
+        }
+
         this.result = data.data
         let offset = new Date().getTimezoneOffset()
         this.result.scanFinished.humanDate = moment(String(data.data.scanFinished.date)).add(parseInt(offset / 60 * -1), 'hours').format('DD.MM.YYYY HH:mm')
