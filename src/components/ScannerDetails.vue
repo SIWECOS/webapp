@@ -19,7 +19,7 @@
     <br><span><small>{{ $t('messages.lastScan') }}: {{ updated_at_human }}</small></span>
     <p></p>
 
-    <div class="scanner-gauge">
+    <div class="scanner-gauge" v-if="!scanner.has_error">
       <svg xmlns="http://www.w3.org/2000/svg" width="126" height="126" version="1.1">
         <g transform="translate(63,63)">
           <text x="0" y="0%" dominant-baseline="central" text-anchor="middle" font-size="200%">{{ scanner.score.toFixed(0) }}</text>
@@ -28,11 +28,14 @@
         </g>
       </svg>
     </div>
-    <div class="scanner-check-wrapper">
+    <div class="scanner-check-wrapper" v-if="!scanner.has_error">
       <div class="scanner-check-content" v-for="(scanresult) in scanner.result">
         <scan-result v-bind:scanresult="scanresult"></scan-result>
         <div style="clear:both"></div>
       </div>
+    </div>
+    <div class="scanner-check-wrapper" v-if="scanner.has_error">
+      {{ scanner.error_message }}
     </div>
 
 
