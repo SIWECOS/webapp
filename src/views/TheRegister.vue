@@ -81,7 +81,11 @@ export default {
     async register () {
       if (this.passwordRepeat !== this.credentials.password) return
 
-      this.registerUser({ agb_check: this.agbCheck, ...this.credentials })
+      try {
+        await this.$api.create('user', { agb_check: this.agbCheck, ...this.credentials })
+      } catch (e) {
+        // TODO:: Output error message
+      }
     }
   }
 }

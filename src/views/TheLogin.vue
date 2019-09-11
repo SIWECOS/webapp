@@ -57,8 +57,8 @@
 </template>
 
 <script>
-// import { login } from '../services/authentication'
-import { mapActions } from 'vuex'
+import { login } from '../services/authentication'
+import { mapMutations } from 'vuex'
 export default {
   name: 'TheLogin',
   data () {
@@ -69,9 +69,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions('account', ['fetchUser']),
+    ...mapMutations('account', ['setToken']),
     async login () {
-      // await login(this.email, this.password)
+      try {
+        const { token } = await login(this.email, this.password)
+
+        this.setToken(token)
+      } catch (e) {
+        // TODO:: Output error message
+      }
     }
   }
 }

@@ -1,19 +1,17 @@
-import Api from '../services/api'
-
 const state = {
-  user: {}
+  token: {}
 }
 
 const mutations = {
   /**
    *
    * @param state
-   * @param user
+   * @param token
    */
-  setUser (state, user) {
-    sessionStorage.setItem('user', JSON.stringify(user))
+  setToken (state, token) {
+    sessionStorage.setItem('token', JSON.stringify(token))
 
-    state.user = user
+    state.token = token
   }
 }
 
@@ -23,33 +21,8 @@ const getters = {
    * @param state
    * @return {*}
    */
-  user (state) {
-    return Object.keys(state.user).length ? state.user : sessionStorage.getItem('user')
-  }
-}
-
-const actions = {
-  /**
-   *
-   * @param commit
-   * @return {Promise<void>}
-   */
-  async fetchUser ({ commit } = {}) {
-    const api = new Api()
-
-    commit('setUser', await api.get('user'))
-  },
-
-  /**
-   *
-   * @param commit
-   * @param credentials
-   * @return {Promise<void>}
-   */
-  async registerUser ({ commit } = {}, credentials) {
-    const api = new Api()
-
-    commit('setUser', await api.create('user', credentials))
+  token (state) {
+    return Object.keys(state.token).length ? state.token : sessionStorage.getItem('token')
   }
 }
 
@@ -57,5 +30,4 @@ export default {
   state,
   mutations,
   getters,
-  actions
 }
