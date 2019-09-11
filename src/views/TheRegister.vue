@@ -1,41 +1,41 @@
 <template>
   <div>
-    <h3>Login</h3>
+    <h3 v-t="'register.main_title'"></h3>
     <div id="UserRegistration">
       <form @submit.prevent="register">
         <ul>
           <li>
-            <h4>Zugangsdaten</h4>
+            <h4 v-t="'register.second_title'"></h4>
           </li>
           <li>
-            <label for="email">E-Mail*</label>
+            <label for="email">{{ $t('common.email') | required }}</label>
             <input
               v-model="credentials.email"
               id="email"
               type="email"
-              placeholder="E-Mail*"
+              :placeholder="$t('common.email') | required"
               name="email"
               aria-required="true"
               aria-invalid="false"/>
           </li>
           <li>
-            <label for="password">Passwort*</label>
+            <label for="password">{{ $t('common.password') | required }}</label>
             <input
               v-model="credentials.password"
               id="password"
               type="password"
-              placeholder="Passwort*"
+              :placeholder="$t('common.password') | required"
               name="password"
               aria-required="true"
               aria-invalid="false"/>
           </li>
           <li>
-            <label for="password_repeat">Passwort wiederholen*</label>
+            <label for="password_repeat">{{ $t('common.repeat') }} {{ $t('common.password') | required }}</label>
             <input
               v-model="passwordRepeat"
+              :placeholder="repeatPlaceholder"
               id="password_repeat"
               type="password"
-              placeholder="Passwort wiederholen*"
               name="password_repeat"
               aria-required="true"
               aria-invalid="false"/>
@@ -49,14 +49,14 @@
                 name="tos"
                 aria-required="true"
                 aria-invalid="false"/>
-              Ich akzeptiere die <a href="https://www.siwecos.de/agb/" target="_blank">AGB</a>
+              {{ $t('common.accept') }} <a href="https://www.siwecos.de/agb/" target="_blank">{{ $t('common.agb') }}</a>
             </label>
           </li>
         </ul>
         <input
           class="submit button"
           type="submit"
-          value="Registrieren" />
+          :value="$t('register.register')" />
       </form>
     </div>
   </div>
@@ -76,8 +76,21 @@ export default {
       agbCheck: false
     }
   },
+  computed: {
+    /**
+     *
+     * @return {string}
+     */
+    repeatPlaceholder () {
+      return `${this.$t('common.repeat')} ${this.$t('common.password')}*`
+    }
+  },
   methods: {
     ...mapActions('account', ['registerUser']),
+    /**
+     *
+     * @return {Promise<void>}
+     */
     async register () {
       if (this.passwordRepeat !== this.credentials.password) return
 

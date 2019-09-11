@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Login</h3>
+    <h3 v-t="'login.main_title'"></h3>
     <div
       id="wppb-login-wrap"
       class="wppb-user-forms">
@@ -8,30 +8,30 @@
         id="loginform"
         @submit.prevent="login">
         <p class="login-username">
-          <label for="email">E-Mail*</label>
+          <label for="email">{{ $t('common.email') | required }}</label>
           <br>
           <input
             v-model="email"
             id="email"
             name="email"
-            placeholder="E-Mail*"
+            :placeholder="$t('common.email') | required"
             type="email"
             aria-required="true"
             aria-invalid="true"/>
-          <span>E-Mail ist ein Pflichtfeld.</span>
+          <span>{{ $t('common.email') }} {{ $t('common.required') }}</span>
         </p>
         <p class="login-password">
-          <label for="password">Passwort*</label>
+          <label for="password">{{ $t('common.password') | required }}</label>
           <br>
           <input
             v-model="password"
             id="password"
             name="password"
-            placeholder="Passwort*"
+            :placeholder="$t('common.password') | required"
             type="password"
             aria-required="true"
             aria-invalid="true" />
-          <span>Passwort ist ein Pflichtfeld.</span>
+          <span>{{ $t('common.password') }} {{ $t('common.required') }}</span>
         </p>
         <p class="login-remember">
           <label for="rememberme">
@@ -40,7 +40,7 @@
               id="rememberme"
               name="rememberme"
               type="checkbox"/>
-            Angemeldet bleiben
+            {{ $t('login.remain') }}
           </label>
         </p>
         <p class="login-submit">
@@ -49,7 +49,7 @@
             class="button button-primary"
             name="wp-submit"
             type="submit"
-            value="Anmelden"/>
+            :value="$t('login.login')"/>
         </p>
       </form>
     </div>
