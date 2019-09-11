@@ -29,7 +29,7 @@
         return false
       }
 
-      api.$http.post(api.urls.account_delete).then((data) => {
+      api.$http.delete(api.urls.account_delete).then((data) => {
         auth.logout()
       }).catch(() => {
         router.push('/domains')
