@@ -11,6 +11,8 @@ const mutations = {
    * @param user
    */
   setUser (state, user) {
+    sessionStorage.setItem('user', JSON.stringify(user))
+
     state.user = user
   }
 }
@@ -19,16 +21,35 @@ const getters = {
   /**
    *
    * @param state
-   * @return {getters.user|(function(*))|state.user|{}|*|number}
+   * @return {*}
    */
   user (state) {
-    return state.user
+    return Object.keys(state.user).length ? state.user : sessionStorage.getItem('user')
   }
 }
 
 const actions = {
-  async fetchUser ({ commit }) {
-    commit('setUser', await Api.get('v2/user'))
+  /**
+   *
+   * @param commit
+   * @return {Promise<void>}
+   */
+  async fetchUser ({ commit } = {}) {
+    const api = new Api()
+
+    commit('setUser', await api.get('user'))
+  },
+
+  /**
+   *
+   * @param commit
+   * @param credentials
+   * @return {Promise<void>}
+   */
+  async registerUser ({ commit } = {}, credentials) {
+    const api = new Api()
+
+    commit('setUser', await api.create('user', credentials))
   }
 }
 
