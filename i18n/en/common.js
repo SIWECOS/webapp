@@ -4,7 +4,9 @@ const common = {
   repeat: 'Repeat',
   accept: 'I accept the',
   agb: 'AGB',
-  required: 'is required.'
+  required: 'is required',
+  invalid: 'is invalid',
+  no_match: 'does not match'
 }
 
 export default common

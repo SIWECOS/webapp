@@ -6,7 +6,7 @@ import store from './store'
 import Api from './services/api'
 import locales from '../i18n/locales'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
-import { required, min, email } from 'vee-validate/dist/rules'
+import { required, min, email, confirmed } from 'vee-validate/dist/rules'
 
 Vue.use(VueI18n)
 
@@ -40,6 +40,11 @@ extend('min', {
 extend('email', {
   ...email,
   message: 'This field must be a valid email'
+})
+
+extend('confirmed', {
+  ...confirmed,
+  message: 'This field does not match'
 })
 
 Vue.component('ValidationProvider', ValidationProvider)

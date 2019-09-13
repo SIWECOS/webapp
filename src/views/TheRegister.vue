@@ -2,37 +2,62 @@
   <div>
     <h3 v-t="'register.main_title'"></h3>
     <div id="UserRegistration">
-      <form @submit.prevent="register">
+      <ValidationObserver
+        ref="register"
+        tag="form"
+        @submit.prevent="register">
         <ul>
           <li>
             <h4 v-t="'register.second_title'"></h4>
           </li>
           <li>
             <label for="email">{{ $t('common.email') | required }}</label>
-            <input
-              v-model="credentials.email"
-              id="email"
-              type="email"
-              :placeholder="$t('common.email') | required"
-              name="email"/>
+            <ValidationProvider
+              mode="passive"
+              name="email"
+              rules="required|email"
+              v-slot="{ errors }">
+              <input
+                v-model="credentials.email"
+                id="email"
+                type="email"
+                :placeholder="$t('common.email') | required"
+                name="email"/>
+              <span>{{ errors[0] }}</span>
+            </ValidationProvider>
           </li>
           <li>
             <label for="password">{{ $t('common.password') | required }}</label>
-            <input
-              v-model="credentials.password"
-              id="password"
-              type="password"
-              :placeholder="$t('common.password') | required"
-              name="password"/>
+            <ValidationProvider
+              vid="password"
+              mode="passive"
+              name="password"
+              rules="required|min:8"
+              v-slot="{ errors }">
+              <input
+                v-model="credentials.password"
+                id="password"
+                type="password"
+                :placeholder="$t('common.password') | required"
+                name="password"/>
+              <span>{{ errors[0] }}</span>
+            </ValidationProvider>
           </li>
           <li>
             <label for="password_repeat">{{ $t('common.repeat') }} {{ $t('common.password') | required }}</label>
-            <input
-              v-model="passwordRepeat"
-              :placeholder="repeatPlaceholder"
-              id="password_repeat"
-              type="password"
-              name="password_repeat"/>
+            <ValidationProvider
+              mode="passive"
+              name="password_repeat"
+              rules="required|confirmed:password"
+              v-slot="{ errors }">
+              <input
+                v-model="passwordRepeat"
+                :placeholder="repeatPlaceholder"
+                id="password_repeat"
+                type="password"
+                name="password_repeat"/>
+              <span>{{ errors[0] }}</span>
+            </ValidationProvider>
           </li>
           <li>
             <label for="tos">
@@ -49,7 +74,7 @@
           class="submit button"
           type="submit"
           :value="$t('register.register')" />
-      </form>
+      </ValidationObserver>
     </div>
   </div>
 </template>
@@ -84,7 +109,9 @@ export default {
      * @return {Promise<void>}
      */
     async register () {
-      if (this.passwordRepeat !== this.credentials.password) return
+      const { valid } = await this.$refs.register.validate()
+
+      if (!valid || this.passwordRepeat !== this.credentials.password) return
 
       try {
         await this.$api.create('user', { agb_check: this.agbCheck, ...this.credentials })
