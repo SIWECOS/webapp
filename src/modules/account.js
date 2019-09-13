@@ -29,5 +29,5 @@ const getters = {
 export default {
   state,
   mutations,
-  getters,
+  getters
 }

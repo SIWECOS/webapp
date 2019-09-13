@@ -4,34 +4,44 @@
     <div
       id="wppb-login-wrap"
       class="wppb-user-forms">
-      <form
+      <ValidationObserver
+        ref="login"
         id="loginform"
+        tag="form"
         @submit.prevent="login">
         <p class="login-username">
           <label for="email">{{ $t('common.email') | required }}</label>
           <br>
-          <input
-            v-model="email"
-            id="email"
+          <ValidationProvider
+            mode="passive"
             name="email"
-            :placeholder="$t('common.email') | required"
-            type="email"
-            aria-required="true"
-            aria-invalid="true"/>
-          <span>{{ $t('common.email') }} {{ $t('common.required') }}</span>
+            rules="required|email"
+            v-slot="{ errors }">
+            <input
+              v-model="email"
+              id="email"
+              name="email"
+              :placeholder="$t('common.email') | required"
+              type="text"/>
+            <span>{{ errors[0] }}</span>
+          </ValidationProvider>
         </p>
         <p class="login-password">
           <label for="password">{{ $t('common.password') | required }}</label>
           <br>
-          <input
-            v-model="password"
-            id="password"
+          <ValidationProvider
+            mode="passive"
             name="password"
-            :placeholder="$t('common.password') | required"
-            type="password"
-            aria-required="true"
-            aria-invalid="true" />
-          <span>{{ $t('common.password') }} {{ $t('common.required') }}</span>
+            rules="required|min:8"
+            v-slot="{ errors }">
+            <input
+              v-model="password"
+              id="password"
+              name="password"
+              :placeholder="$t('common.password') | required"
+              type="password"/>
+            <span>{{ errors[0] }}</span>
+          </ValidationProvider>
         </p>
         <p class="login-remember">
           <label for="rememberme">
@@ -51,7 +61,7 @@
             type="submit"
             :value="$t('login.login')"/>
         </p>
-      </form>
+      </ValidationObserver>
     </div>
   </div>
 </template>
@@ -71,6 +81,10 @@ export default {
   methods: {
     ...mapMutations('account', ['setToken']),
     async login () {
+      const { valid } = await this.$refs.login.validate()
+
+      if (!valid) return
+
       try {
         const { token } = await login(this.email, this.password)
 

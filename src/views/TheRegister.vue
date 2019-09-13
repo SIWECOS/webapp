@@ -14,9 +14,7 @@
               id="email"
               type="email"
               :placeholder="$t('common.email') | required"
-              name="email"
-              aria-required="true"
-              aria-invalid="false"/>
+              name="email"/>
           </li>
           <li>
             <label for="password">{{ $t('common.password') | required }}</label>
@@ -25,9 +23,7 @@
               id="password"
               type="password"
               :placeholder="$t('common.password') | required"
-              name="password"
-              aria-required="true"
-              aria-invalid="false"/>
+              name="password"/>
           </li>
           <li>
             <label for="password_repeat">{{ $t('common.repeat') }} {{ $t('common.password') | required }}</label>
@@ -36,9 +32,7 @@
               :placeholder="repeatPlaceholder"
               id="password_repeat"
               type="password"
-              name="password_repeat"
-              aria-required="true"
-              aria-invalid="false"/>
+              name="password_repeat"/>
           </li>
           <li>
             <label for="tos">
@@ -46,9 +40,7 @@
                 v-model="agbCheck"
                 id="tos"
                 type="checkbox"
-                name="tos"
-                aria-required="true"
-                aria-invalid="false"/>
+                name="tos"/>
               {{ $t('common.accept') }} <a href="https://www.siwecos.de/agb/" target="_blank">{{ $t('common.agb') }}</a>
             </label>
           </li>
