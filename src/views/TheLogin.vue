@@ -62,6 +62,7 @@
             :value="$t('login.login')"/>
         </p>
       </ValidationObserver>
+      <router-link to="forgotpassword">{{ $t('login.forgot_password') }}</router-link>
     </div>
   </div>
 </template>

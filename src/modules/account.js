@@ -29,6 +29,14 @@ const getters = {
 }
 
 const actions = {
+  /**
+   *
+   * @param commit
+   * @param email
+   * @param password
+   * @param remember
+   * @return {Promise<void>}
+   */
   async login ({ commit } = {}, { email, password, remember } = {}) {
     const api = new Api()
 
