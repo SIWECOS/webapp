@@ -17,7 +17,7 @@ class Api {
     this.baseUrl = `${env.APP_URL}/api/v2`
 
     if (this.token) {
-      this.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+      this.axios.defaults.headers.common['SIWECOS-Token'] = this.token
     }
   }
 
@@ -72,15 +72,17 @@ class Api {
    * @param id
    * @param requestBody
    *
-   * @returns {Promise<null>}
+   * @returns {Promise<null|*>}
    */
   async update (path, id, requestBody) {
     if (this.axios === null) {
       return null
     }
 
+    const pathGen = id ? `${this.baseUrl}/${path}/${id}` : `${this.baseUrl}/${path}`
+
     try {
-      const { data } = await this.axios.put(`${this.baseUrl}/${path}/${id}`, requestBody)
+      const { data } = await this.axios.put(pathGen, requestBody)
 
       return data
     } catch (e) {

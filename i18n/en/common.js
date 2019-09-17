@@ -6,7 +6,9 @@ const common = {
   agb: 'AGB',
   required: 'is required',
   invalid: 'is invalid',
-  no_match: 'does not match'
+  no_match: 'does not match',
+  new: 'New',
+  save: 'Save'
 }
 
 export default common

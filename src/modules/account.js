@@ -1,4 +1,5 @@
 import Api from '../services/api'
+import env from '../../env'
 
 const state = {
   token: {}
@@ -11,7 +12,7 @@ const mutations = {
    * @param token
    */
   setToken (state, token) {
-    sessionStorage.setItem('token', JSON.stringify(token))
+    sessionStorage.setItem(env.ID_TOKEN, token)
 
     state.token = token
   }
