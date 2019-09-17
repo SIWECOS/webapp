@@ -11,7 +11,9 @@
             <h4 v-t="'register.second_title'"></h4>
           </li>
           <li>
-            <label for="email">{{ $t('common.email') | required }}</label>
+            <label for="email">
+              {{ $t('common.email') | required }}
+            </label>
             <ValidationProvider
               mode="passive"
               name="email"
@@ -27,9 +29,10 @@
             </ValidationProvider>
           </li>
           <li>
-            <label for="password">{{ $t('common.password') | required }}</label>
+            <label for="password">
+              {{ $t('common.password') | required }}
+            </label>
             <ValidationProvider
-              vid="password"
               mode="passive"
               name="password"
               rules="required|min:8"
@@ -44,7 +47,9 @@
             </ValidationProvider>
           </li>
           <li>
-            <label for="password_repeat">{{ $t('common.repeat') }} {{ $t('common.password') | required }}</label>
+            <label for="password_repeat">
+              {{ $t('common.repeat') }} {{ $t('common.password') | required }}
+            </label>
             <ValidationProvider
               mode="passive"
               name="password_repeat"
@@ -61,13 +66,25 @@
           </li>
           <li>
             <label for="tos">
+              {{ $t('common.accept') }}
+              <a
+                href="https://www.siwecos.de/agb/"
+                target="_blank">
+                {{ $t('common.agb') }}
+              </a>
+            </label>
+            <ValidationProvider
+              mode="passive"
+              name="agbCheck"
+              :rules="{ required: { allowFalse: false } }"
+              v-slot="{ errors }">
               <input
                 v-model="agbCheck"
                 id="tos"
                 type="checkbox"
                 name="tos"/>
-              {{ $t('common.accept') }} <a href="https://www.siwecos.de/agb/" target="_blank">{{ $t('common.agb') }}</a>
-            </label>
+              <span>{{ errors[0] }}</span>
+            </ValidationProvider>
           </li>
         </ul>
         <input
@@ -109,9 +126,13 @@ export default {
      * @return {Promise<void>}
      */
     async register () {
+      console.log(await this.$refs.register.validate())
       const { valid } = await this.$refs.register.validate()
+      console.log(valid)
 
-      if (!valid || this.passwordRepeat !== this.credentials.password) return
+      if (!valid) return
+
+      console.log(1)
 
       try {
         await this.$api.create('user', { agb_check: this.agbCheck, ...this.credentials })

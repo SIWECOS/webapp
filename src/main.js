@@ -33,8 +33,7 @@ extend('required', {
 
 extend('min', {
   ...min,
-  params: ['min'],
-  message: 'This field must be {min} characters long'
+  message: 'This field must be {length} characters long'
 })
 
 extend('email', {
