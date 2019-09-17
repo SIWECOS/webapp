@@ -168,7 +168,6 @@ export default {
       return this.$root.$i18n.locale
     },
     'pdfurl': function () {
-      console.log(this.result)
       return `${api.$http.defaults.baseURL}api/v2/scan/${this.result.id}/${this.$root.$i18n.locale}/pdf`
     },
     'gaugeData': function () {
