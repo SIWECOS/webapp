@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import Api from './services/api'
 import locales from '../i18n/locales'
-import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 import { required, min, email, confirmed } from 'vee-validate/dist/rules'
 
 Vue.use(VueI18n)
@@ -26,24 +26,14 @@ Vue.filter('required', function (value) {
   return `${value}*`
 })
 
-extend('required', {
-  ...required,
-  message: 'The {_field_} is required.'
-})
+extend('required', required)
+extend('min', min)
+extend('email', email)
+extend('confirmed', confirmed)
 
-extend('min', {
-  ...min,
-  message: 'This field must be {length} characters long'
-})
-
-extend('email', {
-  ...email,
-  message: 'This field must be a valid email'
-})
-
-extend('confirmed', {
-  ...confirmed,
-  message: 'This field does not match'
+configure({
+  // this will be used to generate messages.
+  defaultMessage: (_, values) => i18n.t(`rules.${values._rule_}`, values)
 })
 
 Vue.component('ValidationProvider', ValidationProvider)
