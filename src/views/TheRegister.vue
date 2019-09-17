@@ -97,7 +97,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 export default {
   name: 'TheRegister',
   data () {
@@ -120,19 +119,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions('account', ['registerUser']),
     /**
      *
      * @return {Promise<void>}
      */
     async register () {
-      console.log(await this.$refs.register.validate())
-      const { valid } = await this.$refs.register.validate()
-      console.log(valid)
+      const valid = await this.$refs.register.validate()
 
       if (!valid) return
-
-      console.log(1)
 
       try {
         await this.$api.create('user', { agb_check: this.agbCheck, ...this.credentials })

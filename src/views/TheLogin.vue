@@ -8,7 +8,7 @@
         ref="login"
         id="loginform"
         tag="form"
-        @submit.prevent="login">
+        @submit.prevent="authenticate">
         <p class="login-username">
           <label for="email">{{ $t('common.email') | required }}</label>
           <br>
@@ -18,7 +18,7 @@
             rules="required|email"
             v-slot="{ errors }">
             <input
-              v-model="email"
+              v-model="credentials.email"
               id="email"
               name="email"
               :placeholder="$t('common.email') | required"
@@ -35,7 +35,7 @@
             rules="required|min:8"
             v-slot="{ errors }">
             <input
-              v-model="password"
+              v-model="credentials.password"
               id="password"
               name="password"
               :placeholder="$t('common.password') | required"
@@ -46,7 +46,7 @@
         <p class="login-remember">
           <label for="rememberme">
             <input
-              v-model="remember"
+              v-model="credentials.remember"
               id="rememberme"
               name="rememberme"
               type="checkbox"/>
@@ -67,28 +67,28 @@
 </template>
 
 <script>
-import { login } from '../services/authentication'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 export default {
   name: 'TheLogin',
   data () {
     return {
-      email: '',
-      password: '',
-      remember: false
+      credentials: {
+        email: '',
+        password: '',
+        remember: false
+      }
     }
   },
   methods: {
     ...mapMutations('account', ['setToken']),
-    async login () {
-      const { valid } = await this.$refs.login.validate()
+    ...mapActions('account', ['login']),
+    async authenticate () {
+      const valid = await this.$refs.login.validate()
 
       if (!valid) return
 
       try {
-        const { token } = await login(this.email, this.password)
-
-        this.setToken(token)
+        this.login(this.credentials)
       } catch (e) {
         // TODO:: Output error message
       }

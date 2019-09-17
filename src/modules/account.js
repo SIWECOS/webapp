@@ -1,3 +1,5 @@
+import Api from '../services/api'
+
 const state = {
   token: {}
 }
@@ -26,8 +28,27 @@ const getters = {
   }
 }
 
+const actions = {
+  async login ({ commit } = {}, { email, password, remember } = {}) {
+    const api = new Api()
+
+    if (!email || !password) return
+
+    try {
+      const { token } = await api.create('user/login', { email, password })
+
+      if (remember && token) {
+        commit('setToken', token)
+      }
+    } catch (e) {
+      throw e
+    }
+  }
+}
+
 export default {
   state,
   mutations,
-  getters
+  getters,
+  actions
 }
