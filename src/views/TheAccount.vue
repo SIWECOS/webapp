@@ -70,7 +70,11 @@
       </ValidationObserver>
       <p>
         {{ $t('account.delete_account_full') }}
-        <router-link to="accountdelete">{{ $t('account.delete_account') }}</router-link>
+        <button
+          @click="destroy"
+          class="button--link">
+          {{ $t('account.delete_account') }}
+        </button>
       </p>
     </div>
   </div>
@@ -105,6 +109,10 @@ export default {
     }
   },
   methods: {
+    /**
+     *
+     * @return {Promise<void>}
+     */
     async update () {
       const valid = await this.$refs.account.validate()
 
@@ -116,6 +124,23 @@ export default {
           newpassword: this.credentials.newPassword,
           preferred_language: 'en'
         })
+      } catch (e) {
+        // TODO:: Output error
+      }
+    },
+    /**
+     *
+     * @return {Promise<void>}
+     */
+    async destroy () {
+      try {
+        const deleteAccount = confirm(this.$t('common.confirm_delete'))
+
+        if (!deleteAccount) {
+          return
+        }
+
+        await this.$api.delete('user', '')
       } catch (e) {
         // TODO:: Output error
       }

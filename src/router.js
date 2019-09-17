@@ -31,7 +31,6 @@ const router = new Router({ routes })
 
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem(env.ID_TOKEN)
-  console.log(token)
 
   if (token) {
     next(true)

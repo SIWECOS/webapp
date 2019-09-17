@@ -102,8 +102,10 @@ class Api {
       return null
     }
 
+    const pathGen = id ? `${this.baseUrl}/${path}/${id}` : `${this.baseUrl}/${path}`
+
     try {
-      await this.axios.delete(`${this.baseUrl}/${path}/${id}`)
+      await this.axios.delete(pathGen)
     } catch (e) {
       throw e.response
     }
