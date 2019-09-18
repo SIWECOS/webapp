@@ -4,6 +4,8 @@ import logout from './sections/logout'
 import register from './sections/register'
 import rules from './rules'
 import account from './sections/account'
+import domains from './sections/domains'
+import verify from './sections/verify'
 
 const en = {
   common,
@@ -11,7 +13,9 @@ const en = {
   logout,
   register,
   rules,
-  account
+  account,
+  domains,
+  verify
 }
 
 export default en

@@ -71,10 +71,11 @@ class Api {
    * @param path
    * @param id
    * @param requestBody
+   * @param type  put or patch
    *
    * @returns {Promise<null|*>}
    */
-  async update (path, id, requestBody) {
+  async update (path, id, requestBody, type = 'put') {
     if (this.axios === null) {
       return null
     }
@@ -82,7 +83,7 @@ class Api {
     const pathGen = id ? `${this.baseUrl}/${path}/${id}` : `${this.baseUrl}/${path}`
 
     try {
-      const { data } = await this.axios.put(pathGen, requestBody)
+      const { data } = await this.axios[type](pathGen, requestBody)
 
       return data
     } catch (e) {
@@ -94,10 +95,11 @@ class Api {
    *
    * @param path
    * @param id
+   * @param query
    *
    * @returns {Promise<null>}
    */
-  async delete (path, id) {
+  async delete (path, id, query) {
     if (this.axios === null) {
       return null
     }
@@ -105,7 +107,9 @@ class Api {
     const pathGen = id ? `${this.baseUrl}/${path}/${id}` : `${this.baseUrl}/${path}`
 
     try {
-      await this.axios.delete(pathGen)
+      await this.axios.delete(pathGen, {
+        data: { ...query }
+      })
     } catch (e) {
       throw e.response
     }

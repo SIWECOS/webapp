@@ -123,7 +123,7 @@ export default {
           email: this.credentials.email,
           newpassword: this.credentials.newPassword,
           preferred_language: 'en'
-        })
+        }, 'patch')
       } catch (e) {
         // TODO:: Output error
       }

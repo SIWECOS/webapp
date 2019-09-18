@@ -5,6 +5,9 @@ import TheRegister from './views/TheRegister'
 import TheForgotPassword from './views/TheForgotPassword'
 import TheAccount from './views/TheAccount'
 import env from '@/../env'
+import TheDomains from './views/TheDomains'
+import TheDomainsAdd from './views/TheDomainsAdd'
+import DomainVerify from './components/DomainVerify'
 
 Vue.use(Router)
 
@@ -24,21 +27,50 @@ const routes = [
   {
     path: '/account',
     component: TheAccount
+  },
+  {
+    path: '/domains',
+    component: TheDomains
+  },
+  {
+    path: '/domain/add',
+    component: TheDomainsAdd
+  },
+  {
+    path: '/domain/verify/:domain',
+    component: DomainVerify
+  },
+  {
+    path: '/logout',
+    beforeEnter (to, from, next) {
+      next()
+
+      sessionStorage.removeItem(env.ID_TOKEN)
+
+      if (typeof window.login_announce !== 'undefined') {
+        window.login_announce(null)
+      }
+
+      console.log(1)
+
+      // window.location.href = '/login'
+    }
   }
 ]
 
 const router = new Router({ routes })
 
 router.beforeEach((to, from, next) => {
+  next()
   const token = sessionStorage.getItem(env.ID_TOKEN)
 
   if (token) {
-    next(true)
+    next()
     return
   }
 
   if (to.path === '/login' || to.path === '/register') {
-    next(true)
+    next()
     return
   }
 

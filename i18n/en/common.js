@@ -9,7 +9,9 @@ const common = {
   no_match: 'does not match',
   new: 'New',
   save: 'Save',
-  confirm_delete: 'Do you want to irrevocably delete your account?'
+  confirm_delete: 'Do you want to irrevocably delete your account?',
+  add: 'Add',
+  domain: 'Domain'
 }
 
 export default common
