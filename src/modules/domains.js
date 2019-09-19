@@ -12,15 +12,6 @@ const getters = {
    */
   domains (state) {
     return state.domains
-  },
-
-  /**
-   *
-   * @param state
-   * @return {function(*): T[]}
-   */
-  filterByDomainName: (state) => (domain) => {
-    return state.domains.filter(item => item.domain === domain)
   }
 }
 

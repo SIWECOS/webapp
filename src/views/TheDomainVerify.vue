@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { saveAs } from 'file-saver'
 export default {
   name: 'TheDomainVerify',
@@ -70,16 +69,7 @@ export default {
       data: {}
     }
   },
-  watch: {
-    /**
-     * @return {void}
-     */
-    domain (value) {
-      this.data = this.filterByDomainName(value)[0]
-    }
-  },
   computed: {
-    ...mapGetters('domains', ['filterByDomainName']),
     /**
      * @return {string}
      */
@@ -96,6 +86,12 @@ export default {
   beforeRouteEnter ({ params }, from, next) {
     next(vue => {
       vue.domain = params.domain
+
+      if (!vue.domain) return
+
+      vue.$api.get(`domain/${vue.domain}`).then(data => {
+        vue.data = data
+      })
     })
   },
   methods: {

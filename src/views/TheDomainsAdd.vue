@@ -56,6 +56,8 @@ export default {
 
       try {
         await this.$api.create('domain', { domain: this.adjustDomain(this.domain) })
+
+        this.$router.push({ path: '/domains' })
       } catch (e) {
         // TODO:: Output error
       }
