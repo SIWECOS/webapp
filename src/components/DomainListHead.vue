@@ -32,19 +32,22 @@ export default {
   components: { DomainListHeadBase, Doughnut },
   data () {
     return {
-      showDetails: false
+      show: false
     }
   },
   props: {
     report: {
       type: Object
+    },
+    headId: {
+      type: String
     }
   },
   methods: {
     reverseState () {
-      this.showDetails = !this.showDetails
+      this.show = !this.show
 
-      this.$emit('toggle', this.showDetails)
+      this.$emit('toggle', { target: `item__content__${this.headId}`, active: this.show })
     }
   }
 }

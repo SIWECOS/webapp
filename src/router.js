@@ -50,10 +50,6 @@ const routes = [
       if (typeof window.login_announce !== 'undefined') {
         window.login_announce(null)
       }
-
-      console.log(1)
-
-      // window.location.href = '/login'
     }
   }
 ]

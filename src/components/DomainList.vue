@@ -11,8 +11,11 @@
         <div class="item__wrapper">
           <DomainListHead
             v-on:toggle="setVisibility"
+            :headId="key.toString()"
             :report="report"/>
-          <section class="item__content active">
+          <section
+            class="item__content"
+            :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
             <DomainListDoughnuts
               :report="report.report"
               :id="report.id.toString()" />
@@ -52,7 +55,7 @@ export default {
     return {
       reports: [],
       domainsWithoutReports: [],
-      showDetails: false
+      accordions: []
     }
   },
   mounted () {
@@ -89,8 +92,12 @@ export default {
      * @param state
      */
     setVisibility (state) {
-      console.log(state)
-      this.showDetails = state
+      if (this.accordions.includes(state.target) && !state.active) {
+        this.accordions = this.accordions.filter(accordion => accordion !== state.target)
+        return
+      }
+
+      this.accordions.push(state.target)
     }
   }
 }
