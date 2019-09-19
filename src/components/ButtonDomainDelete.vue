@@ -1,18 +1,20 @@
 <template>
   <button
-    @click="destroy(report.domain)"
+    @click="destroy(domain)"
     class="link link-error siteninformation__delete">
     Delete domain
   </button>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'ButtonDomainDelete',
   props: {
     domain: String
   },
   methods: {
+    ...mapActions('domains', ['fetch']),
     /**
      *
      * @param url
@@ -20,7 +22,7 @@ export default {
      */
     async destroy (url) {
       await this.$api.delete('domain', '', { domain: url })
-      // TODO:: REFRESH HERE
+      await this.fetch()
     }
   }
 }
