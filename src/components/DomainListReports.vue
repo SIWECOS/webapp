@@ -10,7 +10,9 @@
           class="accordion__item active"
           v-for="(test, key) in detail.tests"
           :key="key">
-          <button class="accordionitem__heading">
+          <button
+            @click="toggle($event)"
+            class="accordionitem__heading">
             <span class="heading__title">
               {{ test.headline }}
             </span>
@@ -38,9 +40,29 @@
 <script>
 export default {
   name: 'DomainListReports',
+  data () {
+    return {
+      show: false,
+      accordions: []
+    }
+  },
   props: {
     report: {
       type: Array
+    },
+    id: {
+      type: String
+    }
+  },
+  methods: {
+    toggle (event) {
+      let element = event.target.nextElementSibling
+
+      if (!event.target.classList.contains('accordionitem__heading')) {
+        element = event.target.parentElement.nextElementSibling
+      }
+
+      element.classList.toggle('active')
     }
   }
 }

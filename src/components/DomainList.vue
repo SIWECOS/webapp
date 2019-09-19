@@ -19,7 +19,9 @@
             <DomainListDoughnuts
               :report="report.report"
               :id="report.id.toString()" />
-            <DomainListReports :report="report.report" />
+            <DomainListReports
+              :id="key.toString()"
+              :report="report.report" />
           </section>
         </div>
       </li>
