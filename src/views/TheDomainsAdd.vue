@@ -13,6 +13,7 @@
           <label for="domain">{{ $t('common.domain') }}</label>
           <br>
           <ValidationProvider
+            tag="div"
             mode="passive"
             name="domain"
             rules="required"

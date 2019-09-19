@@ -14,6 +14,7 @@
           </label>
           <br>
           <ValidationProvider
+            tag="div"
             mode="passive"
             name="email"
             rules="required|email"
@@ -61,6 +62,8 @@ export default {
 
       try {
         await this.$api.create('user/password/sendResetMail', { email: this.email })
+
+        this.$router.push('/login')
       } catch (e) {
         // TODO:: Output error
       }

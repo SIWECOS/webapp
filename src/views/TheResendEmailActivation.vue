@@ -12,6 +12,7 @@
           </label>
           <br>
           <ValidationProvider
+            tag="div"
             mode="passive"
             name="email"
             rules="required|email"

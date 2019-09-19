@@ -13,6 +13,7 @@
           <li>
             <label for="email">{{ $t('common.email') | required }}</label>
             <ValidationProvider
+              tag="div"
               mode="passive"
               name="email"
               rules="required|email"
@@ -31,6 +32,7 @@
               {{ newPasswordLabel }}
             </label>
             <ValidationProvider
+              tag="div"
               mode="passive"
               name="password"
               rules="required|min:8"
@@ -49,6 +51,7 @@
               {{ newPasswordRepeatLabel }}
             </label>
             <ValidationProvider
+              tag="div"
               mode="passive"
               name="newpassword_repeat"
               rules="required|confirmed:password"

@@ -13,6 +13,7 @@
           <label for="email">{{ $t('common.email') | required }}</label>
           <br>
           <ValidationProvider
+            tag="div"
             mode="passive"
             name="email"
             rules="required|email"
@@ -30,6 +31,7 @@
           <label for="password">{{ $t('common.password') | required }}</label>
           <br>
           <ValidationProvider
+            tag="div"
             mode="passive"
             name="password"
             rules="required|min:8"

@@ -23,10 +23,10 @@ export default {
     ...mapActions('domains', ['fetch']),
     async scan () {
       try {
-        const { scan_id } = await this.$api.create(`scan`, { domain: this.domain })
+        const response = await this.$api.create(`scan`, { domain: this.domain })
 
         this.isDisabled = true
-        this.checkScanStatus(scan_id, 'running')
+        this.checkScanStatus(response.scan_id, 'running')
         this.isDisabled = false
       } catch (e) {
         this.isDisabled = false

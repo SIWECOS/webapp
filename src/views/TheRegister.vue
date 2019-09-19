@@ -15,6 +15,7 @@
               {{ $t('common.email') | required }}
             </label>
             <ValidationProvider
+              tag="div"
               mode="passive"
               name="email"
               rules="required|email"
@@ -33,6 +34,7 @@
               {{ $t('common.password') | required }}
             </label>
             <ValidationProvider
+              tag="div"
               mode="passive"
               name="password"
               rules="required|min:8"
@@ -51,6 +53,7 @@
               {{ $t('common.repeat') }} {{ $t('common.password') | required }}
             </label>
             <ValidationProvider
+              tag="div"
               mode="passive"
               name="password_repeat"
               rules="required|confirmed:password"
@@ -74,6 +77,7 @@
               </a>
             </label>
             <ValidationProvider
+              tag="div"
               mode="passive"
               name="agbCheck"
               :rules="{ required: { allowFalse: false } }"
