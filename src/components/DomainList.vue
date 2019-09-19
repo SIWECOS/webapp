@@ -61,19 +61,15 @@ export default {
     }
   },
   mounted () {
-    this.domains.forEach(item => {
-      this.$api.get(`domain/${item.domain}/report/en`).then(report => {
-        Reflect.set(report, 'domain', item.domain)
-        Reflect.set(report, 'verified', item.is_verified)
+    this.getReports()
+  },
+  watch: {
+    domains () {
+      this.reports = []
+      this.domainsWithoutReports = []
 
-        this.reports.push(report)
-      }).catch(({ data }) => {
-        // Hasn't been scanned yet. No report available.
-        if (data.message === 'Scan Not Found') {
-          this.domainsWithoutReports.push(item)
-        }
-      })
-    })
+      this.getReports()
+    }
   },
   props: {
     domains: {
@@ -81,6 +77,21 @@ export default {
     }
   },
   methods: {
+    getReports () {
+      this.domains.forEach(item => {
+        this.$api.get(`domain/${item.domain}/report/en`).then(report => {
+          Reflect.set(report, 'domain', item.domain)
+          Reflect.set(report, 'verified', item.is_verified)
+
+          this.reports.push(report)
+        }).catch(({ data }) => {
+          // Hasn't been scanned yet. No report available.
+          if (data.message === 'Scan Not Found') {
+            this.domainsWithoutReports.push(item)
+          }
+        })
+      })
+    },
     /**
      *
      * @param url

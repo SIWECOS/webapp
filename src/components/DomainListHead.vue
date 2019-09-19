@@ -9,10 +9,7 @@
         :id="report.id.toString()" />
       <span class="testometer__result"> {{ report.score }} </span>
     </div>
-    <button
-      class="success itemhead__scantoggler">
-      Scan start
-    </button>
+    <Scan :domain="report.domain" />
     <a class="itemhead__infolink" href="#">
       More about the SIWECOS score
     </a>
@@ -27,9 +24,14 @@
 <script>
 import Doughnut from './Doughnut'
 import DomainListHeadBase from './DomainListHeadBase'
+import Scan from './Scan'
 export default {
   name: 'DomainListHead',
-  components: { DomainListHeadBase, Doughnut },
+  components: {
+    Scan,
+    DomainListHeadBase,
+    Doughnut
+  },
   data () {
     return {
       show: false
