@@ -18,7 +18,7 @@
     <button
       @click="reverseState"
       class="itemhead__contenttoggler">
-      {{ $t('domains.show_details') }}
+      {{ show === true ? $t('domains.hide_details') : $t('domains.show_details') }}
     </button>
   </section>
 </template>

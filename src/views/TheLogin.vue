@@ -98,6 +98,8 @@ export default {
 
       try {
         this.login(this.credentials)
+
+        this.$router.push({ path: '/domains' })
       } catch (e) {
         // TODO:: Output error message
       }

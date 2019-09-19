@@ -2,25 +2,27 @@
   <div class="content__detail">
     <section
       class="detail__contentsection"
-      v-for="(detail, key) in report"
-      :key="key">
+      v-for="(detail, scannerKey) in report"
+      :key="scannerKey">
       <h4>{{ detail.scanner_name }}</h4>
       <div class="contentsection__accordion">
         <div
           class="accordion__item active"
-          v-for="(test, key) in detail.tests"
-          :key="key">
+          v-for="(test, testKey) in detail.tests"
+          :key="testKey">
           <button
-            @click="toggle($event)"
+            @click="toggle(`${scannerKey}${testKey}`)"
             class="accordionitem__heading">
             <span class="heading__title">
               {{ test.headline }}
             </span>
             <span class="heading__toggle">
-              {{ $t('domains.hide_details') }}
+              {{ shownTests[`${scannerKey}${testKey}`] ? $t('domains.hide_details') : $t('domains.show_details') }}
             </span>
           </button>
-          <div class="accordionitem__content">
+          <div
+            class="accordionitem__content"
+            :class="(shownTests[`${scannerKey}${testKey}`]) ? 'active' : ''">
             <p> {{ test.result }} </p>
             <h5 v-if="test.has_error">Fehler</h5>
             <ul v-if="test.result_details">
@@ -42,8 +44,8 @@ export default {
   name: 'DomainListReports',
   data () {
     return {
-      show: false,
-      accordions: []
+      accordions: [],
+      shownTests: {}
     }
   },
   props: {
@@ -57,16 +59,10 @@ export default {
   methods: {
     /**
      *
-     * @param event
+     * @param key
      */
-    toggle (event) {
-      let element = event.target.nextElementSibling
-
-      if (!event.target.classList.contains('accordionitem__heading')) {
-        element = event.target.parentElement.nextElementSibling
-      }
-
-      element.classList.toggle('active')
+    toggle (key) {
+      this.$set(this.shownTests, key, !this.shownTests[key])
     }
   }
 }

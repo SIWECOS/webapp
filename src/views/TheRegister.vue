@@ -50,7 +50,7 @@
           </li>
           <li>
             <label for="password_repeat">
-              {{ $t('common.repeat') }} {{ $t('common.password') | required }}
+              {{ $t('register.repeat_password') }} | required }}
             </label>
             <ValidationProvider
               tag="div"
@@ -68,20 +68,19 @@
             </ValidationProvider>
           </li>
           <li>
-            <label for="tos">
-              {{ $t('common.accept') }}
-              <a
-                href="https://www.siwecos.de/agb/"
-                target="_blank">
-                {{ $t('common.agb') }}
-              </a>
-            </label>
+            <label for="tos"></label>
             <ValidationProvider
               tag="div"
               mode="passive"
               name="agbCheck"
               :rules="{ required: { allowFalse: false } }"
               v-slot="{ errors }">
+              {{ $t('common.accept') }}
+              <a
+                href="https://www.siwecos.de/agb/"
+                target="_blank">
+                {{ $t('common.agb') }}
+              </a>
               <input
                 v-model="agbCheck"
                 id="tos"
@@ -119,7 +118,7 @@ export default {
      * @return {string}
      */
     repeatPlaceholder () {
-      return `${this.$t('common.repeat')} ${this.$t('common.password')}*`
+      return `${this.$t('register.repeat_password')}*`
     }
   },
   methods: {

@@ -1,9 +1,9 @@
 const rules = {
-  required: 'The {_field_} is required.',
-  min: 'This field must be {length} characters long.',
+  required: 'Dieses Feld ist ein Pflichtfeld.',
+  min: 'Das Feld muss mindestens {length} Zeichen verwenden.',
   email: 'This field must be a valid email.',
-  confirmed: 'This field does not match.',
-  url: 'This field is not a valid URL'
+  confirmed: 'Dieses Feld stimmt nicht mit dem vorherigen überein.',
+  url: 'Ungültige E-Mail.'
 }
 
 export default rules
