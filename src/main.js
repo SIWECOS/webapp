@@ -16,7 +16,7 @@ Vue.prototype.$api = new Api()
 Vue.prototype.$idToken = 'id_token'
 
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: 'de',
   messages: locales
 })
 

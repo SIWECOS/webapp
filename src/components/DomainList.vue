@@ -10,6 +10,7 @@
         :key="key">
         <div class="item__wrapper">
           <DomainListHead
+            v-on:refresh="getReports"
             v-on:toggle="setVisibility"
             :headId="key.toString()"
             :report="report"/>
@@ -63,21 +64,19 @@ export default {
   mounted () {
     this.getReports()
   },
-  watch: {
-    domains () {
-      this.reports = []
-      this.domainsWithoutReports = []
-
-      this.getReports()
-    }
-  },
   props: {
     domains: {
       type: Array
     }
   },
   methods: {
+    /**
+     * @return {void}
+     */
     getReports () {
+      this.reports = []
+      this.domainsWithoutReports = []
+
       this.domains.forEach(item => {
         this.$api.get(`domain/${item.domain}/report/en`).then(report => {
           Reflect.set(report, 'domain', item.domain)

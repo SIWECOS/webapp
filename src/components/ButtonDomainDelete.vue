@@ -21,6 +21,10 @@ export default {
      * @return {Promise<void>}
      */
     async destroy (url) {
+      const isConfirmed = confirm(this.$t('domains.delete_domain_confirm'))
+
+      if (!isConfirmed) return
+
       await this.$api.delete('domain', '', { domain: url })
       await this.fetch()
     }

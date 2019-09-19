@@ -55,6 +55,10 @@ export default {
     }
   },
   methods: {
+    /**
+     *
+     * @param event
+     */
     toggle (event) {
       let element = event.target.nextElementSibling
 

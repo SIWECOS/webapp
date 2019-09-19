@@ -7,7 +7,8 @@ const domains = {
   delete_domain: 'Delete domain',
   more_about: 'More about the SIWECOS score',
   show_details: 'Show details',
-  hide_details: 'Hide details'
+  hide_details: 'Hide details',
+  delete_domain_confirm: 'Are you sure you want to delete this domain?'
 }
 
 export default domains
