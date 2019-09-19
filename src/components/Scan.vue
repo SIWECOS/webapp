@@ -3,7 +3,7 @@
     :disabled="isDisabled"
     @click="scan"
     class="success itemhead__scantoggler">
-    Scan start
+    {{ $t('common.scan_start') }}
   </button>
 </template>
 

@@ -11,7 +11,11 @@ const common = {
   save: 'Save',
   confirm_delete: 'Do you want to irrevocably delete your account?',
   add: 'Add',
-  domain: 'Domain'
+  domain: 'Domain',
+  download: 'Download',
+  copy: 'Copy',
+  verify: 'Verify',
+  scan_start: 'Scan start'
 }
 
 export default common

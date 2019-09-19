@@ -64,9 +64,13 @@
             :value="$t('login.login')"/>
         </p>
       </ValidationObserver>
-      <router-link to="forgotpassword">{{ $t('login.forgot_password') }}</router-link>
+      <router-link to="forgotpassword">
+        {{ $t('login.forgot_password') }}
+      </router-link>
       <br>
-      <router-link to="resendactivation">Resend Activation Mail</router-link>
+      <router-link to="resendactivation">
+        {{ $t('login.resend_activation') }}
+      </router-link>
     </div>
   </div>
 </template>

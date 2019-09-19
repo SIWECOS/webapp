@@ -10,10 +10,12 @@
       v-if="!domain.is_verified"
       class="btn btn-primary"
       :to="{ path: `/domain/verify/${domain}`, params: { domain } }">
-      Verify Domain
+      {{ $t('common.verify') }} {{ $t('common.domain') }}
     </router-link>
-    <a class="itemhead__infolink" href="#">
-      More about the SIWECOS score
+    <a
+      class="itemhead__infolink"
+      href="#">
+      {{ $t('domains.more_about') }}
     </a>
   </section>
 </template>

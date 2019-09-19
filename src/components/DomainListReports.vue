@@ -17,7 +17,7 @@
               {{ test.headline }}
             </span>
             <span class="heading__toggle">
-              Details ausblenden
+              {{ $t('domains.hide_details') }}
             </span>
           </button>
           <div class="accordionitem__content">

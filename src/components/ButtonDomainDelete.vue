@@ -2,7 +2,7 @@
   <button
     @click="destroy(domain)"
     class="link link-error siteninformation__delete">
-    Delete domain
+    {{ $t('domains.delete_domain') }}
   </button>
 </template>
 

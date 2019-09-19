@@ -25,7 +25,9 @@
         <li>
           Meta Tag: <br> <strong> {{ meta }} </strong>
           <br>
-          <button @click="clipboard(meta)">Copy</button>
+          <button @click="clipboard(meta)">
+            {{ $t('common.copy') }}
+          </button>
         </li>
         <li>
           {{ $t('verify.meta_tag.item_three') }}
@@ -41,7 +43,9 @@
         <li>
           {{ $t('verify.file.item_one') }}
           <br>
-          <button @click="download">Download</button>
+          <button @click="download">
+            {{ $t('common.download') }}
+          </button>
         </li>
         <li>
           {{ $t('verify.file.item_two') }}
@@ -53,7 +57,7 @@
       <button
         @click="verify"
         class="btn btn-primary">
-        Verify
+        {{ $t('common.verify') }}
       </button>
     </div>
   </div>

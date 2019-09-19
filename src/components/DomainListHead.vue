@@ -11,12 +11,12 @@
     </div>
     <Scan :domain="report.domain" />
     <a class="itemhead__infolink" href="#">
-      More about the SIWECOS score
+      {{ $t('domains.more_about') }}
     </a>
     <button
       @click="reverseState"
       class="itemhead__contenttoggler">
-      Show details
+      {{ $t('domains.show_details') }}
     </button>
   </section>
 </template>
