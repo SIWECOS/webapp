@@ -8,6 +8,7 @@ import env from '@/../env'
 import TheDomains from './views/TheDomains'
 import TheDomainsAdd from './views/TheDomainsAdd'
 import TheDomainVerify from './views/TheDomainVerify'
+import TheResendEmailActivation from './views/TheResendEmailActivation'
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ const routes = [
   {
     path: '/domain/add',
     component: TheDomainsAdd
+  },
+  {
+    path: '/resendactivation',
+    component: TheResendEmailActivation
   },
   {
     path: '/domain/verify/:domain',
