@@ -1,15 +1,18 @@
 <template>
   <div class="content__overview">
-    <div class="itemoverview__testometercontainer">
+    <div
+      class="itemoverview__testometercontainer"
+      v-for="(details, key) in report"
+      :key="key">
       <div
         id="testometer__scanner1"
         class="testometer">
         <Doughnut
           :score="details.score"
-          :id="`${id}__content__${itemKey}`"/>
+          :id="`${id}__content__${key}`"/>
         <span class="testometer__result">
-          {{ details.score }}
-        </span>
+            {{ details.score }}
+          </span>
       </div>
       <h3>
         {{ details.scanner_name }}
@@ -26,11 +29,8 @@ export default {
     id: {
       type: String
     },
-    itemKey: {
-      type: String
-    },
-    details: {
-      type: Object
+    report: {
+      type: Array
     }
   },
   components: { Doughnut }

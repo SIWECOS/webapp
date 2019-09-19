@@ -23,7 +23,7 @@
               name="email"
               :placeholder="$t('common.email') | required"
               type="text"/>
-            <span>{{ errors[0] }}</span>
+            <span v-if="errors[0]">{{ errors[0] }}</span>
           </ValidationProvider>
         </p>
         <p class="login-password">
@@ -40,7 +40,7 @@
               name="password"
               :placeholder="$t('common.password') | required"
               type="password"/>
-            <span>{{ errors[0] }}</span>
+            <span v-if="errors[0]">{{ errors[0] }}</span>
           </ValidationProvider>
         </p>
         <p class="login-remember">

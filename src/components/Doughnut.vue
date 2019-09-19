@@ -5,7 +5,7 @@
     viewBox="0 0 100 100">
     <g>
       <circle class="scanometer__base" cx="50" cy="50" r="46"
-              style="stroke: rgb(255, 59, 48); opacity: 0.25;">
+              style="stroke: rgb(150, 150, 150); opacity: 0.25;">
       </circle>
     </g>
     <g>

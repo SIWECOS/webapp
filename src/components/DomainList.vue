@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Display full report -->
     <ul
       class="scanresults"
       v-if="reports.length">
@@ -7,41 +8,28 @@
         class="item"
         v-for="(report, key) in reports"
         :key="key">
-        <DomainListHead
-          v-on:toggle="setVisibility"
-          :report="report"/>
         <div class="item__wrapper">
-          <section
-            v-for="(details, key) in report.report"
-            :key="key"
-            class="item__content"
-            v-if="showDetails">
+          <DomainListHead
+            v-on:toggle="setVisibility"
+            :report="report"/>
+          <section class="item__content active">
             <DomainListDoughnuts
-              :details="details"
-              :itemKey="key.toString()"
-              :id="report.id.toString()"/>
-            <div class="content__detail">
-              <section class="detail__contentsection">
-                <h4>Sectionheading</h4>
-                <div class="contentsection__accordion">
-                  <div class="accordion__item">
-                    <span class="accordionitem__heading"> Accordion-Item Heading </span>
-                    <div class="accordionitem__content">
-                      <p>Die Content-Security-Policy ist eine strukturierte Vorgehensweise, welche das Injizieren und Ausführen von evtl. bösartigen Befehlen in einer Webanwendung (Injection-Angriffe) mildern soll. Es stellt über eine Whitelist dar, von welchen Quellen z. B. Javascript, Bilder, Schriftarten und andere Inhalte auf Ihrer Seite eingebunden werden dürfen.</p>
-                      <h5>Fehler</h5>
-                      <p>Here might be bad Mistake</p>
-                      <h5>URLs</h5>
-                      <ul>
-                        <li>Url.de</li>
-                        <li>Url.de</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
+              :report="report.report"
+              :id="report.id.toString()" />
+            <DomainListReports :report="report.report" />
           </section>
         </div>
+      </li>
+    </ul>
+    <!-- Depending on the verified state: Display only the domain with or without the verify button -->
+    <ul
+      class="scanresults"
+      v-if="domainsWithoutReports.length">
+      <li
+        class="item"
+        v-for="(domains, key) in domainsWithoutReports"
+        :key="key">
+        <DomainListHeadVerify :domain="domains.domain" />
       </li>
     </ul>
   </div>
@@ -49,13 +37,21 @@
 
 <script>
 import DomainListHead from './DomainListHead'
+import DomainListHeadVerify from './DomainListHeadVerify'
+import DomainListReports from './DomainListReports'
 import DomainListDoughnuts from './DomainListDoughnuts'
 export default {
   name: 'DomainList',
-  components: { DomainListDoughnuts, DomainListHead },
+  components: {
+    DomainListDoughnuts,
+    DomainListReports,
+    DomainListHeadVerify,
+    DomainListHead
+  },
   data () {
     return {
       reports: [],
+      domainsWithoutReports: [],
       showDetails: false
     }
   },
@@ -66,6 +62,11 @@ export default {
         Reflect.set(report, 'verified', item.is_verified)
 
         this.reports.push(report)
+      }).catch(({ data }) => {
+        // Hasn't been scanned yet. No report available.
+        if (data.message === 'Scan Not Found') {
+          this.domainsWithoutReports.push(item)
+        }
       })
     })
   },
@@ -88,6 +89,7 @@ export default {
      * @param state
      */
     setVisibility (state) {
+      console.log(state)
       this.showDetails = state
     }
   }

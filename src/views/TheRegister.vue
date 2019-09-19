@@ -25,7 +25,7 @@
                 type="email"
                 :placeholder="$t('common.email') | required"
                 name="email"/>
-              <span>{{ errors[0] }}</span>
+              <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
           <li>
@@ -43,7 +43,7 @@
                 type="password"
                 :placeholder="$t('common.password') | required"
                 name="password"/>
-              <span>{{ errors[0] }}</span>
+              <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
           <li>
@@ -61,7 +61,7 @@
                 id="password_repeat"
                 type="password"
                 name="password_repeat"/>
-              <span>{{ errors[0] }}</span>
+              <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
           <li>
@@ -83,7 +83,7 @@
                 id="tos"
                 type="checkbox"
                 name="tos"/>
-              <span>{{ errors[0] }}</span>
+              <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
         </ul>

@@ -7,7 +7,7 @@ import TheAccount from './views/TheAccount'
 import env from '@/../env'
 import TheDomains from './views/TheDomains'
 import TheDomainsAdd from './views/TheDomainsAdd'
-import DomainVerify from './components/DomainVerify'
+import TheDomainVerify from './views/TheDomainVerify'
 
 Vue.use(Router)
 
@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: '/domain/verify/:domain',
-    component: DomainVerify
+    component: TheDomainVerify
   },
   {
     path: '/logout',

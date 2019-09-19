@@ -63,7 +63,7 @@
 import { mapGetters } from 'vuex'
 import { saveAs } from 'file-saver'
 export default {
-  name: 'DomainVerify',
+  name: 'TheDomainVerify',
   data () {
     return {
       domain: '',

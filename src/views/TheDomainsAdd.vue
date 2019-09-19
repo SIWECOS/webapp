@@ -23,7 +23,7 @@
               name="domain"
               id="domain"
               :placeholder="$t('domains.add_example')">
-            <span>{{ errors[0] }}</span>
+            <span v-if="errors[0]">{{ errors[0] }}</span>
           </ValidationProvider>
         </p>
         <p class="login-submit">

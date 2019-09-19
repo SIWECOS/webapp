@@ -2,6 +2,7 @@
 env.js
 node_modules
 /dist
+/src/assets/scss
 
 # local env files
 .env.local
