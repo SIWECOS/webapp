@@ -10,7 +10,14 @@
           class="accordion__item active"
           v-for="(test, key) in detail.tests"
           :key="key">
-          <span class="accordionitem__heading"> {{ test.headline }}</span>
+          <button class="accordionitem__heading">
+            <span class="heading__title">
+              {{ test.headline }}
+            </span>
+            <span class="heading__toggle">
+              Details ausblenden
+            </span>
+          </button>
           <div class="accordionitem__content">
             <p> {{ test.result }} </p>
             <h5 v-if="test.has_error">Fehler</h5>
