@@ -9,7 +9,7 @@ const getters = {
    * @return {*}
    */
   language (state) {
-    return state
+    return state.language
   }
 }
 
