@@ -63,6 +63,10 @@
             type="submit"
             :value="$t('login.login')"/>
         </p>
+        <ResponseMessage
+          :code="response.code"
+          :namespace="response.namespace"
+          v-if="response.code !== null" />
       </ValidationObserver>
       <router-link to="forgotpassword">
         {{ $t('login.forgot_password') }}
@@ -77,14 +81,20 @@
 
 <script>
 import { mapMutations, mapActions } from 'vuex'
+import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheLogin',
+  components: { ResponseMessage },
   data () {
     return {
       credentials: {
         email: '',
         password: '',
         remember: false
+      },
+      response: {
+        code: null,
+        namespace: 'login'
       }
     }
   },
@@ -97,11 +107,11 @@ export default {
       if (!valid) return
 
       try {
-        this.login(this.credentials)
+        await this.login(this.credentials)
 
         this.$router.push({ path: '/domains' })
       } catch (e) {
-        // TODO:: Output error message
+        this.response.code = e.status
       }
     }
   }

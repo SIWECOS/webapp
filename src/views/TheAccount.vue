@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'TheAccount',
   data () {
@@ -96,6 +97,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('language', ['language']),
     /**
      *
      * @return {string}
@@ -125,7 +127,7 @@ export default {
         await this.$api.update('user', '', {
           email: this.credentials.email,
           newpassword: this.credentials.newPassword,
-          preferred_language: 'en'
+          preferred_language: this.language
         }, 'patch')
       } catch (e) {
         // TODO:: Output error

@@ -87,6 +87,11 @@
                 type="checkbox"
                 name="tos"/>
               <span v-if="errors[0]">{{ errors[0] }}</span>
+              <ResponseMessage
+                :validation="response.data"
+                :code="response.code"
+                :namespace="response.namespace"
+                v-if="response.code !== null" />
             </ValidationProvider>
           </li>
         </ul>
@@ -100,13 +105,19 @@
 </template>
 
 <script>
+import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheRegister',
+  components: { ResponseMessage },
   data () {
     return {
       credentials: {
         email: '',
         password: ''
+      },
+      response: {
+        code: null,
+        namespace: 'user_register'
       },
       passwordRepeat: '',
       agbCheck: false
@@ -133,8 +144,14 @@ export default {
 
       try {
         await this.$api.create('user', { agb_check: this.agbCheck, ...this.credentials })
+
+        this.$router.push({ path: '/login' })
       } catch (e) {
-        // TODO:: Output error message
+        if (Object.keys(e.data).length > 0) {
+          this.response.data = e.data
+        }
+
+        this.response.code = e.status
       }
     }
   }

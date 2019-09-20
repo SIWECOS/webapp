@@ -37,17 +37,27 @@
             :value="$t('login.reset_password')">
           <br>
         </p>
+        <ResponseMessage
+          :code="response.code"
+          :namespace="response.namespace"
+          v-if="response.code !== null" />
       </ValidationObserver>
     </div>
   </div>
 </template>
 
 <script>
+import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheForgotPassword',
+  components: { ResponseMessage },
   data () {
     return {
-      email: ''
+      email: '',
+      response: {
+        code: null,
+        namespace: 'resend_password'
+      }
     }
   },
   methods: {
@@ -65,7 +75,7 @@ export default {
 
         this.$router.push('/login')
       } catch (e) {
-        // TODO:: Output error
+        this.response.code = e.status
       }
     }
   }
