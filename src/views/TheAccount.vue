@@ -79,14 +79,20 @@
           {{ $t('account.delete_account') }}
         </button>
       </p>
+      <ResponseMessage
+        :code="response.code"
+        :namespace="response.namespace"
+        v-if="response.code !== null" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheAccount',
+  components: { ResponseMessage },
   mounted () {
     this.fetch().then(() => {
       this.credentials.email = this.account.email
@@ -98,6 +104,10 @@ export default {
         email: '',
         password: '',
         newPassword: ''
+      },
+      response: {
+        code: null,
+        namespace: 'update_user'
       }
     }
   },
@@ -137,7 +147,7 @@ export default {
           preferred_language: this.language
         }, 'patch')
       } catch (e) {
-        // TODO:: Output error
+        this.response.code = e.status
       }
     },
     /**
@@ -152,9 +162,9 @@ export default {
           return
         }
 
-        await this.$api.delete('user', '')
+        await this.$api.delete('user', '', '')
       } catch (e) {
-        // TODO:: Output error
+        this.response.code = e.status
       }
     }
   }
