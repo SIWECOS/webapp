@@ -4,6 +4,10 @@
     <div
       id="wppb-domainverify-wrap"
       class="wppb-domain-forms">
+      <ResponseMessage
+        :code="response.code"
+        :namespace="response.namespace"
+        v-if="response.code !== null" />
       <p>
         <strong v-t="'verify.verification_process_title'"></strong>
       </p>
@@ -65,12 +69,18 @@
 
 <script>
 import { saveAs } from 'file-saver'
+import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheDomainVerify',
+  components: { ResponseMessage },
   data () {
     return {
       domain: '',
-      data: {}
+      data: {},
+      response: {
+        code: null,
+        namespace: 'verify_domain'
+      }
     }
   },
   computed: {
@@ -106,7 +116,7 @@ export default {
       try {
         await this.$api.create('domain/verify', { domain: this.domain })
       } catch (e) {
-        // TODO:: Output error
+        this.response.code = e.status
       }
     },
     /**

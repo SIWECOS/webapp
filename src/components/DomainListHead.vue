@@ -9,9 +9,7 @@
         :id="report.id.toString()" />
       <span class="testometer__result"> {{ report.score }} </span>
     </div>
-    <Scan
-      v-on:refresh="$emit('refresh')"
-      :domain="report.domain" />
+    <Scan :domain="report.domain" />
     <a class="itemhead__infolink" href="#">
       {{ $t('domains.more_about') }}
     </a>

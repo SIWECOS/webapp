@@ -36,17 +36,27 @@
             :value="$t('common.add')">
           <br>
         </p>
+        <ResponseMessage
+          :code="response.code"
+          :namespace="response.namespace"
+          v-if="response.code !== null" />
       </ValidationObserver>
     </div>
   </div>
 </template>
 
 <script>
+import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheDomainsAdd',
+  components: { ResponseMessage },
   data () {
     return {
-      domain: ''
+      domain: '',
+      response: {
+        code: null,
+        namespace: 'add_domain'
+      }
     }
   },
   methods: {
@@ -60,7 +70,7 @@ export default {
 
         this.$router.push({ path: '/domains' })
       } catch (e) {
-        // TODO:: Output error
+        this.response.code = e.status
       }
     },
     /**

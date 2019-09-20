@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Scan',
   data () {
@@ -19,6 +20,7 @@ export default {
     domain: String
   },
   methods: {
+    ...mapActions('domains', ['fetch']),
     async scan () {
       try {
         const response = await this.$api.create(`scan`, { domain: this.domain })
@@ -38,7 +40,7 @@ export default {
      */
     async checkScanStatus (id, progress) {
       if (progress === 'finished') {
-        this.$emit('refresh')
+        this.fetch()
         return
       }
 

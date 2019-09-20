@@ -5,7 +5,6 @@
     <section id="domains-wrapper">
       <p v-if="!domains.length">{{ $t('domains.none_available') }}</p>
       <DomainList
-        v-on:refresh="refresh"
         :domains="domains"
         v-else />
     </section>
@@ -20,19 +19,15 @@ export default {
   name: 'TheDomains',
   components: { DomainList },
   mounted () {
-    this.fetch()
+    if (!this.domains.length) {
+      this.fetch()
+    }
   },
   computed: {
     ...mapGetters('domains', ['domains'])
   },
   methods: {
-    ...mapActions('domains', ['fetch']),
-    /**
-     * @return {void}
-     */
-    refresh () {
-      this.fetch()
-    }
+    ...mapActions('domains', ['fetch'])
   }
 }
 </script>
