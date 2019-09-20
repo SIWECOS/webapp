@@ -9,6 +9,7 @@ import TheDomains from './views/TheDomains'
 import TheDomainsAdd from './views/TheDomainsAdd'
 import TheDomainVerify from './views/TheDomainVerify'
 import TheResendEmailActivation from './views/TheResendEmailActivation'
+import Logout from './components/Logout'
 
 Vue.use(Router)
 
@@ -47,15 +48,7 @@ const routes = [
   },
   {
     path: '/logout',
-    beforeEnter (to, from, next) {
-      next()
-
-      sessionStorage.removeItem(env.ID_TOKEN)
-
-      if (typeof window.login_announce !== 'undefined') {
-        window.login_announce(null)
-      }
-    }
+    component: Logout
   }
 ]
 
