@@ -21,7 +21,7 @@ export default {
   render (h) {
     const messages = []
 
-    if (Object.keys(this.validation).length > 0) {
+    if (typeof this.validation !== 'undefined') {
       const types = validationTypes(this.validation)
 
       types.forEach(item => {
