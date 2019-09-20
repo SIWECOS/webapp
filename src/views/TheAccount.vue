@@ -24,7 +24,7 @@
                 name="email"
                 :placeholder="$t('common.email') | required"
                 type="text"/>
-              <span>{{ errors[0] }}</span>
+              <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
           <li>
@@ -43,7 +43,7 @@
                 id="newpassword"
                 :placeholder="newPasswordLabel"
                 name="newpassword">
-              <span>{{ errors[0] }}</span>
+              <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
           <li>
@@ -62,7 +62,7 @@
                 id="newpassword_repeat"
                 :placeholder="newPasswordRepeatLabel"
                 name="newpassword2">
-              <span>{{ errors[0] }}</span>
+              <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
         </ul>

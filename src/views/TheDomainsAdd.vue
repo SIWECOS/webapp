@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheDomainsAdd',
@@ -60,6 +61,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('domains', ['fetch']),
     async add () {
       const valid = await this.$refs.domain.validate()
 
@@ -67,6 +69,8 @@ export default {
 
       try {
         await this.$api.create('domain', { domain: this.adjustDomain(this.domain) })
+
+        await this.fetch()
 
         this.$router.push({ path: '/domains' })
       } catch (e) {
