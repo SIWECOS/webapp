@@ -84,9 +84,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'TheAccount',
+  mounted () {
+    this.fetch().then(() => {
+      this.credentials.email = this.account.email
+    })
+  },
   data () {
     return {
       credentials: {
@@ -98,6 +103,7 @@ export default {
   },
   computed: {
     ...mapGetters('language', ['language']),
+    ...mapGetters('account', ['account']),
     /**
      *
      * @return {string}
@@ -114,6 +120,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('account', ['fetch']),
     /**
      *
      * @return {Promise<void>}
