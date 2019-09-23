@@ -1,14 +1,22 @@
 <template>
   <div>
     <h3>{{ $t('domains.headline') }}</h3>
-    <router-link :to="{ path: '/domain/add' }">{{ $t('domains.add') }}</router-link>
+    <router-link
+      tag="button"
+      :to="{ path: '/domain/add' }">
+      {{ $t('domains.add') }}
+    </router-link>
     <section id="domains-wrapper">
       <p v-if="!domains.length">{{ $t('domains.none_available') }}</p>
       <DomainList
         :domains="domains"
         v-else />
     </section>
-    <router-link :to="{ path: '/domain/add' }">{{ $t('domains.add') }}</router-link>
+    <router-link
+      tag="button"
+      :to="{ path: '/domain/add' }">
+      {{ $t('domains.add') }}
+    </router-link>
   </div>
 </template>
 
