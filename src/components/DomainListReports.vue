@@ -23,13 +23,13 @@
           <div
             class="accordionitem__content"
             :class="(shownTests[`${scannerKey}${testKey}`]) ? 'active' : ''">
-            <p> {{ test.result }} </p>
+            <p v-html="test.result"></p>
             <h5 v-if="test.has_error">Fehler</h5>
             <ul v-if="test.result_details">
               <li
+                v-html="detail"
                 v-for="(detail, key) in test.result_details"
                 :key="key">
-                {{ detail }}
               </li>
             </ul>
           </div>
