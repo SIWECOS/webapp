@@ -63,6 +63,9 @@ const responses = {
   inputs: {
     email: {
       unique: 'Email already in use'
+    },
+    domain: {
+      hostname_invalid: 'Domain invalid'
     }
   }
 }

@@ -1,7 +1,7 @@
 const domains = {
   headline: 'Sicherheitsbericht',
   add: 'Domain hinzufügen',
-  headline_add: 'Add a domain',
+  headline_add: 'Domain hinzufügen',
   none_available: 'No domains available',
   add_example: 'Domain, bspws. https://www.example.org',
   delete_domain: 'Domain entfernen',

@@ -37,6 +37,7 @@
           <br>
         </p>
         <ResponseMessage
+          :validation="response.data"
           :code="response.code"
           :namespace="response.namespace"
           v-if="response.code !== null" />
@@ -74,6 +75,10 @@ export default {
 
         this.$router.push({ path: `/domain/verify/${this.adjustDomain(this.domain)}` })
       } catch (e) {
+        if (Object.keys(e.data).length > 0) {
+          this.response.data = e.data
+        }
+
         this.response.code = e.status
       }
     },

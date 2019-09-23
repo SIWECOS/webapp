@@ -16,11 +16,14 @@
             <span class="heading__title">
               <span class="heading__icon">
                 <img
-                  v-if="test.has_error === true"
+                  v-if="test.score < 100 && !test.has_error"
                   src="../assets/scss/img/icon_warning.svg" />
                 <img
-                  v-if="test.has_error === false"
+                  v-if="!test.has_error && test.score === 100"
                   src="../assets/scss/img/icon_success.svg" />
+                <img
+                  v-if="test.has_error"
+                  src="../assets/scss/img/icon_error.svg" />
               </span>
               {{ test.headline }}
             </span>
