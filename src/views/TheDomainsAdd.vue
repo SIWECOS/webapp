@@ -72,7 +72,7 @@ export default {
 
         await this.fetch()
 
-        this.$router.push({ path: '/domains' })
+        this.$router.push({ path: `/domain/verify/${this.adjustDomain(this.domain)}` })
       } catch (e) {
         this.response.code = e.status
       }
