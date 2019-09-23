@@ -132,6 +132,8 @@ export default {
           newpassword: this.credentials.newPassword,
           preferred_language: this.language
         }, 'patch')
+
+        this.response.code = 200
       } catch (e) {
         this.response.code = e.status
       }

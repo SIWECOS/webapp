@@ -73,7 +73,7 @@ export default {
       try {
         await this.$api.create('user/password/sendResetMail', { email: this.email })
 
-        this.$router.push('/login')
+        this.response.code = 200
       } catch (e) {
         this.response.code = e.status
       }

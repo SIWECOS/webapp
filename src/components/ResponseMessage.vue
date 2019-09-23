@@ -20,6 +20,7 @@ export default {
    */
   render (h) {
     const messages = []
+    const responseType = this.code === 200 ? 'wppb-success' : 'wppb-error'
 
     if (typeof this.validation !== 'undefined') {
       const types = validationTypes(this.validation)
@@ -34,7 +35,7 @@ export default {
       {
         attrs:
           {
-            class: 'wppb-error'
+            class: responseType
           }
       },
       [
