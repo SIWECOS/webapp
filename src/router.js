@@ -53,10 +53,12 @@ const routes = [
 ]
 
 const router = new Router({ routes })
+const token = sessionStorage.getItem(env.ID_TOKEN)
+
+router.push(token ? { path: '/domains' } : { path: '/login' })
 
 router.beforeEach((to, from, next) => {
   next()
-  const token = sessionStorage.getItem(env.ID_TOKEN)
 
   if (token) {
     next()
