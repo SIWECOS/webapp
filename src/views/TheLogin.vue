@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 import ResponseMessage from '../components/ResponseMessage'
 export default {
   name: 'TheLogin',
@@ -98,6 +98,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters('account', ['token'])
+  },
   methods: {
     ...mapMutations('account', ['setToken']),
     ...mapActions('account', ['login']),
@@ -109,8 +112,13 @@ export default {
       try {
         await this.login(this.credentials)
 
+        if (typeof window.login_announce !== 'undefined') {
+          window.login_announce(this.token)
+        }
+
         this.$router.push({ path: '/domains' })
       } catch (e) {
+        console.log(e)
         this.response.code = e.status
       }
     }
