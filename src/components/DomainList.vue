@@ -45,6 +45,7 @@ import DomainListHead from './DomainListHead'
 import DomainListHeadVerify from './DomainListHeadVerify'
 import DomainListReports from './DomainListReports'
 import DomainListDoughnuts from './DomainListDoughnuts'
+import { mapGetters } from 'vuex'
 export default {
   name: 'DomainList',
   components: {
@@ -73,6 +74,9 @@ export default {
       type: Array
     }
   },
+  computed: {
+    ...mapGetters('language', ['language'])
+  },
   methods: {
     /**
      * @return {void}
@@ -82,7 +86,7 @@ export default {
       this.domainsWithoutReports = []
 
       this.domains.forEach(item => {
-        this.$api.get(`domain/${item.domain}/report/en`).then(report => {
+        this.$api.get(`domain/${item.domain}/report/${this.language}`).then(report => {
           Reflect.set(report, 'domain', item.domain)
           Reflect.set(report, 'verified', item.is_verified)
 

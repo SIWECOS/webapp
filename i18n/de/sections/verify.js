@@ -1,27 +1,31 @@
 const verify = {
-  confirm_message: 'Confirm the domain:',
-  verification_process_title: 'The verification process',
+  confirm_message: 'Domain bestätigen:',
+  verification_process_title: 'Das Verifizierungsverfahren',
   verification_process: [
-    `Any domain that is added to be scanned by SIWECOS must be verified and cross checked. Siwecos
-    offers two methods for this (File, Meta Tag).`,
-    `Why is verification necessary? The verification proves that you are the true owner of the domain,
-    which is necessary for data protection reasons.`
+    `Alle Domains die bei Siwecos zur Überprüfung eingetragen werden, müssen verifiziert bzw.
+    gegengeprüft werden. Dazu bietet Siwecos zwei verschiedene Verfahren (Datei, Meta-Tag) an.`,
+    `Wozu wird eine Verifizierung gemacht? Bei einer Verifizierung wird aus 
+    datenschutzrechtlichen Gründen nachgewiesen, dass Sie der wirkliche Inhaber der Domain sind.`
   ],
-  meta_tag_title: 'Meta Tag',
+  meta_tag_title: 'Meta-Tag',
   meta_tag: {
-    item_one: `In order to verify a domain with a meta tag, please copy the code specified by
-    us into the header information of your homepage.`,
-    item_two: `Download the homepage (e.g. index.html) and copy the meta tag into the head of the file.`,
-    item_three: `Reload the start file to the main directory of the website and click “Verify” on the Siwecos page.`,
-    item_four: `If the meta information can be found, the new domain will be accepted for the Siwecos services and saved.`
+    item_one: `Um eine Domain über ein Meta-Tag zu verifizieren, kopieren Sie den von uns angegebenen
+    Code in die Headerinformationen ihrer Startseite.`,
+    item_two: `Laden Sie die Startseite (z.B. index.html) herunter und kopieren den Meta-Tag in den
+    Kopfbereich der Datei.`,
+    item_three: `Laden Sie die Startdatei wieder in ihr Hauptverzeichnis der Webseite und klicken Sie Auf
+    der Siwecos-Seite auf „Überprüfen“.`,
+    item_four: `Sollte die Meta-information gefunden werden, wird die neue Domain im Dienst von
+    Siwecos aufgenommen bzw. gespeichert.`
   },
   file_title: 'File',
   file: {
-    item_one: `In order to verify a domain with a file, please first download the
-    verification HTML that we created for you:`,
-    item_two: `Afterwards, upload the created HTML file to the main directory of your website.`,
-    item_three: `Finally, click “Verify”. If verification is successful,
-    the new domain will be accepted for the Siwecos services and saved.`
+    item_one: `Um eine Domain mit einer Datei verifizieren zu können, laden Sie bitte die HTML-Datei herunter,
+    die wir zur Verfizierung nutzen:`,
+    item_two: `Im zweiten Schritt laden Sie die heruntergeladene HTML-Datei in das
+    Hauptverzeichnis Ihrer Webseite hoch.`,
+    item_three: `Klicken Sie im Anschluss auf „Überprüfen“. Ist die Überprüfung erfolgreich,
+    wird die neue Domain im Dienst von Siwecos aufgenommen bzw. gespeichert.`
   }
 }
 

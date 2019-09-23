@@ -10,7 +10,9 @@
       <span class="testometer__result"> {{ report.score }} </span>
     </div>
     <Scan :domain="report.domain" />
-    <a class="itemhead__infolink" href="#">
+    <a
+      class="itemhead__infolink"
+      href="https://siwecos.de/support/gesamtscore">
       {{ $t('domains.more_about') }}
     </a>
     <button

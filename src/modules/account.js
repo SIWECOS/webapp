@@ -2,7 +2,7 @@ import Api from '../services/api'
 import env from '../../env'
 
 const state = {
-  token: {},
+  token: '',
   account: {}
 }
 

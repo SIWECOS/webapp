@@ -9,12 +9,12 @@ const common = {
   no_match: 'does not match',
   new: 'Neu',
   save: 'Speichern',
-  confirm_delete: 'Do you want to irrevocably delete your account?',
+  confirm_delete: 'Möchten Sie Ihr Benutzerkonto unwiderruflich löschen?',
   add: 'hinzufügen',
   domain: 'Domain',
   download: 'Download',
-  copy: 'Copy',
-  verify: 'bestätigen',
+  copy: 'Kopieren',
+  verify: 'Bestätigen',
   scan_start: 'Neuen Scan starten'
 }
 

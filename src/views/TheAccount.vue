@@ -29,7 +29,7 @@
           </li>
           <li>
             <label for="newpassword">
-              {{ newPasswordLabel }}
+              {{ $t('account.new_password') }}
             </label>
             <ValidationProvider
               tag="div"
@@ -41,14 +41,14 @@
                 type="password"
                 v-model="credentials.password"
                 id="newpassword"
-                :placeholder="newPasswordLabel"
+                :placeholder="$t('account.new_password')"
                 name="newpassword">
               <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
           </li>
           <li>
             <label for="newpassword_repeat">
-              {{ newPasswordRepeatLabel }}
+              {{ $t('account.repeat_new_password') }}
             </label>
             <ValidationProvider
               tag="div"
@@ -60,7 +60,7 @@
                 v-model="credentials.newPassword"
                 type="password"
                 id="newpassword_repeat"
-                :placeholder="newPasswordRepeatLabel"
+                :placeholder="$t('account.repeat_new_password')"
                 name="newpassword2">
               <span v-if="errors[0]">{{ errors[0] }}</span>
             </ValidationProvider>
@@ -113,21 +113,7 @@ export default {
   },
   computed: {
     ...mapGetters('language', ['language']),
-    ...mapGetters('account', ['account']),
-    /**
-     *
-     * @return {string}
-     */
-    newPasswordLabel () {
-      return `${this.$t('common.new')} ${this.$t('common.password')}`
-    },
-    /**
-     *
-     * @return {string}
-     */
-    newPasswordRepeatLabel () {
-      return `${this.$t('common.repeat')} ${this.$t('common.new').toLowerCase()} ${this.$t('common.password')}`
-    }
+    ...mapGetters('account', ['account'])
   },
   methods: {
     ...mapActions('account', ['fetch']),
