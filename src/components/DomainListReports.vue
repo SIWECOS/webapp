@@ -14,6 +14,14 @@
             @click="toggle(`${scannerKey}${testKey}`)"
             class="accordionitem__heading">
             <span class="heading__title">
+              <span class="heading__icon">
+                <img
+                  v-if="test.has_error === true"
+                  src="../assets/scss/img/icon_warning.svg" />
+                <img
+                  v-if="test.has_error === false"
+                  src="../assets/scss/img/icon_success.svg" />
+              </span>
               {{ test.headline }}
             </span>
             <span class="heading__toggle">
