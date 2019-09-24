@@ -8,7 +8,7 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'App',
   mounted () {
-    this.setLanguage(document.querySelector('html').getAttribute('lang'))
+    this.setLanguage(document.querySelector('html').getAttribute('lang').substr(0, 2))
   },
   methods: {
     ...mapMutations('language', ['setLanguage'])
