@@ -7,6 +7,7 @@ export default {
   },
   mounted () {
     sessionStorage.removeItem(env.ID_TOKEN)
+    localStorage.removeItem(env.ID_TOKEN)
 
     if (typeof window.login_announce !== 'undefined') {
       window.login_announce(null)

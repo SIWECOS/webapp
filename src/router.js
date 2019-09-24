@@ -53,7 +53,9 @@ const routes = [
 ]
 
 const router = new Router({ routes })
-const token = sessionStorage.getItem(env.ID_TOKEN)
+let token = sessionStorage.getItem(env.ID_TOKEN)
+  ? sessionStorage.getItem(env.ID_TOKEN)
+  : localStorage.getItem(env.ID_TOKEN) || ''
 
 router.push(token ? { path: '/domains' } : { path: '/login' })
 

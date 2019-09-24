@@ -12,7 +12,17 @@ const mutations = {
    * @param state
    * @param token
    */
-  setToken (state, token) {
+  setRememberMeToken (state, token) {
+    localStorage.setItem(env.ID_TOKEN, token)
+
+    state.token = token
+  },
+  /**
+   *
+   * @param state
+   * @param token
+   */
+  setSessionToken (state, token) {
     sessionStorage.setItem(env.ID_TOKEN, token)
 
     state.token = token
@@ -34,7 +44,11 @@ const getters = {
    * @return {*}
    */
   token (state) {
-    return Object.keys(state.token).length ? state.token : sessionStorage.getItem('token')
+    return state.token
+      ? state.token
+      : sessionStorage.getItem('token')
+        ? sessionStorage.getItem('token')
+        : localStorage.getItem('token') || ''
   },
   /**
    *
@@ -63,8 +77,15 @@ const actions = {
     try {
       const { token } = await api.create('user/login', { email, password })
 
-      if (remember && token) {
-        commit('setToken', token)
+      if (token) {
+        switch (remember) {
+          case true:
+            commit('setRememberMeToken', token)
+            break
+          case false:
+            commit('setSessionToken', token)
+            break
+        }
       }
     } catch (e) {
       throw e
