@@ -11,6 +11,7 @@
           v-for="(test, testKey) in detail.tests"
           :key="testKey">
           <button
+            v-if="test.score_type !== 'hidden'"
             @click="toggle(`${scannerKey}${testKey}`)"
             class="accordionitem__heading">
             <span class="testheading__title">
@@ -25,10 +26,11 @@
             </span>
           </button>
           <div
+            v-if="test.score_type !== 'hidden'"
             class="accordionitem__content"
             :class="(shownTests[`${scannerKey}${testKey}`]) ? 'active' : ''">
             <p v-html="test.result"></p>
-            <h5 v-if="test.has_error">Fehler</h5>
+            <h5 v-if="test.has_error">{{ $t('common.error') }}</h5>
             <ul v-if="test.result_details">
               <li
                 v-html="detail"

@@ -15,7 +15,8 @@ const common = {
   download: 'Download',
   copy: 'Copy',
   verify: 'Verify',
-  scan_start: 'Scan start'
+  scan_start: 'Scan start',
+  error: 'Error'
 }
 
 export default common
