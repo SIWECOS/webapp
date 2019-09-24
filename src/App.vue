@@ -15,7 +15,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-  @import './assets/scss/critical.scss';
-  @import './assets/scss/template.scss';
-</style>

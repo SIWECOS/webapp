@@ -13,21 +13,14 @@
           <button
             @click="toggle(`${scannerKey}${testKey}`)"
             class="accordionitem__heading">
-            <span class="heading__title">
-              <span class="heading__icon">
-                <img
-                  v-if="test.score < 100 && !test.has_error"
-                  src="../assets/scss/img/icon_warning.svg" />
-                <img
-                  v-if="!test.has_error && test.score === 100"
-                  src="../assets/scss/img/icon_success.svg" />
-                <img
-                  v-if="test.has_error"
-                  src="../assets/scss/img/icon_error.svg" />
-              </span>
-              {{ test.headline }}
+            <span class="testheading__title">
+              <span
+                      class="testheading__icon"
+                      :class="getHeadingIcon(test)"
+              ></span>
+              <span v-html="test.headline"></span>
             </span>
-            <span class="heading__toggle">
+            <span class="testheading__toggle">
               {{ shownTests[`${scannerKey}${testKey}`] ? $t('domains.hide_details') : $t('domains.show_details') }}
             </span>
           </button>
@@ -74,6 +67,17 @@ export default {
      */
     toggle (key) {
       this.$set(this.shownTests, key, !this.shownTests[key])
+    },
+    getHeadingIcon (test) {
+      if (test.has_error) {
+        return 'testheading__icon--error'
+      }
+
+      if (test.score < 100) {
+        return 'testheading__icon--warning'
+      }
+
+      return 'testheading__icon--success'
     }
   }
 }

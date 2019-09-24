@@ -29,16 +29,22 @@ matrix:
       node_js: lts/*
       script:
         - npm install
-        - npm run build prod
-        - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/static/js/* ${SFTP_HOST}:/home/web4cshyx/html/staging.siwecos.de/spa/main
+        - cp env.staging.js env.js
+        - NODE_ENV=production npm run build
+        - mv ./dist/js/app.*.js ./dist/js/app.js
+        - mv ./dist/js/chunk-vendors.*.js ./dist/js/chunk-vendors.js
+        - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/js/* ${SFTP_HOST}:/home/web4cshyx/html/staging.siwecos.de/spa/main
 
     - language: node_js
       stage: deploy-live
       node_js: lts/*
       script:
         - npm install
-        - npm run build prod
-        - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/static/js/* ${SFTP_HOST}:/home/web4cshyx/html/siwecos.de/spa/main
+        - cp env.live.js env.js
+        - NODE_ENV=production npm run build
+        - mv ./dist/js/app.*.js ./dist/js/app.js
+        - mv ./dist/js/chunk-vendors.*.js ./dist/js/chunk-vendors.js
+        - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/js/* ${SFTP_HOST}:/home/web4cshyx/html/siwecos.de/spa/main
 
 notifications:
   webhooks:

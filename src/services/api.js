@@ -13,7 +13,7 @@ class Api {
    */
   constructor ({ httpClient = null, token = '' } = {}) {
     this.axios = httpClient || axios
-    this.token = token || sessionStorage.getItem(env.ID_TOKEN)
+    this.token = token || sessionStorage.getItem(env.ID_TOKEN) || localStorage.getItem(env.ID_TOKEN)
     this.baseUrl = `${env.APP_URL}/api/v2`
 
     if (this.token) {
