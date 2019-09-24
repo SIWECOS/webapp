@@ -32,7 +32,9 @@ matrix:
         - cp env.staging.js env.js
         - NODE_ENV=production npm run build
         - mv ./dist/js/app.*.js ./dist/js/app.js
+        - mv ./dist/js/app.*.js.map ./dist/js/app.js.map
         - mv ./dist/js/chunk-vendors.*.js ./dist/js/chunk-vendors.js
+        - mv ./dist/js/chunk-vendors.*.js.map ./dist/js/chunk-vendors.js.map
         - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/js/* ${SFTP_HOST}:/home/web4cshyx/html/staging.siwecos.de/spa/main
 
     - language: node_js
@@ -43,7 +45,9 @@ matrix:
         - cp env.live.js env.js
         - NODE_ENV=production npm run build
         - mv ./dist/js/app.*.js ./dist/js/app.js
+        - mv ./dist/js/app.*.js.map ./dist/js/app.js.map
         - mv ./dist/js/chunk-vendors.*.js ./dist/js/chunk-vendors.js
+        - mv ./dist/js/chunk-vendors.*.js.map ./dist/js/chunk-vendors.js.map
         - rsync --progress -avz -e "ssh -i siwecosdeploy_rsa -o StrictHostKeyChecking=no -p 2244" ./dist/js/* ${SFTP_HOST}:/home/web4cshyx/html/siwecos.de/spa/main
 
 notifications:
