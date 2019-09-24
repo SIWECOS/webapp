@@ -118,7 +118,6 @@ export default {
 
         this.$router.push({ path: '/domains' })
       } catch (e) {
-        console.log(e)
         this.response.code = e.status
       }
     }
