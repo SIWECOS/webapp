@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 Vue.prototype.$api = new Api()
 Vue.prototype.$idToken = 'id_token'
 
-const lang = document.querySelector('html').getAttribute('lang')
+const lang = document.querySelector('html').getAttribute('lang').substr(0, 2)
 
 const i18n = new VueI18n({
   locale: lang || 'de',
