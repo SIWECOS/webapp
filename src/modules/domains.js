@@ -1,7 +1,8 @@
 import Api from '../services/api'
 
 const state = {
-  domains: []
+  domains: [],
+  scanId: null
 }
 
 const getters = {
@@ -12,6 +13,14 @@ const getters = {
    */
   domains (state) {
     return state.domains
+  },
+  /**
+   *
+   * @param state
+   * @return {*}
+   */
+  scanId (state) {
+    return state.scanId
   }
 }
 
@@ -23,6 +32,15 @@ const mutations = {
    */
   setDomains (state, domains) {
     state.domains = domains
+  },
+
+  /**
+   *
+   * @param state
+   * @param id
+   */
+  setScanId (state, id) {
+    state.scanId = id
   }
 }
 
