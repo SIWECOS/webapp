@@ -5,15 +5,17 @@
       {{ localeDate }}
     </span>
     <ButtonDomainDelete :domain="report.domain" />
+    <PDFPrint :domain="report.domain"/>
   </div>
 </template>
 
 <script>
 import ButtonDomainDelete from './ButtonDomainDelete'
 import { mapGetters } from 'vuex'
+import PDFPrint from './PDFPrint'
 export default {
   name: 'DomainListHeadBase',
-  components: { ButtonDomainDelete },
+  components: { PDFPrint, ButtonDomainDelete },
   computed: {
     ...mapGetters('language', ['language']),
     localeDate () {

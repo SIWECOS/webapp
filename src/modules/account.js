@@ -46,9 +46,9 @@ const getters = {
   token (state) {
     return state.token
       ? state.token
-      : sessionStorage.getItem('token')
-        ? sessionStorage.getItem('token')
-        : localStorage.getItem('token') || ''
+      : sessionStorage.getItem(env.ID_TOKEN)
+        ? sessionStorage.getItem(env.ID_TOKEN)
+        : localStorage.getItem(env.ID_TOKEN) || ''
   },
   /**
    *

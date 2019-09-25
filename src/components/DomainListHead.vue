@@ -48,6 +48,9 @@ export default {
     }
   },
   methods: {
+    /**
+     *@return {void}
+     */
     reverseState () {
       this.show = !this.show
 
