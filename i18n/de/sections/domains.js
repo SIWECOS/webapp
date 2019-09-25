@@ -2,7 +2,7 @@ const domains = {
   headline: 'Sicherheitsbericht',
   add: 'Domain hinzufügen',
   headline_add: 'Domain hinzufügen',
-  none_available: 'No domains available',
+  none_available: 'Keine Domains vorhanden',
   add_example: 'Domain, bspws. https://www.example.org',
   delete_domain: 'Domain entfernen',
   more_about: 'Was bedeutet der SIWECOS Score?',

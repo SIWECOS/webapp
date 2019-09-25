@@ -16,6 +16,7 @@ const common = {
   copy: 'Copy',
   verify: 'Verify',
   scan_start: 'Scan start',
+  error: 'Error',
   pdf_link: 'Report as PDF'
 }
 
