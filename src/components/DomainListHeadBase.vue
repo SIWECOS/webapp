@@ -1,10 +1,14 @@
 <template>
   <div class="itemhead__siteinformation">
-    <h2 class="siteinformation__title">{{ report.domain }}</h2>
-    <span class="siteinformation__date">
+    <h2 class="siteinformation__title">
+      {{ domain.domain }}
+    </h2>
+    <span
+      v-if="report !== null"
+      class="siteinformation__date">
       {{ localeDate }}
     </span>
-    <ButtonDomainDelete :domain="report.domain" />
+    <ButtonDomainDelete :domain="domain.domain" />
   </div>
 </template>
 
@@ -23,6 +27,9 @@ export default {
     }
   },
   props: {
+    domain: {
+      type: Object
+    },
     report: {
       type: Object
     }

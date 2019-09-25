@@ -1,40 +1,31 @@
 <template>
   <div>
-    <!-- Display full report -->
-    <ul
-      class="scanresults"
-      v-if="reports.length">
+    <ul class="scanresults">
       <li
         class="item"
-        v-for="(report, key) in reports"
+        v-for="(domain, key) in domains"
         :key="key">
-        <div class="item__wrapper">
-          <DomainListHead
-            v-on:toggle="setVisibility"
-            :headId="key.toString()"
-            :report="report"/>
-          <section
-            class="item__content"
-            :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
-            <DomainListDoughnuts
-              :report="report.report"
-              :id="report.id.toString()" />
-            <DomainListReports
-              :id="key.toString()"
-              :report="report.report" />
-          </section>
-        </div>
-      </li>
-    </ul>
-    <!-- Depending on the verified state: Display only the domain with or without the verify button -->
-    <ul
-      class="scanresults"
-      v-if="domainsWithoutReports.length">
-      <li
-        class="item"
-        v-for="(domains, key) in domainsWithoutReports"
-        :key="key">
-        <DomainListHeadVerify :domain="domains.domain" />
+        <DomainListHeadVerify
+          v-if="!domain.is_verified"
+          :domain="domain.domain" />
+        <DomainListHead
+          v-else
+          v-on:toggle="setVisibility"
+          :headId="key.toString()"
+          :domain="domain"
+          :report="reports[key] ? reports[key] : {}"/>
+        <section
+          v-for="(report, key) in reports"
+          :key="key"
+          class="item__content"
+          :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
+          <DomainListDoughnuts
+            :report="report.report"
+            :id="report.id.toString()" />
+          <DomainListReports
+            :id="key.toString()"
+            :report="report.report" />
+        </section>
       </li>
     </ul>
   </div>
@@ -57,7 +48,6 @@ export default {
   data () {
     return {
       reports: [],
-      domainsWithoutReports: [],
       accordions: []
     }
   },
@@ -81,23 +71,21 @@ export default {
     /**
      * @return {void}
      */
-    getReports () {
+    async getReports () {
       this.reports = []
-      this.domainsWithoutReports = []
 
-      this.domains.forEach(item => {
-        this.$api.get(`domain/${item.domain}/report/${this.language}`).then(report => {
-          Reflect.set(report, 'domain', item.domain)
-          Reflect.set(report, 'verified', item.is_verified)
+      for (let domain of this.domains) {
+        if (!domain.is_verified) {
+          continue
+        }
 
-          this.reports.push(report)
-        }).catch(({ data }) => {
-          // Hasn't been scanned yet. No report available.
-          if (data.message === 'Scan Not Found') {
-            this.domainsWithoutReports.push(item)
-          }
-        })
-      })
+        const report = await this.$api.get(`domain/${domain.domain}/report/${this.language}`)
+
+        Reflect.set(report, 'domain', domain.domain)
+        Reflect.set(report, 'verified', domain.is_verified)
+
+        this.reports.push(report)
+      }
     },
     /**
      *

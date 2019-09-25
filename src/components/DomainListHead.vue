@@ -1,15 +1,18 @@
 <template>
   <section class="item__head">
-    <DomainListHeadBase :report="report"/>
+    <DomainListHeadBase
+      :domain="domain"
+      :report="report"/>
     <div
       id="testometer__general"
       class="testometer itemhead__testometer">
       <Doughnut
+        v-if="reportFetched"
         :score="report.score"
         :id="report.id.toString()" />
       <span class="testometer__result"> {{ report.score }} </span>
     </div>
-    <Scan :domain="report.domain" />
+    <Scan :domain="domain.domain" />
     <a
       class="itemhead__infolink"
       href="https://siwecos.de/support/gesamtscore">
@@ -34,12 +37,20 @@ export default {
     DomainListHeadBase,
     Doughnut
   },
+  computed: {
+    reportFetched () {
+      return Object.keys(this.report).length > 0
+    }
+  },
   data () {
     return {
       show: false
     }
   },
   props: {
+    domain: {
+      type: Object
+    },
     report: {
       type: Object
     },
