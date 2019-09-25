@@ -16,7 +16,7 @@ const common = {
   copy: 'Kopieren',
   verify: 'Bestätigen',
   scan_start: 'Neuen Scan starten',
-  pdf_link: 'Pdf link'
+  pdf_link: 'Report als PDF'
 }
 
 export default common
