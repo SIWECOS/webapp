@@ -8,24 +8,26 @@
         <DomainListHeadVerify
           v-if="!domain.is_verified"
           :domain="domain.domain" />
-        <DomainListHead
+        <div
           v-else
-          v-on:toggle="setVisibility"
-          :headId="key.toString()"
-          :domain="domain"
-          :report="reports[key] ? reports[key] : {}"/>
-        <section
-          v-for="(report, key) in reports"
-          :key="key"
-          class="item__content"
-          :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
-          <DomainListDoughnuts
-            :report="report.report"
-            :id="report.id.toString()" />
-          <DomainListReports
-            :id="key.toString()"
-            :report="report.report" />
-        </section>
+          class="item__wrapper">
+          <DomainListHead
+            v-on:toggle="setVisibility"
+            :headId="key.toString()"
+            :domain="domain"
+            :report="reports[key] ? reports[key] : {}"/>
+          <section
+            v-if="reports[key]"
+            class="item__content"
+            :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
+            <DomainListDoughnuts
+              :report="reports[key].report"
+              :id="reports[key].id.toString()" />
+            <DomainListReports
+              :id="key.toString()"
+              :report="reports[key].report" />
+          </section>
+        </div>
       </li>
     </ul>
   </div>
