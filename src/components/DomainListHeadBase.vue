@@ -23,6 +23,10 @@ export default {
     localeDate () {
       const code = `${this.language}-${this.language.toUpperCase()}`
 
+      if (!this.report.finished_at) {
+        return '-'
+      }
+
       return new Date(this.report.finished_at).toLocaleDateString(code)
     }
   },
