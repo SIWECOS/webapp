@@ -25,16 +25,23 @@ export default {
     }
   },
   mounted () {
-    this.getDomainList()
+    this.getUnverifiedDomains()
+    this.getVerifiedDomains()
   },
   watch: {
     /**
      * @return {void}
      */
     verified (domains) {
+      this.reports = []
+
       this.setReports(domains).then(reports => {
         this.reports = reports
       })
+    },
+    domains () {
+      console.log(1)
+      this.getVerifiedDomains()
     }
   },
   props: {
@@ -107,21 +114,34 @@ export default {
     /**
      * @return {void}
      */
-    getDomainList () {
+    getVerifiedDomains () {
       this.verified = []
-      this.unverified = []
 
       for (let domain of this.domains) {
         if (!domain.is_verified) {
-          this.unverified.push(domain)
           continue
         }
 
         this.verified.push(domain)
       }
 
-      this.sortByAlphabet(this.unverified)
       this.sortByAlphabet(this.verified)
+    },
+    /**
+     * @return {void}
+     */
+    getUnverifiedDomains () {
+      this.unverified = []
+
+      for (let domain of this.domains) {
+        if (domain.is_verified) {
+          continue
+        }
+
+        this.unverified.push(domain)
+      }
+
+      this.sortByAlphabet(this.unverified)
     }
   }
 }
