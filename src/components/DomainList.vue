@@ -49,6 +49,73 @@ export default {
     }
   },
   methods: {
+    sortByAlphabet (target) {
+      const alphabet = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+      ]
+
+      /**
+       *
+       * @param firstDomain
+       * @param secondDomain
+       * @param letterPosition
+       * @return {number}
+       */
+      const compareCharacters = (firstDomain, secondDomain, letterPosition = 0) => {
+        const first = firstDomain[letterPosition].toLowerCase()
+        const second = secondDomain[letterPosition].toLowerCase()
+
+        if (alphabet.indexOf(first) === alphabet.indexOf(second)) {
+          compareCharacters(firstDomain, secondDomain, letterPosition + 1)
+        }
+
+        if (alphabet.indexOf(first) > alphabet.indexOf(second)) {
+          return 1
+        }
+
+        return -1
+      }
+
+      target.sort((firstDomain, secondDomain) => {
+        let firstDomainName = firstDomain.domain
+        let secondDomainName = secondDomain.domain
+
+        if (firstDomain.domain.includes('www')) {
+          firstDomainName = firstDomain.domain.replace('www.', '')
+        }
+
+        if (secondDomain.domain.includes('www')) {
+          secondDomainName = secondDomain.domain.replace('www.', '')
+        }
+
+        return compareCharacters(firstDomainName, secondDomainName)
+      })
+    },
     /**
      * @return {Array}
      */
@@ -81,6 +148,9 @@ export default {
 
         this.verified.push(domain)
       }
+
+      this.sortByAlphabet(this.unverified)
+      this.sortByAlphabet(this.verified)
     }
   }
 }
