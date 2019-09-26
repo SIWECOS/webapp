@@ -40,7 +40,6 @@ export default {
       })
     },
     domains () {
-      console.log(1)
       this.getVerifiedDomains()
     }
   },
