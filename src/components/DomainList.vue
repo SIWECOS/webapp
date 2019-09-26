@@ -62,7 +62,7 @@ export default {
         const second = secondDomain[letterPosition].toLowerCase()
 
         if (first === second) {
-          return 0
+          return compareCharacters(firstDomain, secondDomain, letterPosition + 1)
         }
 
         if (first > second) {
