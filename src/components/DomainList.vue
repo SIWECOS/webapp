@@ -1,11 +1,9 @@
 <template>
   <div>
-    <ul class="scanresults">
-      <UnverifiedDomains :domains="unverified" />
-      <VerifiedDomains
-        :domains="verified"
-        :reports="getReports"/>
-    </ul>
+    <UnverifiedDomains :domains="unverified" />
+    <VerifiedDomains
+      :domains="verified"
+      :reports="getReports"/>
   </div>
 </template>
 
