@@ -1,9 +1,9 @@
 <template>
   <div>
-    <UnverifiedDomains :domains="unverified" />
     <VerifiedDomains
       :domains="verified"
       :reports="getReports"/>
+    <UnverifiedDomains :domains="unverified" />
   </div>
 </template>
 
