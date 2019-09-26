@@ -23,8 +23,7 @@ export default {
     return {
       verified: [],
       unverified: [],
-      reports: [],
-      accordions: []
+      reports: []
     }
   },
   mounted () {
