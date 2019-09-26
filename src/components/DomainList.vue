@@ -1,64 +1,43 @@
 <template>
   <div>
     <ul class="scanresults">
-      <li
-        class="item"
-        v-for="(domain, key) in domains"
-        :key="key">
-        <DomainListHeadVerify
-          v-if="!domain.is_verified"
-          :domain="domain.domain" />
-        <div
-          v-else
-          class="item__wrapper">
-          <DomainListHead
-            v-on:toggle="setVisibility"
-            :headId="key.toString()"
-            :domain="domain"
-            :report="reports[key] ? reports[key] : {}"/>
-          <section
-            v-if="reports[key]"
-            class="item__content"
-            :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
-            <DomainListDoughnuts
-              :report="reports[key].report"
-              :id="reports[key].id.toString()" />
-            <DomainListReports
-              :id="key.toString()"
-              :report="reports[key].report" />
-          </section>
-        </div>
-      </li>
+      <UnverifiedDomains :domains="unverified" />
+      <VerifiedDomains
+        :domains="verified"
+        :reports="getReports"/>
     </ul>
   </div>
 </template>
 
 <script>
-import DomainListHead from './DomainListHead'
-import DomainListHeadVerify from './DomainListHeadVerify'
-import DomainListReports from './DomainListReports'
-import DomainListDoughnuts from './DomainListDoughnuts'
 import { mapGetters } from 'vuex'
+import UnverifiedDomains from './UnverifiedDomains'
+import VerifiedDomains from './VerifiedDomains'
 export default {
   name: 'DomainList',
   components: {
-    DomainListDoughnuts,
-    DomainListReports,
-    DomainListHeadVerify,
-    DomainListHead
+    VerifiedDomains,
+    UnverifiedDomains
   },
   data () {
     return {
+      verified: [],
+      unverified: [],
       reports: [],
       accordions: []
     }
   },
   mounted () {
-    this.getReports()
+    this.getDomainList()
   },
   watch: {
-    domains () {
-      this.getReports()
+    /**
+     * @return {void}
+     */
+    verified (domains) {
+      this.setReports(domains).then(reports => {
+        this.reports = reports
+      })
     }
   },
   props: {
@@ -67,39 +46,44 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('language', ['language'])
+    ...mapGetters('language', ['language']),
+    getReports () {
+      return this.reports
+    }
   },
   methods: {
     /**
-     * @return {void}
+     * @return {Array}
      */
-    async getReports () {
-      this.reports = []
+    async setReports (domains) {
+      let reports = []
 
-      for (let domain of this.domains) {
-        if (!domain.is_verified) {
-          continue
-        }
-
+      for (let domain of domains) {
         const report = await this.$api.get(`domain/${domain.domain}/report/${this.language}`)
 
         Reflect.set(report, 'domain', domain.domain)
         Reflect.set(report, 'verified', domain.is_verified)
 
-        this.reports.push(report)
-      }
-    },
-    /**
-     *
-     * @param state
-     */
-    setVisibility (state) {
-      if (this.accordions.includes(state.target) && !state.active) {
-        this.accordions = this.accordions.filter(accordion => accordion !== state.target)
-        return
+        reports.push(report)
       }
 
-      this.accordions.push(state.target)
+      return reports
+    },
+    /**
+     * @return {void}
+     */
+    getDomainList () {
+      this.verified = []
+      this.unverified = []
+
+      for (let domain of this.domains) {
+        if (!domain.is_verified) {
+          this.unverified.push(domain)
+          continue
+        }
+
+        this.verified.push(domain)
+      }
     }
   }
 }
