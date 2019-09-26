@@ -50,35 +50,6 @@ export default {
   },
   methods: {
     sortByAlphabet (target) {
-      const alphabet = [
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f',
-        'g',
-        'h',
-        'i',
-        'j',
-        'k',
-        'l',
-        'm',
-        'n',
-        'o',
-        'p',
-        'q',
-        'r',
-        's',
-        't',
-        'u',
-        'v',
-        'w',
-        'x',
-        'y',
-        'z'
-      ]
-
       /**
        *
        * @param firstDomain
@@ -90,11 +61,11 @@ export default {
         const first = firstDomain[letterPosition].toLowerCase()
         const second = secondDomain[letterPosition].toLowerCase()
 
-        if (alphabet.indexOf(first) === alphabet.indexOf(second)) {
-          compareCharacters(firstDomain, secondDomain, letterPosition + 1)
+        if (first === second) {
+          return 0
         }
 
-        if (alphabet.indexOf(first) > alphabet.indexOf(second)) {
+        if (first > second) {
           return 1
         }
 
