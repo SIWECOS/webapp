@@ -26,8 +26,8 @@ export default {
     }
   },
   props: {
-    domain: {
-      type: String
+    report: {
+      type: Object
     }
   },
   computed: {
@@ -35,14 +35,14 @@ export default {
     ...mapGetters('domains', ['scanId']),
     ...mapGetters('account', ['token']),
     url () {
-      return `${env.APP_URL}/api/v2/scan/${this.scanId.scanId}/${this.language}/pdf`
+      return `${env.APP_URL}/api/v2/scan/${this.report.id}/${this.language}/pdf`
     },
     hasBeenScanned () {
-      if (this.scanId === null) {
+      if (!this.report || !this.report.id) {
         return false
       }
 
-      return this.scanId.scanId && this.scanId.domain === this.domain
+      return true
     }
   }
 }
