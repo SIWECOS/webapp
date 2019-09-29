@@ -3,7 +3,7 @@ const rules = {
   min: 'Das Feld muss mindestens {length} Zeichen verwenden.',
   email: 'This field must be a valid email.',
   confirmed: 'Dieses Feld stimmt nicht mit dem vorherigen überein.',
-  url: 'Ungültige E-Mail.'
+  url: 'Ungültiger Domainname.'
 }
 
 export default rules

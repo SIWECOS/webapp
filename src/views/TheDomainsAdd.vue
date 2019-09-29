@@ -16,10 +16,10 @@
             tag="div"
             mode="passive"
             name="domain"
-            rules="required"
+            rules="required|url"
             v-slot="{ errors }">
             <input
-              type="url"
+              type="text"
               v-model="domain"
               name="domain"
               id="domain"
