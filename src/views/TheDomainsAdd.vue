@@ -69,11 +69,11 @@ export default {
       if (!valid) return
 
       try {
-        await this.$api.create('domain', { domain: this.adjustDomain(this.domain) })
+        await this.$api.create('domain', { domain: this.domain })
 
         await this.fetch()
 
-        this.$router.push({ path: `/domain/verify/${this.adjustDomain(this.domain)}` })
+        this.$router.push({ path: `/domain/verify/${this.domain}` })
       } catch (e) {
         if (Object.keys(e.data).length > 0) {
           this.response.data = e.data
@@ -81,27 +81,6 @@ export default {
 
         this.response.code = e.status
       }
-    },
-    /**
-     *
-     * @param domain
-     * @return {string|*}
-     */
-    adjustDomain (domain) {
-      const blacklist = ['http://', 'https://', 'www.']
-      let url = domain
-
-      if (typeof domain !== 'string') return ''
-
-      blacklist.forEach(item => {
-        const position = domain.indexOf(item)
-
-        if (position !== -1) {
-          url = domain.slice(position + item.length, domain.length)
-        }
-      })
-
-      return url
     }
   }
 }
