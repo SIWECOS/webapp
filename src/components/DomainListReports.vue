@@ -1,6 +1,7 @@
 <template>
   <div class="content__detail">
     <section
+      :id="`${id}_${detail.scanner_name}`"
       class="detail__contentsection"
       v-for="(detail, scannerKey) in report"
       :key="scannerKey">

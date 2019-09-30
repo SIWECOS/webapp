@@ -7,9 +7,11 @@
       <div
         id="testometer__scanner1"
         class="testometer">
-        <Doughnut
-          :score="details.score"
-          :id="`${id}__content__${key}`"/>
+        <a :href="`#${id}_${details.scanner_name}`">
+          <Doughnut
+            :score="details.score"
+            :id="`${id}__content__${key}`"/>
+        </a>
         <span class="testometer__result">
             {{ details.score }}
           </span>

@@ -20,7 +20,7 @@
               :report="report.report"
               :id="report.id.toString()" />
             <DomainListReports
-              :id="key.toString()"
+              :id="report.id.toString()"
               :report="report.report" />
           </section>
         </div>
