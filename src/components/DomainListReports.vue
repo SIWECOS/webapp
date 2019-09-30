@@ -42,6 +42,11 @@
           </div>
         </div>
       </div>
+      <a
+        class="jumplink"
+        :href="`#${id}`">
+        {{ $t('domains.jumplink') }}
+      </a>
     </section>
   </div>
 </template>
