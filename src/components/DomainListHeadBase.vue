@@ -1,28 +1,41 @@
 <template>
   <div class="itemhead__siteinformation">
-    <h2 class="siteinformation__title">{{ report.domain }}</h2>
-    <span class="siteinformation__date">
+    <h2 class="siteinformation__title">
+      {{ domain.domain }}
+    </h2>
+    <span
+      v-if="report !== null"
+      class="siteinformation__date">
       {{ localeDate }}
     </span>
-    <ButtonDomainDelete :domain="report.domain" />
+    <ButtonDomainDelete :domain="domain.domain" />
+    <PDFPrint :report="report"/>
   </div>
 </template>
 
 <script>
 import ButtonDomainDelete from './ButtonDomainDelete'
 import { mapGetters } from 'vuex'
+import PDFPrint from './PDFPrint'
 export default {
   name: 'DomainListHeadBase',
-  components: { ButtonDomainDelete },
+  components: { PDFPrint, ButtonDomainDelete },
   computed: {
     ...mapGetters('language', ['language']),
     localeDate () {
       const code = `${this.language}-${this.language.toUpperCase()}`
 
+      if (!this.report.finished_at) {
+        return '-'
+      }
+
       return new Date(this.report.finished_at).toLocaleDateString(code)
     }
   },
   props: {
+    domain: {
+      type: Object
+    },
     report: {
       type: Object
     }

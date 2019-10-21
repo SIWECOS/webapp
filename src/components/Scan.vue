@@ -21,11 +21,14 @@ export default {
   },
   methods: {
     ...mapActions('domains', ['fetch']),
+    ...mapMutations('domains', ['setScanId']),
     ...mapMutations('loadingSpinner', ['setSpinning']),
     async scan () {
+      let response
+
       this.setSpinning(true)
       try {
-        const response = await this.$api.create(`scan`, { domain: this.domain })
+        response = await this.$api.create(`scan`, { domain: this.domain })
 
         this.isDisabled = true
         this.checkScanStatus(response.scan_id, 'running')
@@ -44,6 +47,7 @@ export default {
     async checkScanStatus (id, progress) {
       if (progress === 'finished') {
         this.fetch()
+        this.setScanId({ domain: this.domain, scanId: id })
         this.setSpinning(false)
         return
       }
