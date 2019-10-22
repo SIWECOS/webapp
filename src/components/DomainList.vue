@@ -1,72 +1,46 @@
 <template>
   <div>
-    <!-- Display full report -->
-    <ul
-      class="scanresults"
-      v-if="reports.length">
-      <li
-        class="item"
-        v-for="(report, key) in reports"
-        :key="key">
-        <div class="item__wrapper">
-          <DomainListHead
-            v-on:toggle="setVisibility"
-            :headId="key.toString()"
-            :report="report"/>
-          <section
-            class="item__content"
-            :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
-            <DomainListDoughnuts
-              :report="report.report"
-              :id="report.id.toString()" />
-            <DomainListReports
-              :id="report.id.toString()"
-              :report="report.report" />
-          </section>
-        </div>
-      </li>
-    </ul>
-    <!-- Depending on the verified state: Display only the domain with or without the verify button -->
-    <ul
-      class="scanresults"
-      v-if="domainsWithoutReports.length">
-      <li
-        class="item"
-        v-for="(domains, key) in domainsWithoutReports"
-        :key="key">
-        <DomainListHeadVerify :domain="domains.domain" />
-      </li>
-    </ul>
+    <VerifiedDomains
+      :domains="verified"
+      :reports="getReports"/>
+    <UnverifiedDomains :domains="unverified" />
   </div>
 </template>
 
 <script>
-import DomainListHead from './DomainListHead'
-import DomainListHeadVerify from './DomainListHeadVerify'
-import DomainListReports from './DomainListReports'
-import DomainListDoughnuts from './DomainListDoughnuts'
 import { mapGetters } from 'vuex'
+import UnverifiedDomains from './UnverifiedDomains'
+import VerifiedDomains from './VerifiedDomains'
 export default {
   name: 'DomainList',
   components: {
-    DomainListDoughnuts,
-    DomainListReports,
-    DomainListHeadVerify,
-    DomainListHead
+    VerifiedDomains,
+    UnverifiedDomains
   },
   data () {
     return {
-      reports: [],
-      domainsWithoutReports: [],
-      accordions: []
+      verified: [],
+      unverified: [],
+      reports: []
     }
   },
   mounted () {
-    this.getReports()
+    this.getUnverifiedDomains()
+    this.getVerifiedDomains()
   },
   watch: {
+    /**
+     * @return {void}
+     */
+    verified (domains) {
+      this.reports = []
+
+      this.setReports(domains).then(reports => {
+        this.reports = reports
+      })
+    },
     domains () {
-      this.getReports()
+      this.getVerifiedDomains()
     }
   },
   props: {
@@ -75,41 +49,98 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('language', ['language'])
+    ...mapGetters('language', ['language']),
+    getReports () {
+      return this.reports
+    }
   },
   methods: {
-    /**
-     * @return {void}
-     */
-    getReports () {
-      this.reports = []
-      this.domainsWithoutReports = []
+    sortByAlphabet (target) {
+      /**
+       *
+       * @param firstDomain
+       * @param secondDomain
+       * @param letterPosition
+       * @return {number}
+       */
+      const compareCharacters = (firstDomain, secondDomain, letterPosition = 0) => {
+        const first = firstDomain[letterPosition].toLowerCase()
+        const second = secondDomain[letterPosition].toLowerCase()
 
-      this.domains.forEach(item => {
-        this.$api.get(`domain/${item.domain}/report/${this.language}`).then(report => {
-          Reflect.set(report, 'domain', item.domain)
-          Reflect.set(report, 'verified', item.is_verified)
+        if (first === second) {
+          return compareCharacters(firstDomain, secondDomain, letterPosition + 1)
+        }
 
-          this.reports.push(report)
-        }).catch(({ data }) => {
-          // Hasn't been scanned yet. No report available.
-          if (data.message === 'Scan Not Found') {
-            this.domainsWithoutReports.push(item)
-          }
-        })
+        if (first > second) {
+          return 1
+        }
+
+        return -1
+      }
+
+      target.sort((firstDomain, secondDomain) => {
+        let firstDomainName = firstDomain.domain
+        let secondDomainName = secondDomain.domain
+
+        if (firstDomain.domain.includes('www')) {
+          firstDomainName = firstDomain.domain.replace('www.', '')
+        }
+
+        if (secondDomain.domain.includes('www')) {
+          secondDomainName = secondDomain.domain.replace('www.', '')
+        }
+
+        return compareCharacters(firstDomainName, secondDomainName)
       })
     },
     /**
-     *
-     * @param state
+     * @return {Array}
      */
-    setVisibility (state) {
-      if (this.accordions.includes(state.target) && !state.active) {
-        this.accordions = this.accordions.filter(accordion => accordion !== state.target)
-        return
+    async setReports (domains) {
+      let reports = []
+
+      for (let domain of domains) {
+        const report = await this.$api.get(`domain/${domain.domain}/report/${this.language}`)
+
+        Reflect.set(report, 'domain', domain.domain)
+        Reflect.set(report, 'verified', domain.is_verified)
+
+        reports.push(report)
       }
 
-      this.accordions.push(state.target)
+      return reports
+    },
+    /**
+     * @return {void}
+     */
+    getVerifiedDomains () {
+      this.verified = []
+
+      for (let domain of this.domains) {
+        if (!domain.is_verified) {
+          continue
+        }
+
+        this.verified.push(domain)
+      }
+
+      this.sortByAlphabet(this.verified)
+    },
+    /**
+     * @return {void}
+     */
+    getUnverifiedDomains () {
+      this.unverified = []
+
+      for (let domain of this.domains) {
+        if (domain.is_verified) {
+          continue
+        }
+
+        this.unverified.push(domain)
+      }
+
+      this.sortByAlphabet(this.unverified)
     }
   }
 }

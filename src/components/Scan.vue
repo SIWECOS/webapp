@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 export default {
   name: 'Scan',
   data () {
@@ -21,14 +21,20 @@ export default {
   },
   methods: {
     ...mapActions('domains', ['fetch']),
+    ...mapMutations('domains', ['setScanId']),
+    ...mapMutations('loadingSpinner', ['setSpinning']),
     async scan () {
+      let response
+
+      this.setSpinning(true)
       try {
-        const response = await this.$api.create(`scan`, { domain: this.domain })
+        response = await this.$api.create(`scan`, { domain: this.domain })
 
         this.isDisabled = true
         this.checkScanStatus(response.scan_id, 'running')
         this.isDisabled = false
       } catch (e) {
+        this.setSpinning(false)
         this.isDisabled = false
       }
     },
@@ -41,6 +47,8 @@ export default {
     async checkScanStatus (id, progress) {
       if (progress === 'finished') {
         this.fetch()
+        this.setScanId({ domain: this.domain, scanId: id })
+        this.setSpinning(false)
         return
       }
 

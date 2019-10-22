@@ -145,7 +145,9 @@ export default {
       try {
         await this.$api.create('user', { agb_check: this.agbCheck, ...this.credentials })
 
-        this.response.code = 200
+        alert(this.$t('register.success'))
+
+        this.$router.push('/login')
       } catch (e) {
         if (Object.keys(e.data).length > 0) {
           this.response.data = e.data

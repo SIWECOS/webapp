@@ -32,6 +32,11 @@ extend('required', required)
 extend('min', min)
 extend('email', email)
 extend('confirmed', confirmed)
+extend('url', {
+  validate: value => {
+    return value.includes('.') && !value.includes(...['http', 'https'])
+  }
+})
 
 configure({
   // this will be used to generate messages.
