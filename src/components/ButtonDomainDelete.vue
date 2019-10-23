@@ -21,7 +21,7 @@ export default {
      * @return {Promise<void>}
      */
     async destroy (url) {
-      const isConfirmed = confirm(this.$t('domains.delete_domain_confirm'))
+      const isConfirmed = confirm(this.$tc('domains.delete_domain_confirm', url, { url }))
 
       if (!isConfirmed) return
 
