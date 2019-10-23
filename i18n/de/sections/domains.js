@@ -8,7 +8,7 @@ const domains = {
   more_about: 'Was bedeutet der SIWECOS Score?',
   show_details: 'Mehr Informationen',
   hide_details: 'Weniger Informationen',
-  delete_domain_confirm: 'Möchten Sie diese Domain wirklich löschen?',
+  delete_domain_confirm: 'Möchten Sie die Domain: {url} wirklich löschen?',
   verify_domain: 'Domain bestätigen',
   jumplink: 'Zurück zur Übersicht'
 }
