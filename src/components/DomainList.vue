@@ -100,7 +100,7 @@ export default {
       let reports = []
 
       for (let domain of domains) {
-        let report
+        let report = {}
 
         try {
           report = await this.$api.get(`domain/${domain.domain}/report/${this.language}`)
