@@ -115,6 +115,8 @@ export default {
     async verify () {
       try {
         await this.$api.create('domain/verify', { domain: this.domain })
+
+        this.$router.push('/domains')
       } catch (e) {
         this.response.code = e.status
       }

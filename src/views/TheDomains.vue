@@ -21,21 +21,21 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import DomainList from '../components/DomainList'
 export default {
   name: 'TheDomains',
   components: { DomainList },
   mounted () {
-    if (!this.domains.length) {
-      this.fetch()
-    }
+    this.clearDomains()
+    this.fetch()
   },
   computed: {
     ...mapGetters('domains', ['domains'])
   },
   methods: {
-    ...mapActions('domains', ['fetch'])
+    ...mapActions('domains', ['fetch']),
+    ...mapMutations('domains', ['clearDomains'])
   }
 }
 </script>
