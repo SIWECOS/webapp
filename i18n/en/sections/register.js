@@ -3,7 +3,8 @@ const register = {
   second_title: 'Login details',
   register: 'Register',
   repeat_password: 'Repeat password',
-  success: 'Your account has been successfully created.'
+  success: 'Thank you for registering with SIWECOS! Please activate your account now by ' +
+    'clicking on the confirmation link that we have sent to you via email.'
 }
 
 export default register
