@@ -37,6 +37,14 @@ const mutations = {
   /**
    *
    * @param state
+   */
+  clearDomains (state) {
+    state.domains = []
+  },
+
+  /**
+   *
+   * @param state
    * @param id
    */
   setScanId (state, id) {

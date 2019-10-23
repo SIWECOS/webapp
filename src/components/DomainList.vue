@@ -121,7 +121,6 @@ export default {
      */
     getVerifiedDomains () {
       this.verified = []
-      console.log(this.domains)
 
       for (let domain of this.domains) {
         if (!domain.is_verified) {
