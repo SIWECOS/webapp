@@ -35,7 +35,7 @@
               tag="div"
               mode="passive"
               name="password"
-              rules="required|min:8"
+              rules="min:8"
               v-slot="{ errors }">
               <input
                 type="password"
@@ -54,7 +54,7 @@
               tag="div"
               mode="passive"
               name="newpassword_repeat"
-              rules="required|confirmed:password"
+              rules="confirmed:password"
               v-slot="{ errors }">
               <input
                 v-model="credentials.newPassword"
@@ -123,15 +123,19 @@ export default {
      */
     async update () {
       const valid = await this.$refs.account.validate()
+      let payload = {
+        email: this.credentials.email,
+        preferred_language: this.language
+      }
+
+      if (this.credentials.newPassword) {
+        Reflect.set(payload, 'newpassword', this.credentials.newPassword)
+      }
 
       if (!valid) return
 
       try {
-        await this.$api.update('user', '', {
-          email: this.credentials.email,
-          newpassword: this.credentials.newPassword,
-          preferred_language: this.language
-        }, 'patch')
+        await this.$api.update('user', '', payload, 'patch')
 
         this.response.code = 200
       } catch (e) {
