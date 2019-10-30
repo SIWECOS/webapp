@@ -9,18 +9,11 @@
           v-on:toggle="toggle"
           :headId="key.toString()"
           :domain="domain"
-          :report="reports.length && reports[key] ? reports[key] : {}"/>
-        <section
-          v-if="reports.length && reports[key]"
-          class="item__content"
-          :class="[accordions.includes(`item__content__${key}`) ? 'active' : '', `item__content__${key}`]">
-          <DomainListDoughnuts
-            :report="reports[key].report"
-            :id="reports[key].id.toString()" />
-          <DomainListReports
-            :id="key.toString()"
-            :report="reports[key].report" />
-        </section>
+          :report="getAssociatedReport(domain.domain)"/>
+        <ReportDetails
+          :reportKey="key"
+          :accordions="accordions"
+          :report="getAssociatedReport(domain.domain)" />
       </div>
     </li>
   </ul>
@@ -28,8 +21,7 @@
 
 <script>
 import DomainListHead from './DomainListHead'
-import DomainListDoughnuts from './DomainListDoughnuts'
-import DomainListReports from './DomainListReports'
+import ReportDetails from './ReportDetails'
 export default {
   name: 'VerifiedDomains',
   data () {
@@ -49,9 +41,17 @@ export default {
       }
 
       this.accordions.push(state.target)
+    },
+    /**
+     *
+     * @param domain
+     * @return {*}
+     */
+    getAssociatedReport (domain) {
+      return this.reports.filter(report => report.domain === domain)[0] || {}
     }
   },
-  components: { DomainListReports, DomainListDoughnuts, DomainListHead },
+  components: { ReportDetails, DomainListHead },
   props: {
     domains: {
       type: Array
