@@ -4,13 +4,10 @@
       :domain="domain"
       :report="report"/>
     <div
-      v-if="hasReport"
       id="testometer__general"
       class="testometer itemhead__testometer">
-      <Doughnut
-        :score="report.score"
-        :id="report.id.toString()" />
-      <span class="testometer__result"> {{ report.score }} </span>
+      <Doughnut :score="getScore"/>
+      <span class="testometer__result"> {{ getScore }} </span>
     </div>
     <Scan :domain="domain.domain"/>
     <a
@@ -41,6 +38,9 @@ export default {
   computed: {
     hasReport () {
       return Object.keys(this.report).length > 0
+    },
+    getScore () {
+      return this.report.score || 0
     }
   },
   data () {
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     /**
-     *@return {void}
+     * @return {void}
      */
     reverseState () {
       this.show = !this.show

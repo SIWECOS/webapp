@@ -33,12 +33,13 @@ export default {
      * @return {void}
      */
     verified (domains) {
-      this.reports = []
-
       this.setReports(domains).then(reports => {
         this.reports = reports
       })
     },
+    /**
+     * @return {void}
+     */
     domains () {
       this.getVerifiedDomains()
     }

@@ -1,6 +1,6 @@
 <template>
   <ul class="scanresults">
-    <li
+   <li
       class="item"
       v-for="(domain, key) in domains"
       :key="key">
