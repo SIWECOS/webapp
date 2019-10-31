@@ -29,7 +29,9 @@ export default {
         return '-'
       }
 
-      return new Date(this.report.finished_at).toLocaleDateString(code)
+      const finishedAt = new Date(this.report.finished_at)
+
+      return `${finishedAt.toLocaleDateString(code)} ${finishedAt.toLocaleTimeString(code)}`
     }
   },
   props: {
