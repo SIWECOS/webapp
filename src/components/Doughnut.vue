@@ -1,6 +1,6 @@
 <template>
   <svg
-    :id="id"
+    ref="doughnut"
     class="testometer__scanometer"
     viewBox="0 0 100 100">
     <g>
@@ -23,9 +23,11 @@ export default {
   props: {
     score: {
       type: Number
-    },
-    id: {
-      type: String
+    }
+  },
+  watch: {
+    score () {
+      this.draw()
     }
   },
   data () {
@@ -40,7 +42,7 @@ export default {
      * @return {void}
      */
     draw () {
-      let doughnut = document.getElementById(this.id).querySelector('.scanometer__value')
+      let doughnut = this.$refs.doughnut.querySelector('.scanometer__value')
       let doughnutLength = doughnut.getTotalLength()
 
       if (this.score < 50) {

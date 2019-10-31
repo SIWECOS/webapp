@@ -39,6 +39,9 @@ export default {
         this.reports = reports
       })
     },
+    /**
+     * @return {void}
+     */
     domains () {
       this.getVerifiedDomains()
     }
