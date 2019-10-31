@@ -6,8 +6,22 @@
     <div
       id="testometer__general"
       class="testometer itemhead__testometer">
-      <Doughnut :score="getScore"/>
-      <span class="testometer__result"> {{ getScore }} </span>
+      <Doughnut
+        v-if="hasReport"
+        :score="getScore"
+      />
+      <span
+        v-if="hasReport"
+        class="testometer__result"
+      >
+        {{ getScore }}
+      </span>
+      <span
+        class="testometer__result"
+        v-else
+      >
+        -
+      </span>
     </div>
     <Scan :domain="domain.domain"/>
     <a
