@@ -33,6 +33,8 @@ export default {
      * @return {void}
      */
     verified (domains) {
+      this.reports = []
+
       this.setReports(domains).then(reports => {
         this.reports = reports
       })
