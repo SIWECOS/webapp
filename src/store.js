@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import account from './modules/account'
 import domains from './modules/domains'
 import language from './modules/language'
-import loadingSpinner from './modules/loadingSpinner'
 
 Vue.use(Vuex)
 
@@ -20,10 +19,6 @@ export default new Vuex.Store({
     language: {
       namespaced: true,
       ...language
-    },
-    loadingSpinner: {
-      namespaced: true,
-      ...loadingSpinner
     }
   }
 })

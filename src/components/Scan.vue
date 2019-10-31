@@ -32,7 +32,6 @@ export default {
 
         this.isDisabled = true
         this.checkScanStatus(response.scan_id, 'running')
-        this.isDisabled = false
       } catch (e) {
         this.setSpinning(false)
         this.isDisabled = false
@@ -48,7 +47,7 @@ export default {
       if (progress === 'finished') {
         this.fetch()
         this.setScanId({ domain: this.domain, scanId: id })
-        this.setSpinning(false)
+        this.isDisabled = false
         return
       }
 
