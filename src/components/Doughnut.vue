@@ -4,13 +4,11 @@
     class="testometer__scanometer"
     viewBox="0 0 100 100">
     <g>
-      <circle class="scanometer__base" cx="50" cy="50" r="46"
-              style="stroke: rgb(150, 150, 150); opacity: 0.25;">
+      <circle class="scanometer__base" cx="50" cy="50" r="46" stroke="#969696" opacity="0.25">
       </circle>
     </g>
     <g>
-      <circle class="scanometer__value" cx="50" cy="50" r="46"
-              style="stroke: rgb(255, 59, 48); stroke-dasharray: 289.067px; stroke-dashoffset: 222.581px;">
+      <circle class="scanometer__value" cx="50" cy="50" r="46" :stroke-dasharray="`${parseInt(length)}`" :stroke-dashoffset="`${parseInt(offset)}`" :stroke="stroke">
       </circle>
     </g>
   </svg>
@@ -30,6 +28,13 @@ export default {
       type: String
     }
   },
+  data () {
+    return {
+      length: 0,
+      offset: 0,
+      stroke: 'red'
+    }
+  },
   methods: {
     /**
      * @return {void}
@@ -39,19 +44,19 @@ export default {
       let doughnutLength = doughnut.getTotalLength()
 
       if (this.score < 50) {
-        doughnut.style.stroke = 'red'
+        this.stroke = 'red'
       }
 
       if (this.score >= 50 && this.score < 75) {
-        doughnut.style.stroke = 'yellow'
+        this.stroke = 'yellow'
       }
 
       if (this.score >= 75) {
-        doughnut.style.stroke = 'green'
+        this.stroke = 'green'
       }
 
-      doughnut.style.strokeDasharray = doughnutLength
-      doughnut.style.strokeDashoffset = (doughnutLength - doughnutLength * (this.score / 100)).toString()
+      this.length = doughnutLength
+      this.offset = (doughnutLength - doughnutLength * (this.score / 100)).toString()
     }
   }
 }
