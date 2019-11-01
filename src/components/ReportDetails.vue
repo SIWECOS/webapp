@@ -4,7 +4,7 @@
     class="item__content"
     :class="[accordions.includes(`item__content__${getReportId}`) ? 'active' : '', `item__content__${getReportId}`]">
     <DomainListDoughnuts
-      :report="report.report"
+      :scores="scores"
       :id="getReportId" />
     <DomainListReports
       :id="getReportId"
@@ -21,6 +21,15 @@ export default {
   computed: {
     getReportId () {
       return this.report.id.toString()
+    },
+    scores () {
+      let scores = []
+
+      Object
+        .keys(this.report.scanner_scores)
+        .forEach(name => scores.push({ name, score: this.report.scanner_scores[name] }))
+
+      return scores
     }
   },
   props: {

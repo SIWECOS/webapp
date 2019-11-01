@@ -17,8 +17,8 @@
             class="accordionitem__heading">
             <span class="testheading__title">
               <span
-                      class="testheading__icon"
-                      :class="getHeadingIcon(test)"
+                class="testheading__icon"
+                :class="getHeadingIcon(test)"
               ></span>
               <span v-html="test.headline"></span>
             </span>

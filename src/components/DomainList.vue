@@ -106,7 +106,7 @@ export default {
         let report = {}
 
         try {
-          report = await this.$api.get(`domain/${domain.domain}/report/${this.language}`)
+          report = await this.$api.get(`domain/${domain.domain}/fullreport/${this.language}`)
         } catch (e) {
           continue
         }
