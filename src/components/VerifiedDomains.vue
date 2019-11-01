@@ -7,11 +7,9 @@
       <div class="item__wrapper">
         <DomainListHead
           v-on:toggle="toggle"
-          :headId="key.toString()"
           :domain="domain"
           :report="getAssociatedReport(domain.domain)"/>
         <ReportDetails
-          :reportKey="key"
           :accordions="accordions"
           :report="getAssociatedReport(domain.domain)" />
       </div>
