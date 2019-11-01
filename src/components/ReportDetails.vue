@@ -2,12 +2,12 @@
   <section
     v-if="Object.keys(report).length"
     class="item__content"
-    :class="[accordions.includes(`item__content__${reportKey}`) ? 'active' : '', `item__content__${reportKey}`]">
+    :class="[accordions.includes(`item__content__${getReportId}`) ? 'active' : '', `item__content__${getReportId}`]">
     <DomainListDoughnuts
       :report="report.report"
-      :id="report.id.toString()" />
+      :id="getReportId" />
     <DomainListReports
-      :id="reportKey.toString()"
+      :id="getReportId"
       :report="report.report" />
   </section>
 </template>
@@ -18,15 +18,17 @@ import DomainListReports from './DomainListReports'
 export default {
   name: 'ReportDetails',
   components: { DomainListReports, DomainListDoughnuts },
+  computed: {
+    getReportId () {
+      return this.report.id.toString()
+    }
+  },
   props: {
     report: {
       type: Object
     },
     accordions: {
       type: Array
-    },
-    reportKey: {
-      type: Number
     }
   }
 }

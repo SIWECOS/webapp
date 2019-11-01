@@ -3,7 +3,7 @@
     <section
       :id="`${id}_${detail.scanner_name}`"
       class="detail__contentsection"
-      v-for="(detail, scannerKey) in report.report"
+      v-for="(detail, scannerKey) in report"
       :key="scannerKey">
       <h4>{{ detail.scanner_name }}</h4>
       <div class="contentsection__accordion">

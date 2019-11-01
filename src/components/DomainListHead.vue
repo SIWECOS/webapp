@@ -68,9 +68,6 @@ export default {
     },
     report: {
       type: Object
-    },
-    headId: {
-      type: String
     }
   },
   methods: {
@@ -80,7 +77,7 @@ export default {
     reverseState () {
       this.show = !this.show
 
-      this.$emit('toggle', { target: `item__content__${this.headId}`, active: this.show })
+      this.$emit('toggle', { target: `item__content__${this.report.id.toString()}`, active: this.show })
     }
   }
 }
