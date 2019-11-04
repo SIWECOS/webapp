@@ -39,23 +39,25 @@ export default {
 
       // Fetch URL keys
       for (let reportUrl in urls) {
-        // Skip main domain
+        // Skip main domain as it gets print out anyway
         if (reportUrl === url) {
           continue
         }
 
+        // Special handling for mail servers as those use other scanners
+        if (reportUrl.includes('mx')) {
+          Reflect.set(data, 'mail', this.getMailReport())
+
+          continue
+        }
+
+        // Fetch affected urls for each scanner, which have not a score of 100
         for (let report of urls[reportUrl].report) {
           if (!Reflect.get(data, report.scanner_code)) {
             Reflect.set(data, report.scanner_code, [])
           }
 
-          for (let test of report.tests) {
-            if (test.score === 100 && test.has_error === false) {
-              continue
-            }
-
-            data[report.scanner_code].push({ domain: reportUrl, headline: test.headline })
-          }
+          data[report.scanner_code].push(...this.getAffectedUrls(report.tests, reportUrl))
         }
       }
 
@@ -76,6 +78,33 @@ export default {
     }
   },
   methods: {
+    /**
+     * Affected urls are those, who have unsatisfying scores.
+     *
+     * @param tests
+     * @param domain
+     *
+     * @return {{}}
+     */
+    getAffectedUrls (tests, domain) {
+      let urls = []
+
+      for (let test of tests) {
+        if (test.score === 100 && test.has_error === false) {
+          continue
+        }
+
+        urls.push({ domain, headline: test.headline })
+      }
+
+      return urls
+    },
+    /**
+     * @return {{}}
+     */
+    getMailReport () {
+      return {}
+    },
     /**
      *
      * @param urls
