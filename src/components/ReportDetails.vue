@@ -29,25 +29,24 @@ export default {
      * @return {{}}
      */
     getReport () {
-      // https://backupmonkey.io/: Object => report { score: 100, tests: [...], ... }
-      // mx01.hosting.de: Object
-      let reports = this.report.reports
-      let reportsClone = { ...this.report.reports }
-      let details = {}
+      let urls = this.report.reports
+      let url = this.getUrl(urls, this.report.domain)
+      let data = {}
 
-      Reflect.deleteProperty(reportsClone, `https://${this.report.domain}/`)
-
-      // This is the main domain
-      let domainObject = reports[`https://${this.report.domain}/`]
-
-      if (domainObject) {
-        Reflect.set(details, 'report', domainObject.report)
+      if (urls[url]) {
+        Reflect.set(data, 'report', urls[url].report)
       }
 
-      for (let domain in reportsClone) {
-        for (let report of reportsClone[domain].report) {
-          if (!Reflect.get(details, report.scanner_code)) {
-            Reflect.set(details, report.scanner_code, [])
+      // Fetch URL keys
+      for (let reportUrl in urls) {
+        // Skip main domain
+        if (reportUrl === url) {
+          continue
+        }
+
+        for (let report of urls[reportUrl].report) {
+          if (!Reflect.get(data, report.scanner_code)) {
+            Reflect.set(data, report.scanner_code, [])
           }
 
           for (let test of report.tests) {
@@ -55,12 +54,12 @@ export default {
               continue
             }
 
-            details[report.scanner_code].push({ domain, headline: test.headline })
+            data[report.scanner_code].push({ domain: reportUrl, headline: test.headline })
           }
         }
       }
 
-      return details
+      return data
     },
     /**
      *
@@ -74,6 +73,27 @@ export default {
         .forEach(name => scores.push({ name, score: this.report.scanner_scores[name] }))
 
       return scores || []
+    }
+  },
+  methods: {
+    /**
+     *
+     * @param urls
+     * @param domain
+     * @return {string}
+     */
+    getUrl (urls, domain) {
+      for (let url in urls) {
+        if (!url.includes(domain)) {
+          continue
+        }
+
+        let usesHttps = url.includes('https')
+        let protocol = usesHttps ? 'https://' : 'http://'
+        let domainUrl = `${protocol}${domain}`
+
+        return usesHttps ? `${domainUrl}/` : domainUrl
+      }
     }
   },
   props: {
