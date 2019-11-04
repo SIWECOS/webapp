@@ -4,52 +4,18 @@
       class="item"
       v-for="(domain, key) in domains"
       :key="key">
-      <div class="item__wrapper">
-        <DomainListHead
-          v-on:toggle="toggle"
-          :domain="domain"
-          :report="getAssociatedReport(domain.domain)"/>
-        <ReportDetails
-          :accordions="accordions"
-          :report="getAssociatedReport(domain.domain)" />
-      </div>
+      <ItemWrapper
+        :domain="domain"
+        :reports="reports" />
     </li>
   </ul>
 </template>
 
 <script>
-import DomainListHead from './DomainListHead'
-import ReportDetails from './ReportDetails'
+import ItemWrapper from './ItemWrapper'
 export default {
   name: 'VerifiedDomains',
-  data () {
-    return {
-      accordions: []
-    }
-  },
-  methods: {
-    /**
-     *
-     * @param state
-     */
-    toggle (state) {
-      if (this.accordions.includes(state.target) && !state.active) {
-        this.accordions = this.accordions.filter(accordion => accordion !== state.target)
-        return
-      }
-
-      this.accordions.push(state.target)
-    },
-    /**
-     *
-     * @param domain
-     * @return {*}
-     */
-    getAssociatedReport (domain) {
-      return this.reports.filter(report => report.domain === domain)[0] || {}
-    }
-  },
-  components: { ReportDetails, DomainListHead },
+  components: { ItemWrapper },
   props: {
     domains: {
       type: Array

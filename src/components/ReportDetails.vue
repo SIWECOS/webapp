@@ -1,8 +1,7 @@
 <template>
   <section
     v-if="Object.keys(report).length"
-    class="item__content"
-    :class="[accordions.includes(`item__content__${getReportId}`) ? 'active' : '', `item__content__${getReportId}`]">
+    class="item__content">
     <DomainListDoughnuts
       :scores="scores"
       :id="getReportId"/>
@@ -152,9 +151,6 @@ export default {
   props: {
     report: {
       type: Object
-    },
-    accordions: {
-      type: Array
     }
   }
 }
