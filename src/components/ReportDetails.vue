@@ -33,9 +33,17 @@ export default {
       let url = this.getUrl(urls, this.report.domain)
       let data = {}
 
+      // Set main report
       if (urls[url]) {
         Reflect.set(data, 'report', urls[url].report)
       }
+
+      // Set main scanner codes
+      this.fetchReport(urls[url].report, item => {
+        if (!Reflect.get(data, item.scanner_code)) {
+          Reflect.set(data, item.scanner_code, [])
+        }
+      })
 
       // Fetch URL keys
       for (let reportUrl in urls) {
@@ -46,19 +54,21 @@ export default {
 
         // Special handling for mail servers as those use other scanners
         if (reportUrl.includes('mx')) {
-          Reflect.set(data, 'mail', this.getMailReport())
-
-          continue
+          this.fetchReport(urls[reportUrl].report, item => {
+            if (!Reflect.get(data, item.scanner_code) && item.tests.length) {
+              data.report.push(item)
+            }
+          })
         }
 
-        // Fetch affected urls for each scanner, which have not a score of 100
-        for (let report of urls[reportUrl].report) {
-          if (!Reflect.get(data, report.scanner_code)) {
-            Reflect.set(data, report.scanner_code, [])
+        this.fetchReport(urls[reportUrl].report, item => {
+          // In this case it is probably a mail server scanner which has been included as an report item before
+          if (!item.scanner_code) {
+            throw new Error('Scanner not defined')
           }
 
-          data[report.scanner_code].push(...this.getAffectedUrls(report.tests, reportUrl))
-        }
+          data[item.scanner_code].push(...this.getAffectedUrls(item.tests, reportUrl))
+        })
       }
 
       return data
@@ -78,6 +88,20 @@ export default {
     }
   },
   methods: {
+    /**
+     * @param report {Array}
+     * @param callback {Function}
+     * @return void
+     */
+    fetchReport (report, callback) {
+      for (let data of report) {
+        try {
+          callback(data)
+        } catch (e) {
+          continue
+        }
+      }
+    },
     /**
      * Affected urls are those, who have unsatisfying scores.
      *
