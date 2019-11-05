@@ -5,7 +5,7 @@
       class="detail__contentsection"
       v-for="(detail, scannerKey) in report.report"
       :key="scannerKey">
-      <h4>{{ detail.scanner_name }}</h4>
+      <h4>{{ detail.scanner_name }} [{{ detail.scanner_code }}]</h4>
       <div
         class="contentsection__accordion"
         v-if="detail.tests.length === 0">
