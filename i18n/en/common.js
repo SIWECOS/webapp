@@ -18,7 +18,7 @@ const common = {
   scan_start: 'Scan start',
   error: 'Error',
   pdf_link: 'Report as PDF',
-  urls: 'Urls'
+  urls: 'Domains / URLs'
 }
 
 export default common
