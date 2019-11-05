@@ -65,7 +65,7 @@
         </div>
       </div>
       <a
-        class="jumplink"
+        class="scanner-jumplink"
         :href="`#${id}`">
         {{ $t('domains.jumplink') }}
       </a>
