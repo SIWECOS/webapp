@@ -52,7 +52,7 @@ export default {
         }
 
         this.fetchReport(urls[reportUrl].report, item => {
-          if (!Reflect.get(data, item.scanner_code) && item.tests.length) {
+          if (!Reflect.get(data, item.scanner_code)) {
             Reflect.set(data, item.scanner_code, [])
 
             data.report.push(item)
@@ -66,8 +66,6 @@ export default {
           data[item.scanner_code].push(...this.getAffectedUrls(item.tests, reportUrl))
         })
       }
-
-      console.log(data)
 
       return data
     },

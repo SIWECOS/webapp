@@ -6,7 +6,24 @@
       v-for="(detail, scannerKey) in report.report"
       :key="scannerKey">
       <h4>{{ detail.scanner_name }}</h4>
-      <div class="contentsection__accordion">
+      <div
+        class="contentsection__accordion"
+        v-if="detail.tests.length === 0">
+        <div class="accordion__item active">
+          <span class="accordionitem__heading">
+            <span class="testheading__title">
+              <span
+                class="testheading__icon"
+                :class="getHeadingIcon({ has_error: true })">
+              </span>
+              <span>{{ detail.error_message }}</span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="contentsection__accordion"
+        v-if="detail.tests.length > 0">
         <div
           class="accordion__item active"
           v-for="(test, testKey) in detail.tests"
