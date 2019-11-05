@@ -3,7 +3,7 @@
     <section
       :id="`${id}_${detail.scanner_name}`"
       class="detail__contentsection"
-      v-for="(detail, scannerKey) in report"
+      v-for="(detail, scannerKey) in report.report"
       :key="scannerKey">
       <h4>{{ detail.scanner_name }}</h4>
       <div class="contentsection__accordion">
@@ -17,9 +17,9 @@
             class="accordionitem__heading">
             <span class="testheading__title">
               <span
-                      class="testheading__icon"
-                      :class="getHeadingIcon(test)"
-              ></span>
+                class="testheading__icon"
+                :class="getHeadingIcon(test)">
+              </span>
               <span v-html="test.headline"></span>
             </span>
             <span class="testheading__toggle">
@@ -34,11 +34,16 @@
             <h5 v-if="test.has_error">{{ $t('common.error') }}</h5>
             <ul v-if="test.result_details">
               <li
-                v-html="detail"
                 v-for="(detail, key) in test.result_details"
+                v-html="detail"
                 :key="key">
               </li>
             </ul>
+            <div v-if="report[detail.scanner_code] && report[detail.scanner_code].length">
+              <Urls
+                :urls="report[detail.scanner_code]"
+                :headline="test.headline" />
+            </div>
           </div>
         </div>
       </div>
@@ -52,8 +57,10 @@
 </template>
 
 <script>
+import Urls from './Urls'
 export default {
   name: 'DomainListReports',
+  components: { Urls },
   data () {
     return {
       accordions: [],
@@ -62,7 +69,7 @@ export default {
   },
   props: {
     report: {
-      type: Array
+      type: Object
     },
     id: {
       type: String

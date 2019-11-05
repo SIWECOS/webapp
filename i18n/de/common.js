@@ -17,7 +17,8 @@ const common = {
   verify: 'Bestätigen',
   scan_start: 'Neuen Scan starten',
   pdf_link: 'Report als PDF',
-  error: 'Fehler'
+  error: 'Fehler',
+  urls: 'Urls'
 }
 
 export default common
