@@ -51,24 +51,23 @@ export default {
           continue
         }
 
-        // Special handling for mail servers as those use other scanners
-        if (reportUrl.includes('mx')) {
-          this.fetchReport(urls[reportUrl].report, item => {
-            if (!Reflect.get(data, item.scanner_code) && item.tests.length) {
-              data.report.push(item)
-            }
-          })
-        }
-
         this.fetchReport(urls[reportUrl].report, item => {
+          if (!Reflect.get(data, item.scanner_code) && item.tests.length) {
+            Reflect.set(data, item.scanner_code, [])
+
+            data.report.push(item)
+          }
+
           // In this case it is probably a mail server scanner which has been included as an report item before
-          if (!item.scanner_code) {
-            throw new Error('Scanner not defined')
+          if (!Reflect.get(data, item.scanner_code)) {
+            throw new Error('Scanner not found')
           }
 
           data[item.scanner_code].push(...this.getAffectedUrls(item.tests, reportUrl))
         })
       }
+
+      console.log(data)
 
       return data
     },

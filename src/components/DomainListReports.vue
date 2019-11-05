@@ -40,15 +40,9 @@
               </li>
             </ul>
             <div v-if="report[detail.scanner_code] && report[detail.scanner_code].length">
-              <b>{{ $t('common.urls').toUpperCase() }}</b>
-              <ul>
-                <li
-                  v-for="(url, urlKey) in report[detail.scanner_code]"
-                  :key="urlKey"
-                  v-if="url.headline === test.headline">
-                  {{ url.domain }}
-                </li>
-              </ul>
+              <Urls
+                :urls="report[detail.scanner_code]"
+                :headline="test.headline" />
             </div>
           </div>
         </div>
@@ -63,17 +57,14 @@
 </template>
 
 <script>
+import Urls from './Urls'
 export default {
   name: 'DomainListReports',
+  components: { Urls },
   data () {
     return {
       accordions: [],
       shownTests: {}
-    }
-  },
-  watch: {
-    report (item) {
-      console.log(item)
     }
   },
   props: {
