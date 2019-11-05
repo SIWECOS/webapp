@@ -10,7 +10,8 @@ const domains = {
   hide_details: 'Weniger Informationen',
   delete_domain_confirm: 'Möchten Sie die Domain: {url} wirklich löschen?',
   verify_domain: 'Domain bestätigen',
-  jumplink: 'Zurück zur Übersicht'
+  jumplink: 'Zurück zur Übersicht',
+  background_info: 'Hintergrundinformationen'
 }
 
 export default domains

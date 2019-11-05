@@ -10,7 +10,8 @@ const domains = {
   hide_details: 'Hide details',
   delete_domain_confirm: 'Are you sure you want to delete the domain: {url}?',
   verify_domain: 'Verify domain',
-  jumplink: 'Get back to the overview'
+  jumplink: 'Get back to the overview',
+  background_info: 'Background information'
 }
 
 export default domains

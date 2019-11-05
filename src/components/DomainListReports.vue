@@ -48,6 +48,7 @@
             class="accordionitem__content"
             :class="(shownTests[`${scannerKey}${testKey}`]) ? 'active' : ''">
             <p v-html="test.result"></p>
+            <a :href="test.information_link">{{ $t('domains.background_info') }}</a>
             <h5 v-if="test.has_error">{{ $t('common.error') }}</h5>
             <ul v-if="test.result_details">
               <li
