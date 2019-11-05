@@ -46,11 +46,6 @@ export default {
 
       // Fetch URL keys
       for (let reportUrl in urls) {
-        // Skip main domain as it gets print out anyway
-        if (reportUrl === url) {
-          continue
-        }
-
         this.fetchReport(urls[reportUrl].report, item => {
           if (!Reflect.get(data, item.scanner_code)) {
             Reflect.set(data, item.scanner_code, [])
