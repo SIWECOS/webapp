@@ -58,7 +58,7 @@ const responses = {
   update_user: {
     200: 'Benutzerdaten aktualisiert',
     403: 'Das SIWECOS-Token ist nicht gültig',
-    422: 'Validierung fehlgeschlagen'
+    422: 'Validierung fehlgeschlagen, Mailadresse wird schon verwendet'
   },
   inputs: {
     email: {
