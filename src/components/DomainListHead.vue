@@ -54,7 +54,7 @@ export default {
       return Object.keys(this.report).length > 0
     },
     getScore () {
-      return this.report.score || 0
+      return (this.report.score) ? parseInt(this.report.score) : 0
     }
   },
   data () {

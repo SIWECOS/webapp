@@ -9,11 +9,11 @@
       <div class="testometer">
         <a :href="`#${id}_${score.name}`">
           <Doughnut
-            :score="score.score"
+            :score="parseInt(score.score)"
             :id="`${id}__content__${key}`"/>
         </a>
         <span class="testometer__result">
-          {{ score.score }}
+          {{ parseInt(score.score) }}
         </span>
       </div>
       <h3>
