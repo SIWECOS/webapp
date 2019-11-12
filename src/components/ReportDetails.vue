@@ -115,12 +115,6 @@ export default {
       return urls
     },
     /**
-     * @return {{}}
-     */
-    getMailReport () {
-      return {}
-    },
-    /**
      *
      * @param urls
      * @param domain
@@ -132,11 +126,7 @@ export default {
           continue
         }
 
-        let usesHttps = url.includes('https')
-        let protocol = usesHttps ? 'https://' : 'http://'
-        let domainUrl = `${protocol}${domain}`
-
-        return usesHttps ? `${domainUrl}/` : domainUrl
+        return url
       }
     }
   },
