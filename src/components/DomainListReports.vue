@@ -57,10 +57,23 @@
                 :key="key">
               </li>
             </ul>
-            <div v-if="report[detail.scanner_code] && report[detail.scanner_code].length">
-              <Urls
-                :urls="report[detail.scanner_code]"
-                :headline="test.headline" />
+            <div v-if="report[detail.scanner_code] && Object.keys(report[detail.scanner_code]).length">
+              <div
+                v-for="(header, headerKey) in Object.keys(report[detail.scanner_code])"
+                :key="headerKey"
+                v-if="header === test.result">
+                <div v-html="header"></div>
+                <div
+                  v-for="(subHeader, subHeaderKey) in Object.keys(report[detail.scanner_code][header])"
+                  :key="subHeaderKey">
+                  <div v-html="subHeader"></div>
+                  <div
+                    v-for="(testUrls, testUrlsKey) in report[detail.scanner_code][header][subHeader]"
+                    :key="testUrlsKey">
+                    <div v-html="testUrls"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -94,6 +107,8 @@ export default {
     }
   },
   methods: {
+    // Test.header in getTestHeader? Dann render da
+    getTestHeader () {},
     /**
      *
      * @param key

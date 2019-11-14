@@ -40,7 +40,7 @@ export default {
       // Set main scanner codes
       this.fetchReport(urls[url].report, item => {
         if (!Reflect.get(data, item.scanner_code)) {
-          Reflect.set(data, item.scanner_code, [])
+          Reflect.set(data, item.scanner_code, {})
         }
       })
 
@@ -48,7 +48,7 @@ export default {
       for (let reportUrl in urls) {
         this.fetchReport(urls[reportUrl].report, item => {
           if (!Reflect.get(data, item.scanner_code)) {
-            Reflect.set(data, item.scanner_code, [])
+            Reflect.set(data, item.scanner_code, {})
 
             data.report.push(item)
           }
@@ -58,7 +58,24 @@ export default {
             throw new Error('Scanner not found')
           }
 
-          data[item.scanner_code].push(...this.getAffectedUrls(item.tests, reportUrl))
+          let affectedUrls = this.getAffectedUrls(item.tests, reportUrl)
+
+          if (!affectedUrls.length) {
+            throw new Error('None affected')
+          }
+
+          for (let urlItem of affectedUrls) {
+            let detailsKey = ''
+
+            for (let details of urlItem.test.result_details) {
+              detailsKey += details
+            }
+
+            data[item.scanner_code][urlItem.test.result] = {}
+            data[item.scanner_code][urlItem.test.result][detailsKey] = []
+
+            data[item.scanner_code][urlItem.test.result][detailsKey].push(urlItem.domain)
+          }
         })
       }
 
@@ -109,7 +126,7 @@ export default {
           continue
         }
 
-        urls.push({ domain, headline: test.headline })
+        urls.push({ domain, test })
       }
 
       return urls
