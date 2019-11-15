@@ -47,16 +47,6 @@
             v-if="test.score_type !== 'hidden'"
             class="accordionitem__content"
             :class="(shownTests[`${scannerKey}${testKey}`]) ? 'active' : ''">
-            <p v-html="test.result"></p>
-            <a :href="test.information_link">{{ $t('domains.background_info') }}</a>
-            <h5 v-if="test.has_error">{{ $t('common.error') }}</h5>
-            <ul v-if="test.result_details">
-              <li
-                v-for="(detail, key) in test.result_details"
-                v-html="detail"
-                :key="key">
-              </li>
-            </ul>
             <div v-if="report[detail.scanner_code] && Object.keys(report[detail.scanner_code]).length">
               <div
                 v-for="(header, headerKey) in Object.keys(report[detail.scanner_code])"
@@ -66,7 +56,7 @@
                 <div
                   v-for="(subHeader, subHeaderKey) in Object.keys(report[detail.scanner_code][header])"
                   :key="subHeaderKey">
-                  <div v-html="subHeader"></div>
+                  <p v-html="subHeader"></p>
                   <div
                     v-for="(testUrls, testUrlsKey) in report[detail.scanner_code][header][subHeader]"
                     :key="testUrlsKey">

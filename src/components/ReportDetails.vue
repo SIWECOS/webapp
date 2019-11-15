@@ -71,8 +71,13 @@ export default {
               detailsKey += details
             }
 
-            data[item.scanner_code][urlItem.test.result] = {}
-            data[item.scanner_code][urlItem.test.result][detailsKey] = []
+            if (!Reflect.get(data[item.scanner_code], urlItem.test.result)) {
+              Reflect.set(data[item.scanner_code], urlItem.test.result, {})
+            }
+
+            if (!Reflect.get(data[item.scanner_code][urlItem.test.result], detailsKey)) {
+              Reflect.set(data[item.scanner_code][urlItem.test.result], detailsKey, [])
+            }
 
             data[item.scanner_code][urlItem.test.result][detailsKey].push(urlItem.domain)
           }
@@ -122,7 +127,7 @@ export default {
       let urls = []
 
       for (let test of tests) {
-        if (test.score === 100 && test.has_error === false) {
+        if (test.score_type === 'success' && test.score === 100 && test.has_error === false) {
           continue
         }
 
