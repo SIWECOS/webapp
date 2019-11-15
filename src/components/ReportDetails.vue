@@ -7,13 +7,14 @@
       :id="getReportId"/>
     <DomainListReports
       :id="getReportId"
-      :report="getReport"/>
+      :report="getModifiedReportVersion"/>
   </section>
 </template>
 
 <script>
 import DomainListDoughnuts from './DomainListDoughnuts'
 import DomainListReports from './DomainListReports'
+import pipe from 'lodash/fp/pipe'
 export default {
   name: 'ReportDetails',
   components: { DomainListReports, DomainListDoughnuts },
@@ -27,61 +28,31 @@ export default {
     /**
      * @return {{}}
      */
-    getReport () {
+    getModifiedReportVersion () {
       let urls = this.report.reports
-      let url = this.getUrl(urls, this.report.domain)
-      let data = {}
+      let data = []
 
-      // Set main report
-      if (urls[url]) {
-        Reflect.set(data, 'report', urls[url].report)
-      }
+      for (let url in urls) {
+        // Construct object keys
+        data.push(pipe([
+          this.addScannerTypes,
+          this.addResultHeader
+        ])(urls[url], url))
 
-      // Set main scanner codes
-      this.fetchReport(urls[url].report, item => {
-        if (!Reflect.get(data, item.scanner_code)) {
-          Reflect.set(data, item.scanner_code, {})
-        }
-      })
+        /** let affectedInfo = this.getAffected(urls[url], url)
 
-      // Fetch URL keys
-      for (let reportUrl in urls) {
-        this.fetchReport(urls[reportUrl].report, item => {
-          if (!Reflect.get(data, item.scanner_code)) {
-            Reflect.set(data, item.scanner_code, {})
+        // Add affected urls to the object
+        for (let info of affectedInfo) {
+          if (typeof data[info['type']][info['resultHeader']][info['detailsHeader']] !== 'undefined') {
+            data[info['type']][info['resultHeader']][info['detailsHeader']].push(info['url'])
 
-            data.report.push(item)
+            continue
           }
 
-          // In this case it is probably a mail server scanner which has been included as an report item before
-          if (!Reflect.get(data, item.scanner_code)) {
-            throw new Error('Scanner not found')
+          if (typeof data[info['type']][info['resultHeader']]['url'] !== 'undefined') {
+            data[info['type']][info['resultHeader']]['url'].push(info[url])
           }
-
-          let affectedUrls = this.getAffectedUrls(item.tests, reportUrl)
-
-          if (!affectedUrls.length) {
-            throw new Error('None affected')
-          }
-
-          for (let urlItem of affectedUrls) {
-            let detailsKey = ''
-
-            for (let details of urlItem.test.result_details) {
-              detailsKey += details
-            }
-
-            if (!Reflect.get(data[item.scanner_code], urlItem.test.result)) {
-              Reflect.set(data[item.scanner_code], urlItem.test.result, {})
-            }
-
-            if (!Reflect.get(data[item.scanner_code][urlItem.test.result], detailsKey)) {
-              Reflect.set(data[item.scanner_code][urlItem.test.result], detailsKey, [])
-            }
-
-            data[item.scanner_code][urlItem.test.result][detailsKey].push(urlItem.domain)
-          }
-        })
+        } **/
       }
 
       return data
@@ -102,54 +73,84 @@ export default {
   },
   methods: {
     /**
-     * @param report {Array}
-     * @param callback {Function}
-     * @return void
+     * @param report {{}}
+     * @param url {String}
      */
-    fetchReport (report, callback) {
-      for (let data of report) {
-        try {
-          callback(data)
-        } catch (e) {
-          continue
-        }
-      }
-    },
-    /**
-     * Affected urls are those, who have unsatisfying scores.
-     *
-     * @param tests
-     * @param domain
-     *
-     * @return {{}}
-     */
-    getAffectedUrls (tests, domain) {
+    getAffected (reports, url) {
       let urls = []
 
-      for (let test of tests) {
-        if (test.score_type === 'success' && test.score === 100 && test.has_error === false) {
-          continue
-        }
+      for (let report of reports.report) {
+        for (let test of report.tests) {
+          if (test.score_type === 'success' && test.score === 100 && test.has_error === false) {
+            continue
+          }
 
-        urls.push({ domain, test })
+          urls.push({
+            type: report.scanner_code,
+            url,
+            resultHeader: test.result,
+            detailsHeader: test.result_details
+          })
+        }
       }
 
       return urls
     },
     /**
-     *
-     * @param urls
-     * @param domain
-     * @return {string}
+     * @param reports {Object}
+     * @param url {String}
+     * @return {{}}
      */
-    getUrl (urls, domain) {
-      for (let url in urls) {
-        if (!url.includes(domain)) {
+    addScannerTypes (reports, url) {
+      const types = {}
+
+      for (let report of reports.report) {
+        if (Reflect.get(types, report.scanner_code)) {
           continue
         }
 
-        return url
+        Reflect.set(types, report.scanner_code, {})
+        Reflect.set(types[report.scanner_code], 'report', report)
+        Reflect.set(types[report.scanner_code]['report'], 'url', url)
       }
+
+      return types
+    },
+    /**
+     * @param types {{}}
+     * @return {{}}
+     */
+    addResultHeader (types) {
+      for (let type in types) {
+        for (let test of types[type].report.tests) {
+          if (!Reflect.get(types[type], test.result)) {
+            Reflect.set(types[type], test.result, { urls: [] })
+          }
+
+          if (test.result_details) {
+            Reflect.set(types[type][test.result], this.getResultDetailsKey(test.result_details), [])
+          }
+        }
+      }
+
+      return types
+    },
+    /**
+     * @param resultDetails {Array}
+     * @return {String}
+     */
+    getResultDetailsKey (resultDetails) {
+      let key = ''
+
+      for (let item of resultDetails) {
+        if (key) {
+          key += '%20&'
+        }
+
+        key += item
+      }
+
+      return key
     }
   },
   props: {

@@ -56,7 +56,13 @@
                 <div
                   v-for="(subHeader, subHeaderKey) in Object.keys(report[detail.scanner_code][header])"
                   :key="subHeaderKey">
-                  <p v-html="subHeader"></p>
+                  <ul>
+                    <li
+                      v-for="(subHeaderItem, subbHeaderItemKey) in subHeader.split('%20&')"
+                      :key="subbHeaderItemKey"
+                      v-html="subHeaderItem">
+                    </li>
+                  </ul>
                   <div
                     v-for="(testUrls, testUrlsKey) in report[detail.scanner_code][header][subHeader]"
                     :key="testUrlsKey">
