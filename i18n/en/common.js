@@ -19,7 +19,7 @@ const common = {
   error: 'Error',
   pdf_link: 'Report as PDF',
   urls: 'Domains / URLs',
-  listOfUrls: 'Liste aller gescannten Domains und/oder URLs'
+  listOfUrls: 'List of all scanned domains/urls'
 }
 
 export default common
