@@ -18,7 +18,8 @@ const common = {
   scan_start: 'Neuen Scan starten',
   pdf_link: 'Report als PDF',
   error: 'Fehler',
-  urls: 'Domains / URLs'
+  urls: 'Domains / URLs',
+  listOfUrls: 'Liste aller gescannten Domains und/oder URLs'
 }
 
 export default common

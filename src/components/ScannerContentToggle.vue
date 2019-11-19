@@ -34,15 +34,21 @@
         :key="resultKey">
 
         <div v-if="result === 'urls'">
-          <p>Domains / URLs</p>
+
+          <p>
+            {{ $t('common.urls') }}
+          </p>
 
           <ul>
+
             <li
               v-for="(errorMsg, errorKey) in scanner[name][headline].urls"
               :key="errorKey">
               {{ errorMsg }}
             </li>
+
           </ul>
+
         </div>
 
         <div v-if="result !== 'score' && result !== 'urls'">
@@ -52,7 +58,7 @@
           <div v-if="scanner[name][headline][result].urls && scanner[name][headline][result].urls">
 
             <p v-if="scanner[name][headline][result].urls.length">
-              Domains / URLs
+              {{ $t('common.urls') }}
             </p>
 
             <ul>
@@ -78,7 +84,7 @@
                 </p>
 
                 <p>
-                  Domains / URLs
+                  {{ $t('common.urls') }}
                 </p>
 
                 <ul>

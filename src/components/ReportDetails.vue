@@ -8,6 +8,16 @@
       :scores="scores"
       :id="getReportId"/>
 
+    <div>
+      {{ $t('common.listOfUrls') }}
+
+      <ul>
+        <li v-for="(url, key) in Object.keys(this.report.reports)" :key="key">
+          {{ url }}
+        </li>
+      </ul>
+    </div>
+
     <DomainListReports
       :id="getReportId"
       :report="getModifiedReportVersion"/>
