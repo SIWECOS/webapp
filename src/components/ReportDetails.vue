@@ -108,8 +108,6 @@ export default {
         }
       }
 
-      console.log(finalReport)
-
       return finalReport
     },
     /**
