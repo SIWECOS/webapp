@@ -1,14 +1,29 @@
 <template>
+
   <section
     v-if="Object.keys(report).length"
     class="item__content">
+
     <DomainListDoughnuts
       :scores="scores"
       :id="getReportId"/>
+
+    <div>
+      {{ $t('common.listOfUrls') }}
+
+      <ul>
+        <li v-for="(url, key) in Object.keys(this.report.reports)" :key="key">
+          {{ url }}
+        </li>
+      </ul>
+    </div>
+
     <DomainListReports
       :id="getReportId"
-      :report="getReport"/>
+      :report="getModifiedReportVersion"/>
+
   </section>
+
 </template>
 
 <script>
@@ -27,42 +42,83 @@ export default {
     /**
      * @return {{}}
      */
-    getReport () {
+    getModifiedReportVersion () {
       let urls = this.report.reports
-      let url = this.getUrl(urls, this.report.domain)
-      let data = {}
+      let finalReport = {}
 
-      // Set main report
-      if (urls[url]) {
-        Reflect.set(data, 'report', urls[url].report)
-      }
-
-      // Set main scanner codes
-      this.fetchReport(urls[url].report, item => {
-        if (!Reflect.get(data, item.scanner_code)) {
-          Reflect.set(data, item.scanner_code, [])
+      // Get access to the domains content
+      for (let url in urls) {
+        if (!urls.hasOwnProperty(url)) {
+          continue
         }
-      })
 
-      // Fetch URL keys
-      for (let reportUrl in urls) {
-        this.fetchReport(urls[reportUrl].report, item => {
-          if (!Reflect.get(data, item.scanner_code)) {
-            Reflect.set(data, item.scanner_code, [])
+        let reports = urls[url].report
 
-            data.report.push(item)
+        // Fetch all reports of the domain
+        for (let report of reports) {
+          let code = Reflect.get(finalReport, report.scanner_code)
+
+          if (!code) {
+            Reflect.set(finalReport, report.scanner_code, {
+              scanner_code: report.scanner_code,
+              scanner_name: report.scanner_name
+            })
           }
 
-          // In this case it is probably a mail server scanner which has been included as an report item before
-          if (!Reflect.get(data, item.scanner_code)) {
-            throw new Error('Scanner not found')
+          if (!report.tests.length && !Reflect.get(finalReport[report.scanner_code], report.error_message)) {
+            Reflect.set(finalReport[report.scanner_code], report.error_message, { urls: [], score: -1 })
           }
 
-          data[item.scanner_code].push(...this.getAffectedUrls(item.tests, reportUrl))
-        })
+          if (!report.tests.length) {
+            finalReport[report.scanner_code][report.error_message]['urls'].push(url)
+
+            continue
+          }
+
+          // Get all test results of this domain
+          for (let test of report.tests) {
+            let scanner = Reflect.get(finalReport, report.scanner_code)
+            let headline = Reflect.get(scanner, test.headline)
+
+            if (!headline) {
+              Reflect.set(scanner, test.headline, { score: test.score })
+            }
+
+            if (this.isValid(test)) {
+              Reflect.set(finalReport[report.scanner_code][test.headline], 'Es sind keine Fehler aufgetreten!', { score: 100 })
+
+              continue
+            }
+
+            let result = Reflect.get(scanner[test.headline], test.result)
+
+            if (!result && test.result) {
+              Reflect.set(scanner[test.headline], test.result, { urls: [] })
+            }
+
+            if (scanner[test.headline].score > test.score) {
+              scanner[test.headline].score = test.score
+            }
+
+            if (!test.result_details) {
+              scanner[test.headline][test.result]['urls'].push(url)
+
+              continue
+            }
+
+            let chainedDetails = this.getResultDetailsKey(test.result_details)
+            let resultDetails = Reflect.get(scanner[test.headline][test.result], chainedDetails)
+
+            if (!resultDetails && test.result_details) {
+              Reflect.set(scanner[test.headline][test.result], chainedDetails, { urls: [] })
+            }
+
+            scanner[test.headline][test.result][chainedDetails]['urls'].push(url)
+          }
+        }
       }
 
-      return data
+      return finalReport
     },
     /**
      *
@@ -80,54 +136,34 @@ export default {
   },
   methods: {
     /**
-     * @param report {Array}
-     * @param callback {Function}
-     * @return void
+     * @param test {Boolean}
+     * @return {Boolean}
      */
-    fetchReport (report, callback) {
-      for (let data of report) {
-        try {
-          callback(data)
-        } catch (e) {
-          continue
-        }
+    isValid (test) {
+      let state = false
+
+      if (test.score_type === 'success' && test.score === 100 && test.has_error === false) {
+        state = true
       }
+
+      return state
     },
     /**
-     * Affected urls are those, who have unsatisfying scores.
-     *
-     * @param tests
-     * @param domain
-     *
-     * @return {{}}
+     * @param resultDetails {Array}
+     * @return {String}
      */
-    getAffectedUrls (tests, domain) {
-      let urls = []
+    getResultDetailsKey (resultDetails) {
+      let key = ''
 
-      for (let test of tests) {
-        if (test.score === 100 && test.has_error === false) {
-          continue
+      for (let item of resultDetails) {
+        if (key) {
+          key += '%20&'
         }
 
-        urls.push({ domain, headline: test.headline })
+        key += item
       }
 
-      return urls
-    },
-    /**
-     *
-     * @param urls
-     * @param domain
-     * @return {string}
-     */
-    getUrl (urls, domain) {
-      for (let url in urls) {
-        if (!url.includes(domain)) {
-          continue
-        }
-
-        return url
-      }
+      return key
     }
   },
   props: {
