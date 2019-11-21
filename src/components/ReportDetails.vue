@@ -118,7 +118,25 @@ export default {
         }
       }
 
-      return finalReport
+      let sortedObject = {}
+      let keysSorted = Object.keys(finalReport)
+
+      keysSorted.sort((a, b) => {
+        if (a < b) {
+          return -1
+        }
+        if (a > b) {
+          return 1
+        }
+
+        return 0
+      })
+
+      keysSorted.forEach(key => {
+        sortedObject[key] = finalReport[key]
+      })
+
+      return sortedObject
     },
     /**
      *
