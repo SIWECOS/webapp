@@ -35,7 +35,7 @@ export default {
     ...mapGetters('domains', ['scanId']),
     ...mapGetters('account', ['token']),
     url () {
-      return `${env.APP_URL}/api/v2/scan/${this.report.id}/${this.language}/pdf`
+      return `${env.APP_URL}/api/v2/siwecosScan/${this.report.id}/${this.language}/pdf`
     },
     hasBeenScanned () {
       if (!this.report || !this.report.id) {
