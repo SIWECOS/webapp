@@ -55,6 +55,10 @@ const responses = {
     200: 'Eine E-Email wurde abgeschickt, sofern der Benutzer existiert',
     422: 'Validierung fehlgeschlagen'
   },
+  reset_password: {
+    200: 'Das Passwort wurde zurückgesetzt',
+    422: 'Validierung fehlgeschlagen'
+  },
   update_user: {
     200: 'Benutzerdaten aktualisiert',
     403: 'Das SIWECOS-Token ist nicht gültig',

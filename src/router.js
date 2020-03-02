@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import TheLogin from './views/TheLogin'
 import TheRegister from './views/TheRegister'
 import TheForgotPassword from './views/TheForgotPassword'
+import ThePasswordReset from './views/ThePasswordReset'
 import TheAccount from './views/TheAccount'
 import env from '@/../env'
 import TheDomains from './views/TheDomains'
@@ -25,6 +26,10 @@ const routes = [
   {
     path: '/forgotpassword',
     component: TheForgotPassword
+  },
+  {
+    path: '/processreset/:token',
+    component: ThePasswordReset
   },
   {
     path: '/account',
@@ -67,7 +72,7 @@ router.beforeEach((to, from, next) => {
     return
   }
 
-  if (to.path === '/login' || to.path === '/register') {
+  if (to.path === '/login' || to.path === '/register' || to.path.substr(0, 13) === '/processreset') {
     next()
     return
   }

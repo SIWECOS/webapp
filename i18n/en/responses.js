@@ -55,6 +55,10 @@ const responses = {
     200: 'Password-Reset email was sent if the activated user exists in the database',
     422: 'Validation failed'
   },
+  reset_password: {
+    200: 'The Password has been reset',
+    422: 'Validation failed'
+  },
   update_user: {
     200: 'User updated',
     403: 'SIWECOS-Token not valid',
