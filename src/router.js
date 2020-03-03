@@ -29,6 +29,7 @@ const routes = [
   },
   {
     path: '/processreset/:token',
+    name: 'processreset',
     component: ThePasswordReset
   },
   {
@@ -65,14 +66,12 @@ let token = sessionStorage.getItem(env.ID_TOKEN)
 router.push(token ? { path: '/domains' } : { path: '/login' })
 
 router.beforeEach((to, from, next) => {
-  next()
-
   if (token) {
     next()
     return
   }
 
-  if (to.path === '/login' || to.path === '/register' || to.path.substr(0, 13) === '/processreset') {
+  if (to.path === '/login' || to.path === '/register' || to.name === 'processreset') {
     next()
     return
   }
