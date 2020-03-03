@@ -63,7 +63,10 @@ let token = sessionStorage.getItem(env.ID_TOKEN)
   ? sessionStorage.getItem(env.ID_TOKEN)
   : localStorage.getItem(env.ID_TOKEN) || ''
 
-router.push(token ? { path: '/domains' } : { path: '/login' })
+// Initial redirect to domains view if user is logged in
+if (token) {
+  router.push({ path: '/domains' })
+}
 
 router.beforeEach((to, from, next) => {
   const whiteList = ['/login', '/register', '/resendactivation', '/forgotpassword', '/logout']
