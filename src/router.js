@@ -16,6 +16,10 @@ Vue.use(Router)
 
 const routes = [
   {
+    path: '/',
+    redirect: '/login'
+  },
+  {
     path: '/login',
     component: TheLogin
   },
@@ -70,6 +74,10 @@ if (token) {
 
 router.beforeEach((to, from, next) => {
   const whiteList = ['/login', '/register', '/resendactivation', '/forgotpassword', '/logout']
+
+  token = sessionStorage.getItem(env.ID_TOKEN)
+    ? sessionStorage.getItem(env.ID_TOKEN)
+    : localStorage.getItem(env.ID_TOKEN) || ''
 
   if (token) {
     next()
