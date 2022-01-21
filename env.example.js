@@ -1,8 +1,6 @@
 export default {
-  APP_NAME: '',
-  // dev or production
-  APP_ENV: '',
-  APP_URL: '',
-  // Token to access the user object via sessionStorage or localStorage
-  ID_TOKEN: ''
+  APP_NAME: 'SIWECOS',
+  APP_ENV: 'dev',
+  APP_URL: 'http://localhost:80',
+  ID_TOKEN: 'siwecos_token'
 }
